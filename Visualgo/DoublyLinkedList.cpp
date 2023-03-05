@@ -73,3 +73,69 @@ void doublyLinkedList::deleteHead()
 	delete pHead;
 	pHead = temp;
 }
+
+void doublyLinkedList::deleteIndexK(int k)
+{
+	int count = 0;
+
+	if (k == 0) 
+	{
+		deleteHead();
+		return;
+	}
+
+	Node* cur = pHead;
+	while (cur != nullptr && count < k)
+		cur = cur->Next, count++;
+
+	if (cur == nullptr)
+	{
+		deleteTail();
+		return;
+	}
+
+	Node* prev = cur->Prev;
+	Node* next = cur->Next;
+	prev->Next = next;
+	next->Prev = prev;
+	delete cur;
+}
+void doublyLinkedList::insertIndexK(int k, int data)
+{
+	int count = 0;
+	Node* cur = pHead;
+
+	if (k <= 0)
+	{
+		addHead(create(data));
+		return;
+	}
+
+	while (cur != nullptr && count < k)
+	{
+		cur = cur->Next;
+		count++;
+	}
+
+	if (cur == nullptr)
+	{
+		addTail(create(data));
+		return;
+	}
+
+	Node* temp = create(data);
+	Node* prev = cur->Prev;
+
+	temp->Prev = prev;
+	temp->Next = cur;
+
+	cur->Prev = temp;
+	if (prev != nullptr)
+	{
+		prev->Next = temp;
+	}
+	else
+	{
+		pHead = temp;
+	}
+}

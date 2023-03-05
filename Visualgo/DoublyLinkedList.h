@@ -14,9 +14,13 @@ struct doublyLinkedList
 
 	void addHead(Node* node);
 
+	void insertIndexK(int k, int data);
+
 	void deleteTail();
 
 	void deleteHead();
+
+	void deleteIndexK(int k);
 };
 
 Node* create(int data);

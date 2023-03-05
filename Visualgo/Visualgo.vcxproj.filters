@@ -27,12 +27,24 @@
     <ClCompile Include="Stack.cpp">
       <Filter>Source Files\Data Structure</Filter>
     </ClCompile>
+    <ClCompile Include="Queue.cpp">
+      <Filter>Source Files\Data Structure</Filter>
+    </ClCompile>
+    <ClCompile Include="StaticArray.cpp">
+      <Filter>Source Files\Data Structure</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="DoublyLinkedList.h">
       <Filter>Source Files\Data Structure</Filter>
     </ClInclude>
     <ClInclude Include="Stack.h">
+      <Filter>Source Files\Data Structure</Filter>
+    </ClInclude>
+    <ClInclude Include="Queue.h">
+      <Filter>Source Files\Data Structure</Filter>
+    </ClInclude>
+    <ClInclude Include="StaticArray.h">
       <Filter>Source Files\Data Structure</Filter>
     </ClInclude>
   </ItemGroup>
