@@ -139,6 +139,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Button.cpp" />
     <ClCompile Include="DoublyLinkedList.cpp" />
     <ClCompile Include="Queue.cpp" />
     <ClCompile Include="Stack.cpp" />
@@ -146,6 +147,7 @@
     <ClCompile Include="Visualgo.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Button.h" />
     <ClInclude Include="DoublyLinkedList.h" />
     <ClInclude Include="Queue.h" />
     <ClInclude Include="Stack.h" />

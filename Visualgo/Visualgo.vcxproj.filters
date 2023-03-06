@@ -16,6 +16,9 @@
     <Filter Include="Source Files\Data Structure">
       <UniqueIdentifier>{c3a9126f-fc22-45c2-a530-5e067669ef74}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\GUI">
+      <UniqueIdentifier>{22b1cebe-f47f-4378-9925-249d76ff7558}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Visualgo.cpp">
@@ -33,6 +36,9 @@
     <ClCompile Include="StaticArray.cpp">
       <Filter>Source Files\Data Structure</Filter>
     </ClCompile>
+    <ClCompile Include="Button.cpp">
+      <Filter>Source Files\GUI</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="DoublyLinkedList.h">
@@ -46,6 +52,9 @@
     </ClInclude>
     <ClInclude Include="StaticArray.h">
       <Filter>Source Files\Data Structure</Filter>
+    </ClInclude>
+    <ClInclude Include="Button.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
