@@ -1,8 +1,10 @@
 #include "Button.h"
 
-Button::Button(float x, float y, float width, float height, sf::Font& font, std::string text,
+Button::Button(float x, float y, float width, float height, std::string text,
     sf::Color idleColor, sf::Color hoverColor, sf::Color activeColor, sf::Color outlineColor)
 {
+    sf::Font font;
+    font.loadFromFile("arial.ttf");
     this->posX = x;
     this->posY = y;
     this->shape.setPosition(sf::Vector2f(x, y));

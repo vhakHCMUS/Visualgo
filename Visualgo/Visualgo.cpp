@@ -6,6 +6,7 @@
 #include "Button.h"
 #include "Circle.h"
 #include "Arrow.h"
+#include "TextBox.h"
 #include <iostream>
 
 int main()
@@ -15,17 +16,21 @@ int main()
     sf::Event event;
     sf::Font font;
     font.loadFromFile("arial.ttf");
+    TextBox textbox(font, 100, 100, 200, 30, sf::Color::White, sf::Color::Black, 10);
 
     while (window.isOpen()) {
-
+        window.clear(sf::Color::White);
         while (window.pollEvent(event)) {
 
             if (event.type == sf::Event::Closed) {
 
                 window.close();
             }
+            textbox.handleEvent(event);
         }
 
+        textbox.draw(window);
+        window.display();
     }
 
     return 0;
