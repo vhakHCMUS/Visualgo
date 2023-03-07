@@ -16,7 +16,7 @@ int main()
     sf::Event event;
     sf::Font font;
     font.loadFromFile("arial.ttf");
-    TextBox textbox(font, 100, 100, 200, 30, sf::Color::White, sf::Color::Black, 10);
+    TextBox textbox(font, 100, 100, 200, 30, sf::Color::White, sf::Color::Black, 5);
 
     while (window.isOpen()) {
         window.clear(sf::Color::White);
@@ -28,10 +28,10 @@ int main()
             }
             textbox.handleEvent(event);
         }
-
         textbox.draw(window);
         window.display();
     }
 
+    textbox.List.loadList();
     return 0;
 }

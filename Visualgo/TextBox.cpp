@@ -1,5 +1,5 @@
 #include "TextBox.h"
-
+#include <iostream>
 TextBox::TextBox(sf::Font& font, float x, float y, float width, float height, sf::Color fillColor, sf::Color outlineColor, float outlineThickness) {
     shape.setPosition(x, y);
     shape.setSize(sf::Vector2f(width, height));
@@ -11,6 +11,24 @@ TextBox::TextBox(sf::Font& font, float x, float y, float width, float height, sf
     text.setCharacterSize(height * 0.8f);
     text.setPosition(x + outlineThickness, y + height * 0.1f);
     text.setFillColor(sf::Color::Black);
+}
+
+void TextBox::update()
+{
+    std::string str = text.getString();
+    int temp = 0;
+    if (str.size() == 0) return;
+
+    for (int i = 0; i < str.size(); i++)
+    {
+        if (str[i] >= '0' && str[i] <= '9')
+            temp = temp * 10 + (str[i] - '0');
+        if (str[i] == ' ')
+        {
+            std::cout << temp<<"\n";
+            temp = 0;
+        }
+    }
 }
 
 void TextBox::draw(sf::RenderWindow & window) {
@@ -37,6 +55,12 @@ void TextBox::handleEvent(sf::Event event) {
         }
         else if (event.text.unicode < 128) {
             text.setString(text.getString() + static_cast<char>(event.text.unicode));
+        }
+    }
+
+    if (event.type == sf::Event::KeyPressed) {
+        if (event.key.code == sf::Keyboard::Enter) {
+            update();
         }
     }
 }

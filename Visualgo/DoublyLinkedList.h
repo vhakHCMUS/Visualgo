@@ -21,7 +21,12 @@ struct doublyLinkedList
 	void deleteHead();
 
 	void deleteIndexK(int k);
+
+	void loadList();
 };
 
+
+
 Node* create(int data);
+
 

@@ -1,4 +1,5 @@
 #include "DoublyLinkedList.h"
+#include <iostream>
 
 Node* create(int data)
 {
@@ -137,5 +138,15 @@ void doublyLinkedList::insertIndexK(int k, int data)
 	else
 	{
 		pHead = temp;
+	}
+}
+
+void doublyLinkedList::loadList()
+{
+	Node* cur = pHead;
+	while (cur != nullptr)
+	{
+		std::cout << cur->data << " ";
+		cur = cur->Next;
 	}
 }
