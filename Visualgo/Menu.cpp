@@ -29,11 +29,12 @@ void RenderDataStructureMenu(sf::Font& font, sf::RenderWindow& window,
     BackButton.render(window);
 }
 
-void handleBackButton(bool& renderDS, Button& back, sf::RenderWindow& window)
+void handleBackButton(bool& Menu, bool& DS, Button& back, sf::RenderWindow& window)
 {
     if (back.isClicked(window))
     {
-        if (renderDS == 1) renderDS = 0;
+        if (DS == 1) DS = 0; else
+            if (Menu == 1) Menu = 0;
     }
     return;
 }
@@ -49,5 +50,5 @@ void controlMenu(sf::Font& font, sf::RenderWindow& window, bool& Menu, bool& DS,
 
     if (StaticArrayButton.isClicked(window) || LinkedListButton.isClicked(window) || QueueButton.isClicked(window) || StackButton.isClicked(window))
         DS = 1;
-    handleBackButton(Menu, BackButton, window);
+    handleBackButton(Menu, DS, BackButton, window);
 }
