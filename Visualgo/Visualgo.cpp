@@ -7,46 +7,9 @@
 #include "Circle.h"
 #include "Arrow.h"
 #include "TextBox.h"
-
+#include "Menu.h"
 #include <iostream>
 
-void RenderMainMenu(sf::Font& font, sf::RenderWindow &window, Button &StartButton, Button &QuitButton)
-{
-    
-    StartButton.update(window);
-    StartButton.render(window);
-
-    QuitButton.update(window);
-    QuitButton.render(window);
-}
-
-void RenderDataStructureMenu(sf::Font& font, sf::RenderWindow& window,
-    Button& StaticArrayButton, Button& LinkedListButton, Button& QueueButton, Button& StackButton, Button& BackButton)
-{
-    StaticArrayButton.update(window);
-    StaticArrayButton.render(window);
-
-    LinkedListButton.update(window);
-    LinkedListButton.render(window);
-
-    QueueButton.update(window);
-    QueueButton.render(window);
-
-    StackButton.update(window);
-    StackButton.render(window);
-
-    BackButton.update(window);
-    BackButton.render(window);
-}
-
-void handleBackButton(bool& renderDS, Button& back, sf::RenderWindow &window)
-{
-    if (back.isClicked(window))
-    {
-        if (renderDS == 1) renderDS = 0;
-    }
-    return;
-}
 int main()
 {
     
@@ -74,9 +37,11 @@ int main()
     Button BackButton(50, 30, 200, 50, font, "Back",
         sf::Color::Blue, sf::Color::Red, sf::Color::Blue, sf::Color::Black);
 
+    doublyLinkedList LinkedList;
     font.loadFromFile("arial.ttf");
     
-    bool RenderDS = false;
+    bool Menu = false, DS = false;
+    bool SA = false, DLL = false, Q = false, S = false;
     while (window.isOpen()) {
 
         while (window.pollEvent(event)) {
@@ -89,10 +54,9 @@ int main()
 
         window.clear(sf::Color::White);
 
-        if (!RenderDS) RenderMainMenu(font, window, StartButton, QuitButton);
-        if (StartButton.isClicked(window)) RenderDS = 1;
-        if (RenderDS) RenderDataStructureMenu(font, window, StaticArrayButton, LinkedListButton, QueueButton, StackButton, BackButton);
-        handleBackButton(RenderDS, BackButton, window);
+        controlMenu(font, window, Menu, DS, StartButton, QuitButton, BackButton,
+            StaticArrayButton, LinkedListButton, QueueButton, StackButton);
+        
         window.display();
     }
 

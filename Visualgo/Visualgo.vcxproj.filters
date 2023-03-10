@@ -19,6 +19,9 @@
     <Filter Include="Source Files\GUI">
       <UniqueIdentifier>{22b1cebe-f47f-4378-9925-249d76ff7558}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\Scene">
+      <UniqueIdentifier>{3f60341b-c306-49a4-9a21-8b3597fff9d2}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Visualgo.cpp">
@@ -48,6 +51,9 @@
     <ClCompile Include="TextBox.cpp">
       <Filter>Source Files\GUI</Filter>
     </ClCompile>
+    <ClCompile Include="Menu.cpp">
+      <Filter>Source Files\Scene</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="DoublyLinkedList.h">
@@ -73,6 +79,9 @@
     </ClInclude>
     <ClInclude Include="TextBox.h">
       <Filter>Source Files\GUI</Filter>
+    </ClInclude>
+    <ClInclude Include="Menu.h">
+      <Filter>Source Files\Scene</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
