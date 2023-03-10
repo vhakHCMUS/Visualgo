@@ -10,8 +10,10 @@
 #include "Menu.h"
 #include <iostream>
 
-void doublyLinkedList_render(sf::Font &font, sf::RenderWindow& window, Button& BackButton)
+void doublyLinkedList_render(sf::Font& font, sf::RenderWindow& window, sf::Event& event, Button& BackButton, TextBox& initBox)
 {
+    static bool initClicked = false; 
+
     BackButton.render(window);
     BackButton.update(window);
 
@@ -20,16 +22,27 @@ void doublyLinkedList_render(sf::Font &font, sf::RenderWindow& window, Button& B
 
     Button* Add = new Button(100, 200, 200, 50, font, "Add",
         sf::Color::Blue, sf::Color::Red, sf::Color::Blue, sf::Color::Black);
-    
+
     Init->update(window);
     Init->render(window);
-    
+
+    if (Init->isClicked(window))
+    {
+        initClicked = true;
+    }
+
+    if (initClicked)
+    {
+        initBox.draw(window);
+    }
+
     Add->update(window);
     Add->render(window);
-    
+
     delete Init;
     delete Add;
 }
+
 int main()
 {
     
@@ -60,7 +73,7 @@ int main()
     doublyLinkedList LinkedList;
     font.loadFromFile("arial.ttf");
 
-    TextBox initBox(font, 100, 100, 200, 50, sf::Color::White, sf::Color::Black, 5);
+    TextBox initBox(font, 500, 500, 200, 50, sf::Color::White, sf::Color::Black, 5);
     
     bool Menu = false, DS = false;
     bool SA = false, DLL = false, Q = false, S = false;
@@ -83,7 +96,7 @@ int main()
         if (Menu && DS)
         {
             if (LinkedListButton.isClicked(window)) DLL = true;
-            if (DLL == true) doublyLinkedList_render(font, window, BackButton);
+            if (DLL == true) doublyLinkedList_render(font, window, event, BackButton, initBox);
         }
 
         window.display();
