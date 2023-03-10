@@ -10,7 +10,7 @@ struct Button {
 	sf::Color activeColor;
 	sf::Color outlineColor;
 
-	Button(float x, float y, float width, float height, std::string text,
+	Button(float x, float y, float width, float height, sf::Font &font, std::string text,
 		sf::Color idleColor, sf::Color hoverColor, sf::Color activeColor, sf::Color outlineColor);
 
 	bool isMouseOver(sf::RenderWindow& window);

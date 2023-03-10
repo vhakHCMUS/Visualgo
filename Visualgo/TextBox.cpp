@@ -25,10 +25,13 @@ void TextBox::update()
             temp = temp * 10 + (str[i] - '0');
         if (str[i] == ' ')
         {
-            std::cout << temp<<"\n";
+            List.addTail(create(temp));
             temp = 0;
         }
     }
+    List.addTail(create(temp));
+    
+    text.setString("");
 }
 
 void TextBox::draw(sf::RenderWindow & window) {
