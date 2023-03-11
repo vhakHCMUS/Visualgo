@@ -39,7 +39,17 @@ void TextBox::draw(sf::RenderWindow & window) {
     window.draw(text);
 }
 
-void TextBox::handleEvent(sf::Event event) {
+void TextBox::transfer(Buttons &visual, sf::Font &font)
+{
+    Node* cur = List.pHead;
+    while (cur != nullptr)
+    {
+        visual.add(cur->data, font);
+        cur = cur->Next;
+    }
+}
+
+void TextBox::handleEvent(sf::Event& event, sf::Font& font, Buttons& visual) {
     if (event.type == sf::Event::MouseButtonPressed && event.mouseButton.button == sf::Mouse::Left) {
         sf::Vector2f mousePos(event.mouseButton.x, event.mouseButton.y);
         if (shape.getGlobalBounds().contains(mousePos)) {
@@ -64,6 +74,8 @@ void TextBox::handleEvent(sf::Event event) {
     if (event.type == sf::Event::KeyPressed) {
         if (event.key.code == sf::Keyboard::Enter) {
             update();
+            transfer(visual, font);
         }
     }
 }
+

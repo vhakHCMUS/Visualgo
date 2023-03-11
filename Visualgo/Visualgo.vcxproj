@@ -141,6 +141,7 @@
   <ItemGroup>
     <ClCompile Include="Arrow.cpp" />
     <ClCompile Include="Button.cpp" />
+    <ClCompile Include="Buttons.cpp" />
     <ClCompile Include="DoublyLinkedList.cpp" />
     <ClCompile Include="Circle.cpp" />
     <ClCompile Include="Menu.cpp" />
@@ -153,6 +154,7 @@
   <ItemGroup>
     <ClInclude Include="Arrow.h" />
     <ClInclude Include="Button.h" />
+    <ClInclude Include="Buttons.h" />
     <ClInclude Include="DoublyLinkedList.h" />
     <ClInclude Include="Circle.h" />
     <ClInclude Include="Menu.h" />

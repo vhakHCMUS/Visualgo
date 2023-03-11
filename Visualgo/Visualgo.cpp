@@ -8,9 +8,11 @@
 #include "Arrow.h"
 #include "TextBox.h"
 #include "Menu.h"
+#include "Buttons.h"
 #include <iostream>
 
-void doublyLinkedList_render(sf::Font& font, sf::RenderWindow& window, sf::Event& event, Button& BackButton, TextBox& initBox)
+void doublyLinkedList_render(sf::Font& font, sf::RenderWindow& window, 
+    sf::Event& event, Button& BackButton, TextBox& initBox, Buttons &visual)
 {
     static bool initClicked = false; 
 
@@ -34,6 +36,7 @@ void doublyLinkedList_render(sf::Font& font, sf::RenderWindow& window, sf::Event
     if (initClicked)
     {
         initBox.draw(window);
+        visual.render(window);
     }
 
     Add->update(window);
@@ -49,6 +52,9 @@ int main()
     sf::RenderWindow window(sf::VideoMode(1600, 900), "Not Tetris");
     sf::Event event;
     sf::Font font;
+
+    Buttons visual;
+
     Button StartButton(600, 300, 200, 50, font, "Start", 
         sf::Color::Blue, sf::Color::Red, sf::Color::Blue, sf::Color::Black);
 
@@ -73,10 +79,12 @@ int main()
     doublyLinkedList LinkedList;
     font.loadFromFile("arial.ttf");
 
-    TextBox initBox(font, 500, 500, 200, 50, sf::Color::White, sf::Color::Black, 5);
+    TextBox initBox(font, 500, 500, 500, 50, sf::Color::White, sf::Color::Black, 5);
     
     bool Menu = false, DS = false;
     bool SA = false, DLL = false, Q = false, S = false;
+
+
     while (window.isOpen()) {
 
         while (window.pollEvent(event)) {
@@ -85,7 +93,7 @@ int main()
 
                 window.close();
             }
-            initBox.handleEvent(event);
+            initBox.handleEvent(event, font, visual);
         }
 
         window.clear(sf::Color::White);
@@ -96,11 +104,12 @@ int main()
         if (Menu && DS)
         {
             if (LinkedListButton.isClicked(window)) DLL = true;
-            if (DLL == true) doublyLinkedList_render(font, window, event, BackButton, initBox);
+            if (DLL == true) doublyLinkedList_render(font, window, event, BackButton, initBox, visual);
+
         }
 
         window.display();
     }
-
+    
     return 0;
 }

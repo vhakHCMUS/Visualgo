@@ -1,6 +1,7 @@
 #include <SFML/Graphics.hpp>
 
 #include "DoublyLinkedList.h"
+#include "Buttons.h"
 
 struct TextBox {
     sf::RectangleShape shape;
@@ -13,6 +14,7 @@ struct TextBox {
 
     void update();
     void draw(sf::RenderWindow& window);
-
-    void handleEvent(sf::Event event);
+    void handleEvent(sf::Event &event, sf::Font& font, Buttons& visual);
+    void transfer(Buttons& visual, sf::Font& font);
+    
 };
