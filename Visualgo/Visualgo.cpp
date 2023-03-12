@@ -9,42 +9,12 @@
 #include "TextBox.h"
 #include "Menu.h"
 #include "Buttons.h"
+#include "MenuDLL.h"
+#include "MenuStaticArray.h"
+#include "MenuQueue.h"
+#include "MenuStack.h"
 #include <iostream>
 
-void doublyLinkedList_render(sf::Font& font, sf::RenderWindow& window, 
-    sf::Event& event, Button& BackButton, TextBox& initBox, Buttons &visual)
-{
-    static bool initClicked = false; 
-
-    BackButton.render(window);
-    BackButton.update(window);
-
-    Button* Init = new Button(100, 100, 200, 50, font, "Init",
-        sf::Color::Blue, sf::Color::Red, sf::Color::Blue, sf::Color::Black);
-
-    Button* Add = new Button(100, 200, 200, 50, font, "Add",
-        sf::Color::Blue, sf::Color::Red, sf::Color::Blue, sf::Color::Black);
-
-    Init->update(window);
-    Init->render(window);
-
-    if (Init->isClicked(window))
-    {
-        initClicked = true;
-    }
-
-    if (initClicked)
-    {
-        initBox.draw(window);
-        visual.render(window);
-    }
-
-    Add->update(window);
-    Add->render(window);
-
-    delete Init;
-    delete Add;
-}
 
 int main()
 {
@@ -80,6 +50,15 @@ int main()
         if (MenuCur) MenuNext(window, font, Start, MenuCur,
             StaticArray, LinkedList, Stack, Queue);
 
+        if (LinkedList) MenuDLL(window, font, MenuCur, LinkedList);
+
+        if (StaticArray) MenuStaticArray(window, font, MenuCur, StaticArray);
+
+        if (Queue) MenuQueue(window, font, MenuCur, Queue);
+
+        if (Stack) MenuStack(window, font, MenuCur, Stack);
+
+        
         window.display();
     }
     

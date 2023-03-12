@@ -22,7 +22,7 @@ void Menu(sf::RenderWindow& window, sf::Font& font, bool &Start, bool &Menu, But
     }
 }
 
-void MenuNext(sf::RenderWindow& window, sf::Font& font, bool& Start, bool& Menu,
+void MenuNext(sf::RenderWindow& window, sf::Font& font, bool& Start, bool& MenuCur,
     bool& StaticArray, bool& LinkedList, bool& Stack, bool& Queue)
 {
 
@@ -44,17 +44,31 @@ void MenuNext(sf::RenderWindow& window, sf::Font& font, bool& Start, bool& Menu,
     StaticArrayButton->update(window);
     StaticArrayButton->render(window);
 
+    if (StaticArrayButton->isClicked(window))
+        StaticArray = true;
+
     LinkedListButton->update(window);
     LinkedListButton->render(window);
+
+    if (LinkedListButton->isClicked(window))
+        LinkedList = true;
 
     QueueButton->update(window);
     QueueButton->render(window);
 
+    if (QueueButton->isClicked(window))
+        Queue = true;
+
     StackButton->update(window);
     StackButton->render(window);
 
+    if (StackButton->isClicked(window))
+        Stack = true;
+
     BackButton->update(window);
     BackButton->render(window);
+     
+    if (BackButton->isClicked(window)) MenuCur = 0, Start = 1; 
 
     delete StaticArrayButton, LinkedListButton, QueueButton, StackButton, BackButton;
 }

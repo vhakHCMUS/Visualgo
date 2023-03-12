@@ -1,4 +1,5 @@
 #include "Button.h"
+#include <iostream>
 
 Button::Button(float x, float y, float width, float height, sf::Font &font, std::string text,
     sf::Color idleColor, sf::Color hoverColor, sf::Color activeColor, sf::Color outlineColor)
@@ -65,6 +66,8 @@ bool Button::isClicked(sf::RenderWindow& window)
 {
     if (this->isMouseOver(window) && sf::Mouse::isButtonPressed(sf::Mouse::Left))
     {
+        sf::Time sleepTime = sf::seconds(0.1f);
+        sf::sleep(sleepTime);
         return true;
     }
     return false;

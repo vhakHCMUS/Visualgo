@@ -145,6 +145,10 @@
     <ClCompile Include="DoublyLinkedList.cpp" />
     <ClCompile Include="Circle.cpp" />
     <ClCompile Include="Menu.cpp" />
+    <ClCompile Include="MenuDLL.cpp" />
+    <ClCompile Include="MenuQueue.cpp" />
+    <ClCompile Include="MenuStack.cpp" />
+    <ClCompile Include="MenuStaticArray.cpp" />
     <ClCompile Include="Queue.cpp" />
     <ClCompile Include="Stack.cpp" />
     <ClCompile Include="StaticArray.cpp" />
@@ -158,6 +162,10 @@
     <ClInclude Include="DoublyLinkedList.h" />
     <ClInclude Include="Circle.h" />
     <ClInclude Include="Menu.h" />
+    <ClInclude Include="MenuDLL.h" />
+    <ClInclude Include="MenuQueue.h" />
+    <ClInclude Include="MenuStack.h" />
+    <ClInclude Include="MenuStaticArray.h" />
     <ClInclude Include="Queue.h" />
     <ClInclude Include="Stack.h" />
     <ClInclude Include="StaticArray.h" />
