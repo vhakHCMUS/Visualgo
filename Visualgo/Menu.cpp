@@ -1,54 +1,60 @@
 #include "Menu.h"
 
-void RenderMainMenu(sf::Font& font, sf::RenderWindow& window, Button& StartButton, Button& QuitButton)
+void Menu(sf::RenderWindow& window, sf::Font& font, bool &Start, bool &Menu, Button &QuitButton)
 {
-
-    StartButton.update(window);
-    StartButton.render(window);
-
-    QuitButton.update(window);
-    QuitButton.render(window);
-}
-
-void RenderDataStructureMenu(sf::Font& font, sf::RenderWindow& window,
-    Button& StaticArrayButton, Button& LinkedListButton, Button& QueueButton, Button& StackButton, Button& BackButton)
-{
-    StaticArrayButton.update(window);
-    StaticArrayButton.render(window);
-
-    LinkedListButton.update(window);
-    LinkedListButton.render(window);
-
-    QueueButton.update(window);
-    QueueButton.render(window);
-
-    StackButton.update(window);
-    StackButton.render(window);
-
-    BackButton.update(window);
-    BackButton.render(window);
-}
-
-void handleBackButton(bool& Menu, bool& DS, Button& back, sf::RenderWindow& window)
-{
-    if (back.isClicked(window))
+    if (Start)
     {
-        if (DS == 1) DS = 0; else
-            if (Menu == 1) Menu = 0;
+        Button* StartButton = new Button(600, 300, 200, 50, font, "Start",
+            sf::Color::Blue, sf::Color::Red, sf::Color::Blue, sf::Color::Black);
+
+        StartButton->update(window);
+        StartButton->render(window);
+
+        if (StartButton->isClicked(window))
+        {
+            Start = 0;
+            Menu = 1;
+        }
+        QuitButton.update(window);
+        QuitButton.render(window);
+
+        delete StartButton;
     }
-    return;
 }
 
-void controlMenu(sf::Font& font, sf::RenderWindow& window, bool& Menu, bool& DS, Button& StartButton, Button& QuitButton, Button& BackButton,
-    Button& StaticArrayButton, Button& LinkedListButton, Button& QueueButton, Button& StackButton)
+void MenuNext(sf::RenderWindow& window, sf::Font& font, bool& Start, bool& Menu,
+    bool& StaticArray, bool& LinkedList, bool& Stack, bool& Queue)
 {
-    if (!Menu && !DS) RenderMainMenu(font, window, StartButton, QuitButton);
 
-    if (StartButton.isClicked(window)) Menu = 1;
+    Button *StaticArrayButton = new Button(100, 100, 200, 50, font, "StaticArray",
+        sf::Color::Blue, sf::Color::Red, sf::Color::Blue, sf::Color::Black);
 
-    if (Menu && !DS) RenderDataStructureMenu(font, window, StaticArrayButton, LinkedListButton, QueueButton, StackButton, BackButton);
+    Button *LinkedListButton = new Button(100, 200, 200, 50, font, "LinkedList",
+        sf::Color::Blue, sf::Color::Red, sf::Color::Blue, sf::Color::Black);
 
-    if (StaticArrayButton.isClicked(window) || LinkedListButton.isClicked(window) || QueueButton.isClicked(window) || StackButton.isClicked(window))
-        DS = 1;
-    handleBackButton(Menu, DS, BackButton, window);
+    Button *QueueButton = new Button(100, 300, 200, 50, font, "Queue",
+        sf::Color::Blue, sf::Color::Red, sf::Color::Blue, sf::Color::Black);
+
+    Button *StackButton = new Button(100, 400, 200, 50, font, "Stack",
+        sf::Color::Blue, sf::Color::Red, sf::Color::Blue, sf::Color::Black);
+
+    Button *BackButton = new Button(50, 20, 200, 50, font, "Back",
+        sf::Color::Blue, sf::Color::Red, sf::Color::Blue, sf::Color::Black);
+
+    StaticArrayButton->update(window);
+    StaticArrayButton->render(window);
+
+    LinkedListButton->update(window);
+    LinkedListButton->render(window);
+
+    QueueButton->update(window);
+    QueueButton->render(window);
+
+    StackButton->update(window);
+    StackButton->render(window);
+
+    BackButton->update(window);
+    BackButton->render(window);
+
+    delete StaticArrayButton, LinkedListButton, QueueButton, StackButton, BackButton;
 }

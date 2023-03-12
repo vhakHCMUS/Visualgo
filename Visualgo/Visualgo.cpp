@@ -55,35 +55,13 @@ int main()
 
     Buttons visual;
 
-    Button StartButton(600, 300, 200, 50, font, "Start", 
-        sf::Color::Blue, sf::Color::Red, sf::Color::Blue, sf::Color::Black);
-
-    Button QuitButton(600, 400, 200, 50, font, "Quit", 
-        sf::Color::Blue, sf::Color::Red, sf::Color::Blue, sf::Color::Black);
-
-    Button StaticArrayButton(100, 100, 200, 50, font, "StaticArray", 
-        sf::Color::Blue, sf::Color::Red, sf::Color::Blue, sf::Color::Black);
-
-    Button LinkedListButton(100, 200, 200, 50, font, "LinkedList", 
-        sf::Color::Blue, sf::Color::Red, sf::Color::Blue, sf::Color::Black);
-
-    Button QueueButton(100, 300, 200, 50, font, "Queue", 
-        sf::Color::Blue, sf::Color::Red, sf::Color::Blue, sf::Color::Black);
-
-    Button StackButton(100, 400, 200, 50, font, "Stack", 
-        sf::Color::Blue, sf::Color::Red, sf::Color::Blue, sf::Color::Black);
-
-    Button BackButton(50, 30, 200, 50, font, "Back",
-        sf::Color::Blue, sf::Color::Red, sf::Color::Blue, sf::Color::Black);
-
-    doublyLinkedList LinkedList;
     font.loadFromFile("arial.ttf");
 
-    TextBox initBox(font, 500, 500, 500, 50, sf::Color::White, sf::Color::Black, 5);
     
-    bool Menu = false, DS = false;
-    bool SA = false, DLL = false, Q = false, S = false;
-
+    Button QuitButton(600, 400, 200, 50, font, "Quit",
+        sf::Color::Blue, sf::Color::Red, sf::Color::Blue, sf::Color::Black);
+    
+    bool Start = 1, MenuCur = 0, StaticArray = 0, LinkedList = 0, Queue = 0, Stack = 0;
 
     while (window.isOpen()) {
 
@@ -93,20 +71,14 @@ int main()
 
                 window.close();
             }
-            initBox.handleEvent(event, font, visual);
         }
 
         window.clear(sf::Color::White);
 
-        controlMenu(font, window, Menu, DS, StartButton, QuitButton, BackButton,
-            StaticArrayButton, LinkedListButton, QueueButton, StackButton);
-        
-        if (Menu && DS)
-        {
-            if (LinkedListButton.isClicked(window)) DLL = true;
-            if (DLL == true) doublyLinkedList_render(font, window, event, BackButton, initBox, visual);
+        if (Start) Menu(window, font, Start, MenuCur, QuitButton);
 
-        }
+        if (MenuCur) MenuNext(window, font, Start, MenuCur,
+            StaticArray, LinkedList, Stack, Queue);
 
         window.display();
     }
