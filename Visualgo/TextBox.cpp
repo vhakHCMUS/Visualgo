@@ -1,5 +1,5 @@
 #include "TextBox.h"
-#include <iostream>
+
 TextBox::TextBox(sf::Font& font, float x, float y, float width, float height, sf::Color fillColor, sf::Color outlineColor, float outlineThickness) {
     shape.setPosition(x, y);
     shape.setSize(sf::Vector2f(width, height));

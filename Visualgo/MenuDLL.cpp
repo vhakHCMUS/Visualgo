@@ -1,6 +1,6 @@
 #include "MenuDLL.h"
 
-void MenuDLL(sf::RenderWindow& window, sf::Font& font, bool &MenuCur, bool &LinkedList)
+void MenuDLL(sf::RenderWindow& window, sf::Font& font, bool &MenuCur, bool &LinkedList, TextBox &textfield, Buttons& visual)
 {
 	Button* BackButton = new Button(50, 20, 200, 50, font, "Back",
 		sf::Color::Blue, sf::Color::Red, sf::Color::Blue, sf::Color::Black);
@@ -31,6 +31,17 @@ void MenuDLL(sf::RenderWindow& window, sf::Font& font, bool &MenuCur, bool &Link
 	Search->render(window);
 	Add_Head->render(window);
 	Delete_Head->render(window);
+
+	static bool init = false;
+	if (Init->isClicked(window))
+	{
+		init = !(init);
+	}
+	if (init)
+	{
+		textfield.draw(window);
+	}
+	visual.render(window);
 
 	if (BackButton->isClicked(window))
 	{
