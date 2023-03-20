@@ -1,6 +1,6 @@
 #include "MenuDLL.h"
 
-void MenuDLL(sf::RenderWindow& window, sf::Font& font, bool &MenuCur, bool &LinkedList, TextBox &textfield, Buttons& visual)
+void MenuDLL(sf::RenderWindow& window, sf::Font& font, bool &MenuCur, bool &LinkedList, TextBox &textField, Buttons& visual, TextBox& addField)
 {
 	Button* BackButton = new Button(50, 20, 200, 50, font, "Back",
 		sf::Color::Blue, sf::Color::Red, sf::Color::Blue, sf::Color::Black);
@@ -11,10 +11,10 @@ void MenuDLL(sf::RenderWindow& window, sf::Font& font, bool &MenuCur, bool &Link
 	Button* Search = new Button(100, 200, 200, 50, font, "Search",
 		sf::Color::Blue, sf::Color::Red, sf::Color::Blue, sf::Color::Black);
 
-	Button* Add_Head = new Button(100, 300, 200, 50, font, "Add Head",
+	Button* Add_Tail = new Button(100, 300, 200, 50, font, "Add Tail",
 		sf::Color::Blue, sf::Color::Red, sf::Color::Blue, sf::Color::Black);
 
-	Button* Delete_Head = new Button(100, 400, 200, 50, font, "Delete Head",
+	Button* Delete_Tail = new Button(100, 400, 200, 50, font, "Delete Tail",
 		sf::Color::Blue, sf::Color::Red, sf::Color::Blue, sf::Color::Black);
 
 	MenuCur = 0;
@@ -24,22 +24,37 @@ void MenuDLL(sf::RenderWindow& window, sf::Font& font, bool &MenuCur, bool &Link
 
 	Init->update(window);
 	Search->update(window);
-	Add_Head->update(window);
-	Delete_Head->update(window);
+	Add_Tail->update(window);
+	Delete_Tail->update(window);
 
 	Init->render(window);
 	Search->render(window);
-	Add_Head->render(window);
-	Delete_Head->render(window);
+	Add_Tail->render(window);
+	Delete_Tail->render(window);
 
 	static bool init = false;
+	static bool add = false;
 	if (Init->isClicked(window))
 	{
 		init = !(init);
 	}
+	if (Add_Tail->isClicked(window))
+	{
+		add = !(add);
+	}
+
 	if (init)
 	{
-		textfield.draw(window);
+		textField.draw(window);
+	}
+	if (add)
+	{
+		addField.draw(window);
+	}
+
+	if (Delete_Tail->isClicked(window))
+	{
+		visual.pop_tail();
 	}
 	visual.render(window);
 
@@ -49,5 +64,5 @@ void MenuDLL(sf::RenderWindow& window, sf::Font& font, bool &MenuCur, bool &Link
 		MenuCur = 1;
 	}
 
-	delete BackButton, Init, Search, Add_Head, Delete_Head;
+	delete BackButton, Init, Search, Add_Tail, Delete_Tail;
 }

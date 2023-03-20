@@ -1,4 +1,5 @@
 #include "TextBox.h"
+#include <iostream>
 
 TextBox::TextBox(sf::Font& font, float x, float y, float width, float height, sf::Color fillColor, sf::Color outlineColor, float outlineThickness) {
     shape.setPosition(x, y);
@@ -17,6 +18,9 @@ void TextBox::update()
 {
     std::string str = text.getString();
     int temp = 0;
+    
+    while (List.pHead != nullptr) List.deleteHead();
+    
     if (str.size() == 0) return;
 
     for (int i = 0; i < str.size(); i++)
@@ -28,18 +32,19 @@ void TextBox::update()
             List.addTail(create(temp));
             temp = 0;
         }
+        std::cout << i << " : " << temp << " | " << str[i] << "\n";
     }
     List.addTail(create(temp));
-    
+    std::cout << "--------------------------------------\n";
     text.setString("");
 }
 
-void TextBox::draw(sf::RenderWindow & window) {
+void TextBox::draw(sf::RenderWindow& window) {
     window.draw(shape);
     window.draw(text);
 }
 
-void TextBox::transfer(Buttons &visual, sf::Font &font)
+void TextBox::transfer(Buttons& visual, sf::Font& font)
 {
     Node* cur = List.pHead;
     while (cur != nullptr)
@@ -73,9 +78,9 @@ void TextBox::handleEvent(sf::Event& event, sf::Font& font, Buttons& visual) {
 
     if (event.type == sf::Event::KeyPressed) {
         if (event.key.code == sf::Keyboard::Enter) {
+            std::string str = text.getString();
             update();
-            transfer(visual, font);
+            if (str[0] >= '0' && str[0] <= '9') transfer(visual, font);
         }
     }
 }
-

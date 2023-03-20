@@ -8,6 +8,8 @@ struct Buttons
 
 	void add(int a, sf::Font& font);
 
+	void pop_tail();
+
 	void render(sf::RenderTarget& target);
 };
 

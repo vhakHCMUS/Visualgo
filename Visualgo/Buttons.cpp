@@ -20,6 +20,11 @@ void Buttons::add(int a, sf::Font& font)
 	block.push_back(newButton);
 }
 
+void Buttons::pop_tail()
+{
+	if (!block.size()) return;
+	block.pop_back();
+}
 void Buttons::render(sf::RenderTarget& target)
 {
 	for (auto& button : block) {

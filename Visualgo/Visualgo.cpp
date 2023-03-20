@@ -29,8 +29,8 @@ int main()
         sf::Color::Blue, sf::Color::Red, sf::Color::Blue, sf::Color::Black);
 
     Buttons temp;
-    TextBox textfield(font, 600, 400, 500, 50, sf::Color::White, sf::Color::Black, 5);
-
+    TextBox textField(font, 600, 400, 500, 50, sf::Color::White, sf::Color::Black, 5);
+    TextBox addField(font, 700, 500, 400, 50, sf::Color::White, sf::Color::Black, 5);
     bool Start = 1, MenuCur = 0, StaticArray = 0, LinkedList = 0, Queue = 0, Stack = 0;
 
     while (window.isOpen()) {
@@ -41,7 +41,8 @@ int main()
 
                 window.close();
             }
-            textfield.handleEvent(event, font, temp);
+            textField.handleEvent(event, font, temp);
+            addField.handleEvent(event, font, temp);
         }
 
         window.clear(sf::Color::White);
@@ -51,7 +52,7 @@ int main()
         if (MenuCur) MenuNext(window, font, Start, MenuCur,
             StaticArray, LinkedList, Stack, Queue);
 
-        if (LinkedList) MenuDLL(window, font, MenuCur, LinkedList, textfield, temp);
+        if (LinkedList) MenuDLL(window, font, MenuCur, LinkedList, textField, temp, addField);
 
         if (StaticArray) MenuStaticArray(window, font, MenuCur, StaticArray);
 
