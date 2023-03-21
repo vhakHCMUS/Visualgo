@@ -23,6 +23,7 @@ void TextBox::update()
     
     if (str.size() == 0) return;
 
+    while (str[str.size() - 1] == ' ') str.erase(str.size() - 1);
     for (int i = 0; i < str.size(); i++)
     {
         if (str[i] >= '0' && str[i] <= '9')

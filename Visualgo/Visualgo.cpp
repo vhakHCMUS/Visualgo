@@ -47,8 +47,11 @@ int main()
             if (LinkedList && Init) textField.handleEvent(event, font, temp, doublyLL);
             if (LinkedList && Add) addField.handleEvent(event, font, temp, doublyLL);
 
-            if (Stack && Init) textField.handleEvent(event, font, temp, doublyLL);
-            if (Stack && Add) addField.handleEvent(event, font, temp, doublyLL);
+            if (Stack && Init) textField.handleEvent(event, font, temp, stack);
+            if (Stack && Add) addField.handleEvent(event, font, temp, stack);
+
+            if (Queue && Init) textField.handleEvent(event, font, temp, queue);
+            if (Queue && Add) addField.handleEvent(event, font, temp, queue);
         }
 
         window.clear(sf::Color::White);
@@ -62,9 +65,9 @@ int main()
 
         if (StaticArray) MenuStaticArray(window, font, MenuCur, StaticArray);
 
-        if (Queue) MenuQueue(window, font, MenuCur, Queue);
+        if (Queue) MenuQueue(window, font, MenuCur, Queue, textField, temp, addField, queue, Init, Add);
 
-        if (Stack) MenuStack(window, font, MenuCur, Stack, textField, temp, addField, doublyLL, Init, Add);
+        if (Stack) MenuStack(window, font, MenuCur, Stack, textField, temp, addField, stack, Init, Add);
 
 
         window.display();
