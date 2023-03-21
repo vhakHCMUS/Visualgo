@@ -13,6 +13,8 @@ struct Buttons
 
 	void pop_tail();
 
+	void pop_head();
+
 	void render(sf::RenderTarget& target);
 };
 

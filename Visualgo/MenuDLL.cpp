@@ -59,6 +59,14 @@ void MenuDLL(sf::RenderWindow& window, sf::Font& font, bool &MenuCur, bool &Link
 
 	if (BackButton->isClicked(window))
 	{
+		while (visual.block.size()) visual.block.pop_back();
+		while (doublyLL.pHead != nullptr)
+		{
+			Node* cur = doublyLL.pHead;
+			doublyLL.pHead = doublyLL.pHead->Next;
+			delete cur;
+		}
+		add = init = 0;
 		LinkedList = 0;
 		MenuCur = 1;
 	}

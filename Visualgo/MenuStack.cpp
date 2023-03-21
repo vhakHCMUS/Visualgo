@@ -28,15 +28,34 @@ void MenuStack(sf::RenderWindow& window, sf::Font& font, bool& MenuCur, bool& St
 	Add->render(window);
 	Pop->render(window);
 
+	if (Init->isClicked(window))
+	{
+		init = !(init);
+	}
+	if (Add->isClicked(window))
+	{
+		add = !(add);
+	}
+
+	if (init)
+	{
+		textField.draw(window);
+	}
+	if (add)
+	{
+		addField.draw(window);
+	}
 	if (Pop->isClicked(window))
 	{
-		stack.deleteHead();
+		stack.deleteTail();
 		visual.pop_tail();
 	}
 	visual.render(window);
 
 	if (BackButton->isClicked(window))
 	{
+		while (visual.block.size()) visual.block.pop_back();
+		add = init = 0;
 		Stack = 0;
 		MenuCur = 1;
 	}

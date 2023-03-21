@@ -46,6 +46,9 @@ int main()
             }
             if (LinkedList && Init) textField.handleEvent(event, font, temp, doublyLL);
             if (LinkedList && Add) addField.handleEvent(event, font, temp, doublyLL);
+
+            if (Stack && Init) textField.handleEvent(event, font, temp, doublyLL);
+            if (Stack && Add) addField.handleEvent(event, font, temp, doublyLL);
         }
 
         window.clear(sf::Color::White);
