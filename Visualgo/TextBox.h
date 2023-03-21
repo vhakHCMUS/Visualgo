@@ -1,3 +1,4 @@
+#pragma once
 #include <SFML/Graphics.hpp>
 
 #include "DoublyLinkedList.h"
@@ -13,8 +14,11 @@ struct TextBox {
     TextBox(sf::Font& font, float x, float y, float width, float height, sf::Color fillColor, sf::Color outlineColor, float outlineThickness);
 
     void update();
+
     void draw(sf::RenderWindow& window);
-    void handleEvent(sf::Event &event, sf::Font& font, Buttons& visual);
-    void transfer(Buttons& visual, sf::Font& font);
+
+    void handleEvent(sf::Event& event, sf::Font& font, Buttons& visual, doublyLinkedList& list);
+
+    void transfer(Buttons& visual, doublyLinkedList& list, sf::Font& font);
     
 };

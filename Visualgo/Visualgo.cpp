@@ -17,7 +17,7 @@
 
 int main()
 {
-    sf::RenderWindow window(sf::VideoMode(1600, 900), "Not Tetris");
+    sf::RenderWindow window(sf::VideoMode(1600, 900), "Visualgo");
     sf::Event event;
     sf::Font font;
 
@@ -29,9 +29,12 @@ int main()
         sf::Color::Blue, sf::Color::Red, sf::Color::Blue, sf::Color::Black);
 
     Buttons temp;
+    doublyLinkedList doublyLL, stack, queue;
     TextBox textField(font, 600, 400, 500, 50, sf::Color::White, sf::Color::Black, 5);
     TextBox addField(font, 700, 500, 400, 50, sf::Color::White, sf::Color::Black, 5);
+
     bool Start = 1, MenuCur = 0, StaticArray = 0, LinkedList = 0, Queue = 0, Stack = 0;
+    bool Init = 0, Add = 0;
 
     while (window.isOpen()) {
 
@@ -41,8 +44,8 @@ int main()
 
                 window.close();
             }
-            textField.handleEvent(event, font, temp);
-            addField.handleEvent(event, font, temp);
+            if (LinkedList && Init) textField.handleEvent(event, font, temp, doublyLL);
+            if (LinkedList && Add) addField.handleEvent(event, font, temp, doublyLL);
         }
 
         window.clear(sf::Color::White);
@@ -52,13 +55,13 @@ int main()
         if (MenuCur) MenuNext(window, font, Start, MenuCur,
             StaticArray, LinkedList, Stack, Queue);
 
-        if (LinkedList) MenuDLL(window, font, MenuCur, LinkedList, textField, temp, addField);
+        if (LinkedList) MenuDLL(window, font, MenuCur, LinkedList, textField, temp, addField, doublyLL, Init, Add);
 
         if (StaticArray) MenuStaticArray(window, font, MenuCur, StaticArray);
 
         if (Queue) MenuQueue(window, font, MenuCur, Queue);
 
-        if (Stack) MenuStack(window, font, MenuCur, Stack);
+        if (Stack) MenuStack(window, font, MenuCur, Stack, textField, temp, addField, doublyLL, Init, Add);
 
 
         window.display();

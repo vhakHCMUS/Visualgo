@@ -35,7 +35,7 @@ void TextBox::update()
         std::cout << i << " : " << temp << " | " << str[i] << "\n";
     }
     List.addTail(create(temp));
-    std::cout << "--------------------------------------\n";
+    std::cout << "update--------------------------------------\n";
     text.setString("");
 }
 
@@ -44,17 +44,26 @@ void TextBox::draw(sf::RenderWindow& window) {
     window.draw(text);
 }
 
-void TextBox::transfer(Buttons& visual, sf::Font& font)
+void TextBox::transfer(Buttons& visual, doublyLinkedList& list, sf::Font& font)
 {
     Node* cur = List.pHead;
     while (cur != nullptr)
     {
+        list.addTail(create(cur->data));
+        cur = cur->Next;
+    }
+    while (visual.block.size()) visual.pop_tail();
+    cur = list.pHead;
+    while (cur != nullptr)
+    {
+        std::cout << cur->data << " ";
         visual.add(cur->data, font);
         cur = cur->Next;
     }
+    std::cout << "transfer--------------------------------------\n";
 }
 
-void TextBox::handleEvent(sf::Event& event, sf::Font& font, Buttons& visual) {
+void TextBox::handleEvent(sf::Event& event, sf::Font& font, Buttons& visual, doublyLinkedList& list) {
     if (event.type == sf::Event::MouseButtonPressed && event.mouseButton.button == sf::Mouse::Left) {
         sf::Vector2f mousePos(event.mouseButton.x, event.mouseButton.y);
         if (shape.getGlobalBounds().contains(mousePos)) {
@@ -80,7 +89,7 @@ void TextBox::handleEvent(sf::Event& event, sf::Font& font, Buttons& visual) {
         if (event.key.code == sf::Keyboard::Enter) {
             std::string str = text.getString();
             update();
-            if (str[0] >= '0' && str[0] <= '9') transfer(visual, font);
+            transfer(visual, list, font);
         }
     }
 }

@@ -1,6 +1,6 @@
 #pragma once
-#pragma once
-#include "Buttons.h"
 
-void MenuStack(sf::RenderWindow& window, sf::Font& font, bool& MenuCur, bool& Stack);
+#include "TextBox.h"
+
+void MenuStack(sf::RenderWindow& window, sf::Font& font, bool& MenuCur, bool& Stack, TextBox& textField, Buttons& visual, TextBox& addField, doublyLinkedList& doublyLL, bool& init, bool& add);
 
