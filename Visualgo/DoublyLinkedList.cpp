@@ -89,7 +89,7 @@ void doublyLinkedList::deleteIndexK(int k)
 	while (cur != nullptr && count < k)
 		cur = cur->Next, count++;
 
-	if (cur == nullptr)
+	if (cur == nullptr || cur->Next == nullptr)
 	{
 		deleteTail();
 		return;

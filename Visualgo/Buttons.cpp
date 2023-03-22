@@ -1,4 +1,5 @@
 #include "Buttons.h"
+#include "Arrow.h"
 
 void Buttons::add(int a, sf::Font& font)
 {
@@ -15,8 +16,8 @@ void Buttons::add(int a, sf::Font& font)
 	}
 	
 	Button newButton(x, y, 80, 50, font, std::to_string(a),
-		sf::Color::Green, sf::Color::Yellow, sf::Color::Green, sf::Color::Black);
-
+		sf::Color::Green, sf::Color::Yellow, sf::Color::Cyan, sf::Color::Black);
+	if (block.size() == 0) newButton.shape.setFillColor(newButton.activeColor);
 	block.push_back(newButton);
 }
 
@@ -32,10 +33,17 @@ void Buttons::pop_head()
 
 	for (int i = 0; i < block.size() - 1; i++) block[i] = block[i + 1];
 	block.pop_back();
+	block[0].shape.setFillColor(block[0].activeColor);
 }
 void Buttons::render(sf::RenderTarget& target)
 {
 	for (auto& button : block) {
 		button.render(target);
+	}
+	for (int i = 1; i < block.size(); i++)
+	{
+		Arrow* arrow = new Arrow(block[i - 1].posX +  block[i - 1].shape.getSize().x, block[i - 1].posY + block[i - 1].shape.getSize().y/2, 50, 10, sf::Color::Black);
+		arrow->draw(target);
+		delete arrow;
 	}
 }

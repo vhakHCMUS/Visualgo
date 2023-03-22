@@ -66,7 +66,7 @@ bool Button::isClicked(sf::RenderWindow& window)
 {
     if (this->isMouseOver(window) && sf::Mouse::isButtonPressed(sf::Mouse::Left))
     {
-        sf::Time sleepTime = sf::seconds(0.1f);
+        sf::Time sleepTime = sf::seconds(0.2f);
         sf::sleep(sleepTime);
         return true;
     }

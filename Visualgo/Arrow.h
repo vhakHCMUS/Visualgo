@@ -6,6 +6,6 @@ struct Arrow {
     sf::ConvexShape head;
 
     Arrow(float x, float y, float length, float thickness, sf::Color color);
-    void draw(sf::RenderWindow& window);
+    void draw(sf::RenderTarget& window);
 };
 

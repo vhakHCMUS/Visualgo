@@ -15,7 +15,7 @@ Arrow::Arrow(float x, float y, float length, float thickness, sf::Color color) {
     head.setPosition(x + length, y + thickness / 2);
 }
 
-void Arrow::draw(sf::RenderWindow& window) {
+void Arrow::draw(sf::RenderTarget& window) {
     window.draw(body);
     window.draw(head);
 }
