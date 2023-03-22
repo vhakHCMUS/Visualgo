@@ -30,11 +30,11 @@ int main()
 
     Buttons temp;
     doublyLinkedList doublyLL, stack, queue;
-    TextBox textField(font, 600, 400, 500, 50, sf::Color::White, sf::Color::Black, 5);
+    TextBox textField(font, 600, 50, 500, 50, sf::Color::White, sf::Color::Black, 5);
     TextBox addField(font, 700, 500, 400, 50, sf::Color::White, sf::Color::Black, 5);
 
     bool Start = 1, MenuCur = 0, StaticArray = 0, LinkedList = 0, Queue = 0, Stack = 0;
-    bool Init = 0, Add = 0;
+    bool Init = 0, Add_Tail = 0, Add_Head = 0;
 
     while (window.isOpen()) {
 
@@ -44,14 +44,15 @@ int main()
 
                 window.close();
             }
-            if (LinkedList && Init) textField.handleEvent(event, font, temp, doublyLL);
-            if (LinkedList && Add) addField.handleEvent(event, font, temp, doublyLL);
+            if (LinkedList && Init) textField.handleEvent(event, font, temp, doublyLL, 1);
+            if (LinkedList && Add_Tail) addField.handleEvent(event, font, temp, doublyLL, 1);
+            if (LinkedList && Add_Head) addField.handleEvent(event, font, temp, doublyLL, 0);
 
-            if (Stack && Init) textField.handleEvent(event, font, temp, stack);
-            if (Stack && Add) addField.handleEvent(event, font, temp, stack);
+            if (Stack && Init) textField.handleEvent(event, font, temp, stack, 0);
+            if (Stack && Add_Tail) addField.handleEvent(event, font, temp, stack, 1);
 
-            if (Queue && Init) textField.handleEvent(event, font, temp, queue);
-            if (Queue && Add) addField.handleEvent(event, font, temp, queue);
+            if (Queue && Init) textField.handleEvent(event, font, temp, queue, 0);
+            if (Queue && Add_Tail) addField.handleEvent(event, font, temp, queue, 1);
         }
 
         window.clear(sf::Color::White);
@@ -61,13 +62,13 @@ int main()
         if (MenuCur) MenuNext(window, font, Start, MenuCur,
             StaticArray, LinkedList, Stack, Queue);
 
-        if (LinkedList) MenuDLL(window, font, MenuCur, LinkedList, textField, temp, addField, doublyLL, Init, Add);
+        if (LinkedList) MenuDLL(window, font, MenuCur, LinkedList, textField, temp, addField, doublyLL, Init, Add_Tail, Add_Head);
 
         if (StaticArray) MenuStaticArray(window, font, MenuCur, StaticArray);
 
-        if (Queue) MenuQueue(window, font, MenuCur, Queue, textField, temp, addField, queue, Init, Add);
+        if (Queue) MenuQueue(window, font, MenuCur, Queue, textField, temp, addField, queue, Init, Add_Tail);
 
-        if (Stack) MenuStack(window, font, MenuCur, Stack, textField, temp, addField, stack, Init, Add);
+        if (Stack) MenuStack(window, font, MenuCur, Stack, textField, temp, addField, stack, Init, Add_Tail);
 
 
         window.display();

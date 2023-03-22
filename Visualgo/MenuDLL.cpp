@@ -1,6 +1,6 @@
 #include "MenuDLL.h"
 
-void MenuDLL(sf::RenderWindow& window, sf::Font& font, bool &MenuCur, bool &LinkedList, TextBox &textField, Buttons& visual, TextBox& addField, doublyLinkedList& doublyLL, bool &init, bool &add)
+void MenuDLL(sf::RenderWindow& window, sf::Font& font, bool &MenuCur, bool &LinkedList, TextBox &textField, Buttons& visual, TextBox& addField, doublyLinkedList& doublyLL, bool &init, bool &add_tail, bool &add_head)
 {
 	Button* BackButton = new Button(50, 20, 200, 50, font, "Back",
 		sf::Color::Blue, sf::Color::Red, sf::Color::Blue, sf::Color::Black);
@@ -17,6 +17,14 @@ void MenuDLL(sf::RenderWindow& window, sf::Font& font, bool &MenuCur, bool &Link
 	Button* Delete_Tail = new Button(100, 400, 200, 50, font, "Delete Tail",
 		sf::Color::Blue, sf::Color::Red, sf::Color::Blue, sf::Color::Black);
 
+	Button* Add_Head = new Button(100, 500, 200, 50, font, "Add Head",
+		sf::Color::Blue, sf::Color::Red, sf::Color::Blue, sf::Color::Black);
+
+	Button* Delete_Head = new Button(100, 600, 200, 50, font, "Delete Head",
+		sf::Color::Blue, sf::Color::Red, sf::Color::Blue, sf::Color::Black);
+
+
+
 	MenuCur = 0;
 
 	BackButton->update(window);
@@ -26,11 +34,15 @@ void MenuDLL(sf::RenderWindow& window, sf::Font& font, bool &MenuCur, bool &Link
 	Search->update(window);
 	Add_Tail->update(window);
 	Delete_Tail->update(window);
+	Add_Head->update(window);
+	Delete_Head->update(window);
 
 	Init->render(window);
 	Search->render(window);
 	Add_Tail->render(window);
 	Delete_Tail->render(window);
+	Add_Head->render(window);
+	Delete_Head->render(window);
 
 	if (Init->isClicked(window))
 	{
@@ -38,14 +50,18 @@ void MenuDLL(sf::RenderWindow& window, sf::Font& font, bool &MenuCur, bool &Link
 	}
 	if (Add_Tail->isClicked(window))
 	{
-		add = !(add);
+		add_tail = !(add_tail);
+	}
+	if (Add_Head->isClicked(window))
+	{
+		add_head = !(add_head);
 	}
 
 	if (init)
 	{
 		textField.draw(window);
 	}
-	if (add)
+	if (add_tail || add_head)
 	{
 		addField.draw(window);
 	}
@@ -54,6 +70,12 @@ void MenuDLL(sf::RenderWindow& window, sf::Font& font, bool &MenuCur, bool &Link
 	{
 		doublyLL.deleteTail();
 		visual.pop_tail();
+	}
+
+	if (Delete_Head->isClicked(window))
+	{
+		doublyLL.deleteHead();
+		visual.pop_head();
 	}
 	visual.render(window);
 
@@ -66,7 +88,7 @@ void MenuDLL(sf::RenderWindow& window, sf::Font& font, bool &MenuCur, bool &Link
 			doublyLL.pHead = doublyLL.pHead->Next;
 			delete cur;
 		}
-		add = init = 0;
+		add_tail = add_head = init = 0;
 		LinkedList = 0;
 		MenuCur = 1;
 	}

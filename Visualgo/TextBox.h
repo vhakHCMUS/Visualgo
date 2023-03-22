@@ -17,8 +17,10 @@ struct TextBox {
 
     void draw(sf::RenderWindow& window);
 
-    void handleEvent(sf::Event& event, sf::Font& font, Buttons& visual, doublyLinkedList& list);
+    void handleEvent(sf::Event& event, sf::Font& font, Buttons& visual, doublyLinkedList& list, int type);
 
-    void transfer(Buttons& visual, doublyLinkedList& list, sf::Font& font);
+    void transfer_head(Buttons& visual, doublyLinkedList& list, sf::Font& font);
+
+    void transfer_tail(Buttons& visual, doublyLinkedList& list, sf::Font& font);
     
 };

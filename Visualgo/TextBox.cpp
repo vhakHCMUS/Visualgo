@@ -45,7 +45,28 @@ void TextBox::draw(sf::RenderWindow& window) {
     window.draw(text);
 }
 
-void TextBox::transfer(Buttons& visual, doublyLinkedList& list, sf::Font& font)
+void TextBox::transfer_head(Buttons& visual, doublyLinkedList& list, sf::Font& font)
+{
+    Node* cur = List.pTail;
+    while (cur != nullptr)
+    {
+        list.addHead(create(cur->data));
+        Node* tmp = cur;
+        cur = cur->Prev;
+        delete tmp;
+    }
+    while (visual.block.size()) visual.pop_tail();
+    cur = list.pHead;
+    while (cur != nullptr)
+    {
+        std::cout << cur->data << " ";
+        visual.add(cur->data, font);
+        cur = cur->Next;
+    }
+    std::cout << "transfer--------------------------------------\n";
+}
+
+void TextBox::transfer_tail(Buttons& visual, doublyLinkedList& list, sf::Font& font)
 {
     Node* cur = List.pHead;
     while (cur != nullptr)
@@ -64,7 +85,7 @@ void TextBox::transfer(Buttons& visual, doublyLinkedList& list, sf::Font& font)
     std::cout << "transfer--------------------------------------\n";
 }
 
-void TextBox::handleEvent(sf::Event& event, sf::Font& font, Buttons& visual, doublyLinkedList& list) {
+void TextBox::handleEvent(sf::Event& event, sf::Font& font, Buttons& visual, doublyLinkedList& list, int type) {
     if (event.type == sf::Event::MouseButtonPressed && event.mouseButton.button == sf::Mouse::Left) {
         sf::Vector2f mousePos(event.mouseButton.x, event.mouseButton.y);
         if (shape.getGlobalBounds().contains(mousePos)) {
@@ -90,7 +111,8 @@ void TextBox::handleEvent(sf::Event& event, sf::Font& font, Buttons& visual, dou
         if (event.key.code == sf::Keyboard::Enter) {
             std::string str = text.getString();
             update();
-            transfer(visual, list, font);
+            if (type == 0) transfer_head(visual, list, font);
+            if (type == 1) transfer_tail(visual, list, font);
         }
     }
 }
