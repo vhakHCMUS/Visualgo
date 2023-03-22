@@ -22,5 +22,9 @@ struct TextBox {
     void transfer_head(Buttons& visual, doublyLinkedList& list, sf::Font& font);
 
     void transfer_tail(Buttons& visual, doublyLinkedList& list, sf::Font& font);
+
+    void transfer_index(Buttons& visual, doublyLinkedList& list, sf::Font& font);
+
+    void transfer_del_index(Buttons& visual, doublyLinkedList& list, sf::Font& font);
     
 };

@@ -1,6 +1,6 @@
 #include "MenuDLL.h"
 
-void MenuDLL(sf::RenderWindow& window, sf::Font& font, bool &MenuCur, bool &LinkedList, TextBox &textField, Buttons& visual, TextBox& addField, doublyLinkedList& doublyLL, bool &init, bool &add_tail, bool &add_head)
+void MenuDLL(sf::RenderWindow& window, sf::Font& font, bool &MenuCur, bool &LinkedList, TextBox &textField, Buttons& visual, TextBox& addField, doublyLinkedList& doublyLL, bool &init, bool &add_tail, bool &add_head, bool &add_index, bool& delete_index)
 {
 	Button* BackButton = new Button(50, 20, 200, 50, font, "Back",
 		sf::Color::Blue, sf::Color::Red, sf::Color::Blue, sf::Color::Black);
@@ -23,6 +23,12 @@ void MenuDLL(sf::RenderWindow& window, sf::Font& font, bool &MenuCur, bool &Link
 	Button* Delete_Head = new Button(100, 600, 200, 50, font, "Delete Head",
 		sf::Color::Blue, sf::Color::Red, sf::Color::Blue, sf::Color::Black);
 
+	Button* Add_Index = new Button(100, 700, 200, 50, font, "Add Index",
+		sf::Color::Blue, sf::Color::Red, sf::Color::Blue, sf::Color::Black);
+
+	Button* Delete_Index = new Button(100, 800, 200, 50, font, "Delete Index",
+		sf::Color::Blue, sf::Color::Red, sf::Color::Blue, sf::Color::Black);
+
 
 
 	MenuCur = 0;
@@ -36,6 +42,8 @@ void MenuDLL(sf::RenderWindow& window, sf::Font& font, bool &MenuCur, bool &Link
 	Delete_Tail->update(window);
 	Add_Head->update(window);
 	Delete_Head->update(window);
+	Add_Index->update(window);
+	Delete_Index->update(window);
 
 	Init->render(window);
 	Search->render(window);
@@ -43,6 +51,8 @@ void MenuDLL(sf::RenderWindow& window, sf::Font& font, bool &MenuCur, bool &Link
 	Delete_Tail->render(window);
 	Add_Head->render(window);
 	Delete_Head->render(window);
+	Add_Index->render(window);
+	Delete_Index->render(window);
 
 	if (Init->isClicked(window))
 	{
@@ -56,12 +66,19 @@ void MenuDLL(sf::RenderWindow& window, sf::Font& font, bool &MenuCur, bool &Link
 	{
 		add_head = !(add_head);
 	}
-
+	if (Add_Index->isClicked(window))
+	{
+		add_index = !(add_index);
+	}
+	if (Delete_Index->isClicked(window))
+	{
+		delete_index = !(delete_index);
+	}
 	if (init)
 	{
 		textField.draw(window);
 	}
-	if (add_tail || add_head)
+	if (add_tail || add_head || add_index || delete_index)
 	{
 		addField.draw(window);
 	}
