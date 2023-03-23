@@ -52,8 +52,8 @@ int main()
             if (LinkedList && Search) addField.handleSearchEvent(event, font, temp, doublyLL, search_data);
             if (LinkedList && Update) addField.handleEvent(event, font, temp, doublyLL, 4);
 
-            if (Stack && Init) textField.handleEvent(event, font, temp, stack, 0);
-            if (Stack && Add_Tail) addField.handleEvent(event, font, temp, stack, 1);
+            if (Stack && Init) textField.handleEvent(event, font, temp, stack, 1);
+            if (Stack && Add_Head) addField.handleEvent(event, font, temp, stack, 0);
 
             if (Queue && Init) textField.handleEvent(event, font, temp, queue, 0);
             if (Queue && Add_Tail) addField.handleEvent(event, font, temp, queue, 1);
@@ -72,7 +72,7 @@ int main()
 
         if (Queue) MenuQueue(window, font, MenuCur, Queue, textField, temp, addField, queue, Init, Add_Tail);
 
-        if (Stack) MenuStack(window, font, MenuCur, Stack, textField, temp, addField, stack, Init, Add_Tail);
+        if (Stack) MenuStack(window, font, MenuCur, Stack, textField, temp, addField, stack, Init, Add_Tail, Add_Head, Add_Index, Delete_Index, Search, search_data, Update);
 
 
         window.display();

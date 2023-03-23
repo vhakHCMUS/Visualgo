@@ -1,6 +1,6 @@
 #include "Arrow.h"
 
-Arrow::Arrow(float x, float y, float length, float thickness, sf::Color color) {
+Arrow::Arrow(float x, float y, float length, float thickness, sf::Color color, sf::Font& font) {
     // Create the body of the arrow
     body.setSize(sf::Vector2f(length * 0.7, thickness));
     body.setPosition(x + 10, y);
@@ -20,6 +20,18 @@ Arrow::Arrow(float x, float y, float length, float thickness, sf::Color color) {
     head2.setPoint(2, sf::Vector2f(thickness * 2, -thickness));
     head2.setFillColor(color);
     head2.setPosition(x, y + thickness / 2);
+
+    aboveText.setFont(font);
+    aboveText.setString("pNext");
+    aboveText.setCharacterSize(15);
+    aboveText.setFillColor(sf::Color::Black);
+    aboveText.setPosition(x + 10, y - 30);
+
+    belowText.setFont(font);
+    belowText.setString("pPrev");
+    belowText.setCharacterSize(15);
+    belowText.setFillColor(sf::Color::Black);
+    belowText.setPosition(x + 10, y + 30);
 }
 
 void Arrow::draw(sf::RenderTarget& window) {

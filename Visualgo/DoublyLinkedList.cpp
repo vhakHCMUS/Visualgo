@@ -62,11 +62,9 @@ void doublyLinkedList::deleteHead()
 {
 	if (pHead == nullptr) return;
 
-	if (pHead == pTail)
+	if (pHead->Next == nullptr)
 	{
-		delete pHead;
-		pHead = nullptr;
-		pTail = nullptr;
+		deleteTail();
 		return;
 	}
 

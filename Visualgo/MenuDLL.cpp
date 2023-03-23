@@ -101,6 +101,31 @@ void MenuDLL(sf::RenderWindow& window, sf::Font& font, bool& MenuCur, bool& Link
 		addField.draw(window);
 	}
 
+	if (add_head)
+	{
+		sf::Text* aboveText = new sf::Text();
+		aboveText->setFont(font);
+		aboveText->setString("Input value: ");
+		aboveText->setCharacterSize(20);
+		aboveText->setFillColor(sf::Color::Red);
+		aboveText->setPosition(700, 450);
+		aboveText->setString("Input value: [value] Current Add head, click again to quit");
+		window.draw(*aboveText);
+		delete aboveText;
+	}
+
+	if (add_tail)
+	{
+		sf::Text* aboveText = new sf::Text();
+		aboveText->setFont(font);
+		aboveText->setString("Input value: ");
+		aboveText->setCharacterSize(20);
+		aboveText->setFillColor(sf::Color::Red);
+		aboveText->setPosition(700, 450);
+		aboveText->setString("Input value: [value] Current Add tail, click again to quit");
+		window.draw(*aboveText);
+		delete aboveText;
+	}
 	if (add_index)
 	{
 		sf::Text* aboveText = new sf::Text();
@@ -192,7 +217,7 @@ void MenuDLL(sf::RenderWindow& window, sf::Font& font, bool& MenuCur, bool& Link
 		search = !(search);
 	}
 
-	visual.render2arrow(window, search, search_data);
+	visual.render2arrow(window, search, search_data, font);
 
 	if (BackButton->isClicked(window))
 	{

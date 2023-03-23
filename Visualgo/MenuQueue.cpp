@@ -50,7 +50,7 @@ void MenuQueue(sf::RenderWindow& window, sf::Font& font, bool& MenuCur, bool& Qu
 		queue.deleteHead();
 		visual.pop_head();
 	}
-	visual.render(window);
+	visual.render(window, font);
 
 	if (BackButton->isClicked(window))
 	{
