@@ -34,7 +34,7 @@ int main()
     TextBox addField(font, 700, 500, 400, 50, sf::Color::White, sf::Color::Black, 5);
 
     bool Start = 1, MenuCur = 0, StaticArray = 0, LinkedList = 0, Queue = 0, Stack = 0;
-    bool Init = 0, Add_Tail = 0, Add_Head = 0, Add_Index = 0, Delete_Index = 0, Search = 0;
+    bool Init = 0, Add_Tail = 0, Add_Head = 0, Add_Index = 0, Delete_Index = 0, Search = 0, Update = 0;
     int search_data = 0;
     while (window.isOpen()) {
 
@@ -50,6 +50,7 @@ int main()
             if (LinkedList && Add_Index) addField.handleEvent(event, font, temp, doublyLL, 2);
             if (LinkedList && Delete_Index) addField.handleEvent(event, font, temp, doublyLL, 3);
             if (LinkedList && Search) addField.handleSearchEvent(event, font, temp, doublyLL, search_data);
+            if (LinkedList && Update) addField.handleEvent(event, font, temp, doublyLL, 4);
 
             if (Stack && Init) textField.handleEvent(event, font, temp, stack, 0);
             if (Stack && Add_Tail) addField.handleEvent(event, font, temp, stack, 1);
@@ -65,7 +66,7 @@ int main()
         if (MenuCur) MenuNext(window, font, Start, MenuCur,
             StaticArray, LinkedList, Stack, Queue);
 
-        if (LinkedList) MenuDLL(window, font, MenuCur, LinkedList, textField, temp, addField, doublyLL, Init, Add_Tail, Add_Head, Add_Index, Delete_Index, Search, search_data);
+        if (LinkedList) MenuDLL(window, font, MenuCur, LinkedList, textField, temp, addField, doublyLL, Init, Add_Tail, Add_Head, Add_Index, Delete_Index, Search, search_data, Update);
 
         if (StaticArray) MenuStaticArray(window, font, MenuCur, StaticArray);
 

@@ -1,6 +1,6 @@
 #include "MenuDLL.h"
 
-void MenuDLL(sf::RenderWindow& window, sf::Font& font, bool& MenuCur, bool& LinkedList, TextBox& textField, Buttons& visual, TextBox& addField, doublyLinkedList& doublyLL, bool& init, bool& add_tail, bool& add_head, bool& add_index, bool& delete_index, bool& search, int search_data)
+void MenuDLL(sf::RenderWindow& window, sf::Font& font, bool& MenuCur, bool& LinkedList, TextBox& textField, Buttons& visual, TextBox& addField, doublyLinkedList& doublyLL, bool& init, bool& add_tail, bool& add_head, bool& add_index, bool& delete_index, bool& search, int search_data, bool& update)
 {
 	Button* BackButton = new Button(50, 20, 200, 40, font, "Back",
 		sf::Color::Blue, sf::Color::Red, sf::Color::Blue, sf::Color::Black);
@@ -32,7 +32,10 @@ void MenuDLL(sf::RenderWindow& window, sf::Font& font, bool& MenuCur, bool& Link
 	Button* Random_Init = new Button(100, 500, 200, 40, font, "Random Init",
 		sf::Color::Blue, sf::Color::Red, sf::Color::Blue, sf::Color::Black);
 
-	Button* Reset = new Button(100, 550, 200, 40, font, "Reset",
+	Button* Update = new Button(100, 550, 200, 40, font, "Update Index",
+		sf::Color::Blue, sf::Color::Red, sf::Color::Blue, sf::Color::Black);
+
+	Button* Reset = new Button(100, 600, 200, 40, font, "Reset",
 		sf::Color::Blue, sf::Color::Red, sf::Color::Blue, sf::Color::Black);
 
 
@@ -51,6 +54,7 @@ void MenuDLL(sf::RenderWindow& window, sf::Font& font, bool& MenuCur, bool& Link
 	Delete_Index->update(window);
 	Random_Init->update(window);
 	Reset->update(window);
+	Update->update(window);
 
 	Init->render(window);
 	Search->render(window);
@@ -62,6 +66,7 @@ void MenuDLL(sf::RenderWindow& window, sf::Font& font, bool& MenuCur, bool& Link
 	Delete_Index->render(window);
 	Random_Init->render(window);
 	Reset->render(window);
+	Update->render(window);
 
 	if (Init->isClicked(window))
 	{
@@ -83,15 +88,70 @@ void MenuDLL(sf::RenderWindow& window, sf::Font& font, bool& MenuCur, bool& Link
 	{
 		delete_index = !(delete_index);
 	}
+	if (Update->isClicked(window))
+	{
+		update = !(update);
+	}
 	if (init)
 	{
 		textField.draw(window);
 	}
-	if (add_tail || add_head || add_index || delete_index || search)
+	if (add_tail || add_head || add_index || delete_index || search || update)
 	{
 		addField.draw(window);
 	}
 
+	if (add_index)
+	{
+		sf::Text* aboveText = new sf::Text();
+		aboveText->setFont(font);
+		aboveText->setString("Input value: ");
+		aboveText->setCharacterSize(20);
+		aboveText->setFillColor(sf::Color::Red);
+		aboveText->setPosition(700, 450);
+		aboveText->setString("Input value: [index] [space] [value] Current Add by Index, click again to quit");
+		window.draw(*aboveText);
+		delete aboveText;
+	}
+
+	if (delete_index)
+	{
+		sf::Text* aboveText = new sf::Text();
+		aboveText->setFont(font);
+		aboveText->setString("Input value: ");
+		aboveText->setCharacterSize(20);
+		aboveText->setFillColor(sf::Color::Red);
+		aboveText->setPosition(700, 450);
+		aboveText->setString("Input value: [index] Current Delete by Index, click again to quit");
+		window.draw(*aboveText);
+		delete aboveText;
+	}
+
+	if (search)
+	{
+		sf::Text* aboveText = new sf::Text();
+		aboveText->setFont(font);
+		aboveText->setString("Input value: ");
+		aboveText->setCharacterSize(20);
+		aboveText->setFillColor(sf::Color::Red);
+		aboveText->setPosition(700, 450);
+		aboveText->setString("Input value: [value] Current search, click again to quit");
+		window.draw(*aboveText);
+		delete aboveText;
+	}
+
+	if (update)
+	{
+		sf::Text* aboveText = new sf::Text();
+		aboveText->setFont(font);
+		aboveText->setString("Input value: ");
+		aboveText->setCharacterSize(20);
+		aboveText->setFillColor(sf::Color::Red);
+		aboveText->setPosition(700, 450);
+		aboveText->setString("Input value: [index] [space] [value] Current Update by Index, click again to quit");
+		window.draw(*aboveText);
+		delete aboveText;
+	}
 	if (Delete_Tail->isClicked(window))
 	{
 		doublyLL.deleteTail();

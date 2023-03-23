@@ -120,6 +120,24 @@ void TextBox::transfer_del_index(Buttons& visual, doublyLinkedList& list, sf::Fo
     std::cout << "transfer--------------------------------------\n";
 }
 
+void TextBox::transfer_update(Buttons& visual, doublyLinkedList& list, sf::Font& font)
+{
+    Node* cur = List.pHead;
+    int index = cur->data;
+    cur = cur->Next;
+    int value = cur->data;
+    list.updateIndexK(index, value);
+    while (visual.block.size()) visual.pop_tail();
+    cur = list.pHead;
+    while (cur != nullptr)
+    {
+        std::cout << cur->data << " ";
+        visual.add(cur->data, font);
+        cur = cur->Next;
+    }
+    std::cout << "transfer--------------------------------------\n";
+}
+
 void TextBox::transfer_search(int &search_data)
 {
     search_data = List.pHead->data;
@@ -155,6 +173,7 @@ void TextBox::handleEvent(sf::Event& event, sf::Font& font, Buttons& visual, dou
             if (type == 1) transfer_tail(visual, list, font);
             if (type == 2) transfer_index(visual, list, font);
             if (type == 3) transfer_del_index(visual, list, font);
+            if (type == 4) transfer_update(visual, list, font);
         }
     }
 }

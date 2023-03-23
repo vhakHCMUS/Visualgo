@@ -29,6 +29,8 @@ struct TextBox {
 
     void transfer_del_index(Buttons& visual, doublyLinkedList& list, sf::Font& font);
 
+    void transfer_update(Buttons& visual, doublyLinkedList& list, sf::Font& font);
+
     void transfer_search(int &search_data);
     
 };

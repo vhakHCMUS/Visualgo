@@ -141,6 +141,11 @@ void doublyLinkedList::insertIndexK(int k, int data)
 	}
 }
 
+void doublyLinkedList::updateIndexK(int k, int data)
+{
+	insertIndexK(k, data);
+	deleteIndexK(k + 1);
+}
 void doublyLinkedList::loadList()
 {
 	Node* cur = pHead;
