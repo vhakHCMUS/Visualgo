@@ -19,6 +19,8 @@ struct TextBox {
 
     void handleEvent(sf::Event& event, sf::Font& font, Buttons& visual, doublyLinkedList& list, int type);
 
+    void handleSearchEvent(sf::Event& event, sf::Font& font, Buttons& visual, doublyLinkedList& list, int& search_data);
+
     void transfer_head(Buttons& visual, doublyLinkedList& list, sf::Font& font);
 
     void transfer_tail(Buttons& visual, doublyLinkedList& list, sf::Font& font);
@@ -26,5 +28,7 @@ struct TextBox {
     void transfer_index(Buttons& visual, doublyLinkedList& list, sf::Font& font);
 
     void transfer_del_index(Buttons& visual, doublyLinkedList& list, sf::Font& font);
+
+    void transfer_search(int &search_data);
     
 };

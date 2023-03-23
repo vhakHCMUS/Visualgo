@@ -1,34 +1,39 @@
 #include "MenuDLL.h"
 
-void MenuDLL(sf::RenderWindow& window, sf::Font& font, bool &MenuCur, bool &LinkedList, TextBox &textField, Buttons& visual, TextBox& addField, doublyLinkedList& doublyLL, bool &init, bool &add_tail, bool &add_head, bool &add_index, bool& delete_index)
+void MenuDLL(sf::RenderWindow& window, sf::Font& font, bool& MenuCur, bool& LinkedList, TextBox& textField, Buttons& visual, TextBox& addField, doublyLinkedList& doublyLL, bool& init, bool& add_tail, bool& add_head, bool& add_index, bool& delete_index, bool& search, int search_data)
 {
-	Button* BackButton = new Button(50, 20, 200, 50, font, "Back",
+	Button* BackButton = new Button(50, 20, 200, 40, font, "Back",
 		sf::Color::Blue, sf::Color::Red, sf::Color::Blue, sf::Color::Black);
 
-	Button* Init = new Button(100, 100, 200, 50, font, "Init",
+	Button* Init = new Button(100, 100, 200, 40, font, "Init",
 		sf::Color::Blue, sf::Color::Red, sf::Color::Blue, sf::Color::Black);
 
-	Button* Search = new Button(100, 200, 200, 50, font, "Search",
+	Button* Search = new Button(100, 150, 200, 40, font, "Search",
 		sf::Color::Blue, sf::Color::Red, sf::Color::Blue, sf::Color::Black);
 
-	Button* Add_Tail = new Button(100, 300, 200, 50, font, "Add Tail",
+	Button* Add_Tail = new Button(100, 200, 200, 40, font, "Add Tail",
 		sf::Color::Blue, sf::Color::Red, sf::Color::Blue, sf::Color::Black);
 
-	Button* Delete_Tail = new Button(100, 400, 200, 50, font, "Delete Tail",
+	Button* Delete_Tail = new Button(100, 250, 200, 40, font, "Delete Tail",
 		sf::Color::Blue, sf::Color::Red, sf::Color::Blue, sf::Color::Black);
 
-	Button* Add_Head = new Button(100, 500, 200, 50, font, "Add Head",
+	Button* Add_Head = new Button(100, 300, 200, 40, font, "Add Head",
 		sf::Color::Blue, sf::Color::Red, sf::Color::Blue, sf::Color::Black);
 
-	Button* Delete_Head = new Button(100, 600, 200, 50, font, "Delete Head",
+	Button* Delete_Head = new Button(100, 350, 200, 40, font, "Delete Head",
 		sf::Color::Blue, sf::Color::Red, sf::Color::Blue, sf::Color::Black);
 
-	Button* Add_Index = new Button(100, 700, 200, 50, font, "Add Index",
+	Button* Add_Index = new Button(100, 400, 200, 40, font, "Add Index",
 		sf::Color::Blue, sf::Color::Red, sf::Color::Blue, sf::Color::Black);
 
-	Button* Delete_Index = new Button(100, 800, 200, 50, font, "Delete Index",
+	Button* Delete_Index = new Button(100, 450, 200, 40, font, "Delete Index",
 		sf::Color::Blue, sf::Color::Red, sf::Color::Blue, sf::Color::Black);
 
+	Button* Random_Init = new Button(100, 500, 200, 40, font, "Random Init",
+		sf::Color::Blue, sf::Color::Red, sf::Color::Blue, sf::Color::Black);
+
+	Button* Reset = new Button(100, 550, 200, 40, font, "Reset",
+		sf::Color::Blue, sf::Color::Red, sf::Color::Blue, sf::Color::Black);
 
 
 	MenuCur = 0;
@@ -44,6 +49,8 @@ void MenuDLL(sf::RenderWindow& window, sf::Font& font, bool &MenuCur, bool &Link
 	Delete_Head->update(window);
 	Add_Index->update(window);
 	Delete_Index->update(window);
+	Random_Init->update(window);
+	Reset->update(window);
 
 	Init->render(window);
 	Search->render(window);
@@ -53,6 +60,8 @@ void MenuDLL(sf::RenderWindow& window, sf::Font& font, bool &MenuCur, bool &Link
 	Delete_Head->render(window);
 	Add_Index->render(window);
 	Delete_Index->render(window);
+	Random_Init->render(window);
+	Reset->render(window);
 
 	if (Init->isClicked(window))
 	{
@@ -78,7 +87,7 @@ void MenuDLL(sf::RenderWindow& window, sf::Font& font, bool &MenuCur, bool &Link
 	{
 		textField.draw(window);
 	}
-	if (add_tail || add_head || add_index || delete_index)
+	if (add_tail || add_head || add_index || delete_index || search)
 	{
 		addField.draw(window);
 	}
@@ -94,7 +103,36 @@ void MenuDLL(sf::RenderWindow& window, sf::Font& font, bool &MenuCur, bool &Link
 		doublyLL.deleteHead();
 		visual.pop_head();
 	}
-	visual.render(window);
+
+	if (Random_Init->isClicked(window))
+	{
+		int number = rand() % 10 + 1;
+		while (doublyLL.pHead != nullptr) doublyLL.deleteHead();
+		for (int i = 0; i < number; i++)
+		{
+			doublyLL.addTail(create(rand() % 100));
+		}
+		while (visual.block.size()) visual.pop_tail();
+		Node* cur = doublyLL.pHead;
+		while (cur != nullptr)
+		{
+			visual.add(cur->data, font);
+			cur = cur->Next;
+		}
+	}
+
+	if (Reset->isClicked(window))
+	{
+		while (doublyLL.pHead != nullptr) doublyLL.deleteHead();
+		while (visual.block.size()) visual.pop_tail();
+	}
+
+	if (Search->isClicked(window))
+	{
+		search = !(search);
+	}
+
+	visual.render2arrow(window, search, search_data);
 
 	if (BackButton->isClicked(window))
 	{
@@ -110,5 +148,5 @@ void MenuDLL(sf::RenderWindow& window, sf::Font& font, bool &MenuCur, bool &Link
 		MenuCur = 1;
 	}
 
-	delete BackButton, Init, Search, Add_Tail, Delete_Tail;
+	delete BackButton, Init, Search, Add_Tail, Delete_Tail, Add_Head, Delete_Head, Add_Index, Delete_Index, Random_Init;
 }

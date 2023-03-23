@@ -16,5 +16,7 @@ struct Buttons
 	void pop_head();
 
 	void render(sf::RenderTarget& target);
+
+	void render2arrow(sf::RenderTarget& target, bool& search, int& search_data);
 };
 

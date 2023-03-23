@@ -18,9 +18,9 @@ void TextBox::update()
 {
     std::string str = text.getString();
     int temp = 0;
-    
+
     while (List.pHead != nullptr) List.deleteHead();
-    
+
     if (str.size() == 0) return;
 
     while (str[str.size() - 1] == ' ') str.erase(str.size() - 1);
@@ -120,6 +120,11 @@ void TextBox::transfer_del_index(Buttons& visual, doublyLinkedList& list, sf::Fo
     std::cout << "transfer--------------------------------------\n";
 }
 
+void TextBox::transfer_search(int &search_data)
+{
+    search_data = List.pHead->data;
+}
+
 void TextBox::handleEvent(sf::Event& event, sf::Font& font, Buttons& visual, doublyLinkedList& list, int type) {
     if (event.type == sf::Event::MouseButtonPressed && event.mouseButton.button == sf::Mouse::Left) {
         sf::Vector2f mousePos(event.mouseButton.x, event.mouseButton.y);
@@ -150,6 +155,37 @@ void TextBox::handleEvent(sf::Event& event, sf::Font& font, Buttons& visual, dou
             if (type == 1) transfer_tail(visual, list, font);
             if (type == 2) transfer_index(visual, list, font);
             if (type == 3) transfer_del_index(visual, list, font);
+        }
+    }
+}
+
+void TextBox::handleSearchEvent(sf::Event& event, sf::Font& font, Buttons& visual, doublyLinkedList& list, int &search_data) {
+    if (event.type == sf::Event::MouseButtonPressed && event.mouseButton.button == sf::Mouse::Left) {
+        sf::Vector2f mousePos(event.mouseButton.x, event.mouseButton.y);
+        if (shape.getGlobalBounds().contains(mousePos)) {
+            isSelected = true;
+        }
+        else {
+            isSelected = false;
+        }
+    }
+
+    if (event.type == sf::Event::TextEntered && isSelected) {
+        if (event.text.unicode == '\b') {
+            if (!text.getString().isEmpty()) {
+                text.setString(text.getString().substring(0, text.getString().getSize() - 1));
+            }
+        }
+        else if (event.text.unicode < 128) {
+            text.setString(text.getString() + static_cast<char>(event.text.unicode));
+        }
+    }
+
+    if (event.type == sf::Event::KeyPressed) {
+        if (event.key.code == sf::Keyboard::Enter) {
+            std::string str = text.getString();
+            update();
+            transfer_search(search_data);
         }
     }
 }

@@ -3,6 +3,7 @@
 
 struct Button {
 	float posX, posY, width, height;
+	int value;
 	sf::Text text;
 	sf::RectangleShape shape;
 	sf::Color idleColor;
