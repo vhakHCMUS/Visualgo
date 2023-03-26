@@ -15,8 +15,8 @@ struct Buttons
 
 	void pop_head();
 
-	void render(sf::RenderTarget& target, sf::Font& font);
+	void render(sf::RenderWindow& target, sf::Font& font);
 
-	void render2arrow(sf::RenderTarget& target, bool& search, int& search_data, sf::Font& font);
+	void render2arrow(sf::RenderWindow& target, bool& search, int& search_data, sf::Font& font);
 };
 

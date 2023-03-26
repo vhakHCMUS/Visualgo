@@ -20,7 +20,7 @@ struct Button {
 
 	bool isClicked(sf::RenderWindow& window);
 
-	void render(sf::RenderTarget& target);
+	void render(sf::RenderWindow& target);
 
 };
 

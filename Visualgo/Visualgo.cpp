@@ -35,6 +35,7 @@ int main()
 
     bool Start = 1, MenuCur = 0, StaticArray = 0, LinkedList = 0, Queue = 0, Stack = 0;
     bool Init = 0, Add_Tail = 0, Add_Head = 0, Add_Index = 0, Delete_Index = 0, Search = 0, Update = 0;
+    bool entered = 0;
     int search_data = 0;
     while (window.isOpen()) {
 
@@ -44,19 +45,23 @@ int main()
 
                 window.close();
             }
-            if (LinkedList && Init) textField.handleEvent(event, font, temp, doublyLL, 1);
-            if (LinkedList && Add_Tail) addField.handleEvent(event, font, temp, doublyLL, 1);
-            if (LinkedList && Add_Head) addField.handleEvent(event, font, temp, doublyLL, 0);
-            if (LinkedList && Add_Index) addField.handleEvent(event, font, temp, doublyLL, 2);
-            if (LinkedList && Delete_Index) addField.handleEvent(event, font, temp, doublyLL, 3);
+            if (LinkedList && Init) textField.handleEvent(event, font, temp, doublyLL, 1, window);
+            if (LinkedList && Add_Tail) {
+                addField.handleEvent(event, font, temp, doublyLL, 1, window);
+            }
+            if (LinkedList && Add_Head) {
+                addField.handleEvent(event, font, temp, doublyLL, 0, window);
+            }
+            if (LinkedList && Add_Index) addField.handleEvent(event, font, temp, doublyLL, 2, window);
+            if (LinkedList && Delete_Index) addField.handleEvent(event, font, temp, doublyLL, 3, window);
             if (LinkedList && Search) addField.handleSearchEvent(event, font, temp, doublyLL, search_data);
-            if (LinkedList && Update) addField.handleEvent(event, font, temp, doublyLL, 4);
+            if (LinkedList && Update) addField.handleEvent(event, font, temp, doublyLL, 4, window);
 
-            if (Stack && Init) textField.handleEvent(event, font, temp, stack, 1);
-            if (Stack && Add_Head) addField.handleEvent(event, font, temp, stack, 0);
+            if (Stack && Init) textField.handleEvent(event, font, temp, stack, 1, window);
+            if (Stack && Add_Head) addField.handleEvent(event, font, temp, stack, 0, window);
 
-            if (Queue && Init) textField.handleEvent(event, font, temp, queue, 0);
-            if (Queue && Add_Tail) addField.handleEvent(event, font, temp, queue, 1);
+            if (Queue && Init) textField.handleEvent(event, font, temp, queue, 0, window);
+            if (Queue && Add_Tail) addField.handleEvent(event, font, temp, queue, 1, window);
         }
 
         window.clear(sf::Color::White);

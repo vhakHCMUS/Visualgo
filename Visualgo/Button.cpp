@@ -73,7 +73,7 @@ bool Button::isClicked(sf::RenderWindow& window)
     return false;
 }
 
-void Button::render(sf::RenderTarget& target)
+void Button::render(sf::RenderWindow& target)
 {
     target.draw(this->shape);
     target.draw(this->text);

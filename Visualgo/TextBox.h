@@ -17,11 +17,11 @@ struct TextBox {
 
     void draw(sf::RenderWindow& window);
 
-    void handleEvent(sf::Event& event, sf::Font& font, Buttons& visual, doublyLinkedList& list, int type);
+    void handleEvent(sf::Event& event, sf::Font& font, Buttons& visual, doublyLinkedList& list, int type, sf::RenderWindow& window);
 
     void handleSearchEvent(sf::Event& event, sf::Font& font, Buttons& visual, doublyLinkedList& list, int& search_data);
 
-    void transfer_head(Buttons& visual, doublyLinkedList& list, sf::Font& font);
+    void transfer_head(Buttons& visual, doublyLinkedList& list, sf::Font& font, sf::RenderWindow& window);
 
     void transfer_tail(Buttons& visual, doublyLinkedList& list, sf::Font& font);
 

@@ -19,6 +19,7 @@ void Buttons::add(int a, sf::Font& font)
 		sf::Color::Green, sf::Color::Yellow, sf::Color::Cyan, sf::Color::Black);
 	if (block.size() == 0) newButton.shape.setFillColor(newButton.activeColor);
 	newButton.value = a;
+	newButton.text.setFillColor(sf::Color::Black);
 	block.push_back(newButton);
 }
 
@@ -40,7 +41,7 @@ void Buttons::pop_head()
 	block.pop_back();
 	block[0].shape.setFillColor(block[0].activeColor);
 }
-void Buttons::render2arrow(sf::RenderTarget& target, bool& search, int& search_data, sf::Font& font)
+void Buttons::render2arrow(sf::RenderWindow& target, bool& search, int& search_data, sf::Font& font)
 {
 	for (auto& button : block) {
 		if (button.value == search_data && search) button.shape.setFillColor(button.hoverColor);
@@ -72,7 +73,7 @@ void Buttons::render2arrow(sf::RenderTarget& target, bool& search, int& search_d
 		delete arrow;
 	}
 }
-void Buttons::render(sf::RenderTarget& target, sf::Font& font)
+void Buttons::render(sf::RenderWindow& target, sf::Font& font)
 {
 	if (block.size())
 	{

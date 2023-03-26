@@ -10,7 +10,9 @@ struct Arrow {
     sf::Font font;
 
     Arrow(float x, float y, float length, float thickness, sf::Color color, sf::Font& font);
-    void draw(sf::RenderTarget& window);
-    void draw2(sf::RenderTarget& window);
+    void draw(sf::RenderWindow& window);
+    void draw2(sf::RenderWindow& window);
+    void drawUpsideDown(sf::RenderWindow& window);
+    void drawRotated(sf::RenderWindow& window, float angle);
 };
-
+void drawArrow(sf::RenderWindow& window, float x, float y, float x1, float y1, sf::Color color, sf::Font& font);
