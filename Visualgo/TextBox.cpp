@@ -48,7 +48,7 @@ void TextBox::draw(sf::RenderWindow& window) {
 
 void add_head_step(Buttons& visual, doublyLinkedList& list, sf::Font& font, sf::RenderWindow& window, int temp)
 {
-    sf::Time sleepTime = sf::seconds(1.0f);
+    sf::Time sleepTime = sf::seconds(0.7f);
     window.clear(sf::Color::White);
     for (int i = 0; i < visual.block.size(); i++)
     {
@@ -90,7 +90,7 @@ void add_head_step(Buttons& visual, doublyLinkedList& list, sf::Font& font, sf::
 
 void add_tail_step(Buttons& visual, doublyLinkedList& list, sf::Font& font, sf::RenderWindow& window, int temp)
 {
-    sf::Time sleepTime = sf::seconds(1.0f);
+    sf::Time sleepTime = sf::seconds(0.7f);
     window.clear(sf::Color::White);
     for (int i = 0; i < visual.block.size(); i++)
     {
@@ -171,12 +171,52 @@ void TextBox::transfer_tail(Buttons& visual, doublyLinkedList& list, sf::Font& f
     std::cout << "transfer--------------------------------------\n";
 }
 
-void TextBox::transfer_index(Buttons& visual, doublyLinkedList& list, sf::Font& font)
+void add_index_step(Buttons& visual, doublyLinkedList& list, sf::Font& font, sf::RenderWindow& window, int temp, int index)
+{
+    sf::Time sleepTime = sf::seconds(0.3f);
+    for (int i = 0; i < visual.block.size(); i++)
+    {
+        // Reset colors of all buttons
+        for (int j = 0; j < visual.block.size(); j++) {
+            visual.block[j].shape.setFillColor(visual.block[j].idleColor);
+            visual.block[j].render(window);
+        }
+
+        // Set hover color of current button
+        if (i < index) visual.block[i].shape.setFillColor(visual.block[i].hoverColor);
+        visual.block[i].render(window);
+
+        window.display();
+        sf::sleep(sleepTime);
+    }
+}
+void update_index_step(Buttons& visual, doublyLinkedList& list, sf::Font& font, sf::RenderWindow& window, int temp, int index)
+{
+    sf::Time sleepTime = sf::seconds(0.3f);
+    for (int i = 0; i < visual.block.size(); i++)
+    {
+        // Reset colors of all buttons
+        for (int j = 0; j < visual.block.size(); j++) {
+            visual.block[j].shape.setFillColor(visual.block[j].idleColor);
+            visual.block[j].render(window);
+        }
+
+        // Set hover color of current button
+        if (i <= index) visual.block[i].shape.setFillColor(visual.block[i].hoverColor);
+        visual.block[i].render(window);
+
+        window.display();
+        sf::sleep(sleepTime);
+        if (i == index) sf::sleep(sleepTime);
+    }
+}
+void TextBox::transfer_index(Buttons& visual, doublyLinkedList& list, sf::Font& font, sf::RenderWindow& window)
 {
     Node* cur = List.pHead;
     int index = cur->data;
     cur = cur->Next;
     int value = cur->data;
+    add_index_step(visual, list, font, window, value, index);
     list.insertIndexK(index, value);
     while (visual.block.size()) visual.pop_tail();
     cur = list.pHead;
@@ -206,12 +246,13 @@ void TextBox::transfer_del_index(Buttons& visual, doublyLinkedList& list, sf::Fo
     std::cout << "transfer--------------------------------------\n";
 }
 
-void TextBox::transfer_update(Buttons& visual, doublyLinkedList& list, sf::Font& font)
+void TextBox::transfer_update(Buttons& visual, doublyLinkedList& list, sf::Font& font, sf::RenderWindow& window)
 {
     Node* cur = List.pHead;
     int index = cur->data;
     cur = cur->Next;
     int value = cur->data;
+    update_index_step(visual, list, font, window, value, index);
     list.updateIndexK(index, value);
     while (visual.block.size()) visual.pop_tail();
     cur = list.pHead;
@@ -257,9 +298,9 @@ void TextBox::handleEvent(sf::Event& event, sf::Font& font, Buttons& visual, dou
             update();
             if (type == 0) transfer_head(visual, list, font, window);
             if (type == 1) transfer_tail(visual, list, font, window);
-            if (type == 2) transfer_index(visual, list, font);
+            if (type == 2) transfer_index(visual, list, font, window);
             if (type == 3) transfer_del_index(visual, list, font);
-            if (type == 4) transfer_update(visual, list, font);
+            if (type == 4) transfer_update(visual, list, font, window);
         }
     }
 }
