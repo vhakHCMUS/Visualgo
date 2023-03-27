@@ -23,7 +23,7 @@ struct TextBox {
 
     void transfer_head(Buttons& visual, doublyLinkedList& list, sf::Font& font, sf::RenderWindow& window);
 
-    void transfer_tail(Buttons& visual, doublyLinkedList& list, sf::Font& font);
+    void transfer_tail(Buttons& visual, doublyLinkedList& list, sf::Font& font, sf::RenderWindow& window);
 
     void transfer_index(Buttons& visual, doublyLinkedList& list, sf::Font& font);
 
@@ -34,3 +34,5 @@ struct TextBox {
     void transfer_search(int &search_data);
     
 };
+
+void add_head_step(Buttons& visual, doublyLinkedList& list, sf::Font& font, sf::RenderWindow& window, int temp);

@@ -60,29 +60,61 @@ void add_head_step(Buttons& visual, doublyLinkedList& list, sf::Font& font, sf::
         arrow->draw2(window);
         delete arrow;
     }
-    sf::sleep(sleepTime);
-    window.display();
-
-    drawArrow(window, 600, 400, visual.block[0].shape.getPosition().x, visual.block[0].shape.getPosition().y, sf::Color::Black, font);
-
     window.display();
     sf::sleep(sleepTime);
 
-    Button* Temp = new Button(600, 400, 80, 80, font, std::to_string(temp),
+    drawArrow(window, visual.block[0].shape.getPosition().x, visual.block[0].shape.getPosition().y + 200, visual.block[0].shape.getPosition().x, visual.block[0].shape.getPosition().y, sf::Color::Black, font);
+
+    window.display();
+    sf::sleep(sleepTime);
+
+    Button* Temp = new Button(visual.block[0].shape.getPosition().x, visual.block[0].shape.getPosition().y + 200, 80, 80, font, std::to_string(temp),
         sf::Color::Green, sf::Color::Red, sf::Color::Blue, sf::Color::Black);
 
     Temp->render(window);
-    drawArrow(window, 600, 400, visual.block[0].shape.getPosition().x, visual.block[0].shape.getPosition().y, sf::Color::Black, font);
+    drawArrow(window, visual.block[0].shape.getPosition().x, visual.block[0].shape.getPosition().y + 200, visual.block[0].shape.getPosition().x, visual.block[0].shape.getPosition().y, sf::Color::Black, font);
     window.display();
     sf::sleep(sleepTime);
 
-    drawArrow(window, 600, 400, visual.block[0].shape.getPosition().x, visual.block[0].shape.getPosition().y, sf::Color::Black, font);
+    drawArrow(window, visual.block[0].shape.getPosition().x, visual.block[0].shape.getPosition().y + 200, visual.block[0].shape.getPosition().x, visual.block[0].shape.getPosition().y, sf::Color::Black, font);
 
     Temp->shape.setFillColor(sf::Color::Cyan);
     Temp->render(window);
 
     visual.block[0].shape.setFillColor(sf::Color::Green);
     visual.block[0].render(window);
+
+    window.display();
+    sf::sleep(sleepTime);
+}
+
+void add_tail_step(Buttons& visual, doublyLinkedList& list, sf::Font& font, sf::RenderWindow& window, int temp)
+{
+    sf::Time sleepTime = sf::seconds(1.0f);
+    window.clear(sf::Color::White);
+    for (int i = 0; i < visual.block.size(); i++)
+    {
+        visual.block[i].render(window);
+    }
+    for (int i = 1; i < visual.block.size(); i++)
+    {
+        Arrow* arrow = new Arrow(visual.block[i - 1].posX + visual.block[i - 1].shape.getSize().x, visual.block[i - 1].posY + visual.block[i - 1].shape.getSize().y / 2, 50, 7, sf::Color::Black, font);
+        arrow->draw2(window);
+        delete arrow;
+    }
+    window.display();
+    sf::sleep(sleepTime);
+
+    drawArrow(window, visual.block.back().shape.getPosition().x, visual.block.back().shape.getPosition().y + 200, visual.block.back().shape.getPosition().x, visual.block.back().shape.getPosition().y, sf::Color::Black, font);
+
+    window.display();
+    sf::sleep(sleepTime);
+
+    Button* Temp = new Button(visual.block.back().shape.getPosition().x, visual.block.back().shape.getPosition().y + 200, 80, 80, font, std::to_string(temp),
+        sf::Color::Green, sf::Color::Red, sf::Color::Blue, sf::Color::Black);
+
+    Temp->render(window);
+    drawArrow(window, visual.block.back().shape.getPosition().x, visual.block.back().shape.getPosition().y + 200, visual.block.back().shape.getPosition().x, visual.block.back().shape.getPosition().y, sf::Color::Black, font);
 
     window.display();
     sf::sleep(sleepTime);
@@ -117,9 +149,11 @@ void TextBox::transfer_head(Buttons& visual, doublyLinkedList& list, sf::Font& f
     std::cout << "transfer--------------------------------------\n";
 }
 
-void TextBox::transfer_tail(Buttons& visual, doublyLinkedList& list, sf::Font& font)
+void TextBox::transfer_tail(Buttons& visual, doublyLinkedList& list, sf::Font& font, sf::RenderWindow &window)
 {
     Node* cur = List.pHead;
+    int temp = cur->data;
+    if (list.pHead != nullptr) add_tail_step(visual, list, font, window, temp);
     while (cur != nullptr)
     {
         list.addTail(create(cur->data));
@@ -222,7 +256,7 @@ void TextBox::handleEvent(sf::Event& event, sf::Font& font, Buttons& visual, dou
             std::string str = text.getString();
             update();
             if (type == 0) transfer_head(visual, list, font, window);
-            if (type == 1) transfer_tail(visual, list, font);
+            if (type == 1) transfer_tail(visual, list, font, window);
             if (type == 2) transfer_index(visual, list, font);
             if (type == 3) transfer_del_index(visual, list, font);
             if (type == 4) transfer_update(visual, list, font);
