@@ -54,7 +54,7 @@ int main()
             }
             if (LinkedList && Add_Index) addField.handleEvent(event, font, temp, doublyLL, 2, window);
             if (LinkedList && Delete_Index) addField.handleEvent(event, font, temp, doublyLL, 3, window);
-            if (LinkedList && Search) addField.handleSearchEvent(event, font, temp, doublyLL, search_data);
+            if (LinkedList && Search) addField.handleSearchEvent(event, font, temp, doublyLL, search_data, window);
             if (LinkedList && Update) addField.handleEvent(event, font, temp, doublyLL, 4, window);
 
             if (Stack && Init) textField.handleEvent(event, font, temp, stack, 1, window);
