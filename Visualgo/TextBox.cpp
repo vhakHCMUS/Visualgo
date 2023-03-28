@@ -279,7 +279,7 @@ void TextBox::transfer_del_index(Buttons& visual, doublyLinkedList& list, sf::Fo
     Node* cur = List.pHead;
     int index = cur->data;
 
-    if (list.pHead != nullptr) delete_index_step(visual, list, font, window, index);
+    if (list.pHead != nullptr && index != 0) delete_index_step(visual, list, font, window, index);
     list.deleteIndexK(index);
     while (visual.block.size()) visual.pop_tail();
     cur = list.pHead;

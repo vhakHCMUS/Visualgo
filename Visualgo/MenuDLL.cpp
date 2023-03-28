@@ -1,5 +1,5 @@
 #include "MenuDLL.h"
-
+#include "Arrow.h"
 void MenuDLL(sf::RenderWindow& window, sf::Font& font, bool& MenuCur, bool& LinkedList, TextBox& textField, Buttons& visual, TextBox& addField, doublyLinkedList& doublyLL, bool& init, bool& add_tail, bool& add_head, bool& add_index, bool& delete_index, bool& search, int search_data, bool& update)
 {
 	Button* BackButton = new Button(50, 20, 200, 40, font, "Back",
@@ -179,6 +179,27 @@ void MenuDLL(sf::RenderWindow& window, sf::Font& font, bool& MenuCur, bool& Link
 	}
 	if (Delete_Tail->isClicked(window))
 	{
+		sf::Time sleepTime = sf::seconds(0.5f);
+		for (int i = 0; i < visual.block.size(); i++)
+		{
+			// Reset colors of all buttons
+			for (int j = 0; j < visual.block.size(); j++) {
+				visual.block[j].shape.setFillColor(visual.block[j].idleColor);
+				visual.block[j].render(window);
+			}
+			for (int i = 1; i < visual.block.size(); i++)
+			{
+				Arrow* arrow = new Arrow(visual.block[i - 1].posX + visual.block[i - 1].shape.getSize().x, visual.block[i - 1].posY + visual.block[i - 1].shape.getSize().y / 2, 50, 7, sf::Color::Black, font);
+				arrow->draw2(window);
+				delete arrow;
+			}
+			// Set hover color of current button
+			visual.block[i].shape.setFillColor(visual.block[i].hoverColor);
+			visual.block[i].render(window);
+
+			window.display();
+			sf::sleep(sleepTime);
+		}
 		doublyLL.deleteTail();
 		visual.pop_tail();
 	}
