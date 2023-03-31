@@ -168,6 +168,27 @@ void TextBox::transfer_tail(Buttons& visual, doublyLinkedList& list, sf::Font& f
     std::cout << "transfer--------------------------------------\n";
 }
 
+void TextBox::transfer_tail_queue(Buttons& visual, doublyLinkedList& list, sf::Font& font, sf::RenderWindow& window)
+{
+    Node* cur = List.pHead;
+    int temp = cur->data;
+    while (cur != nullptr)
+    {
+        list.addTail(create(cur->data));
+        cur = cur->Next;
+    }
+    while (visual.block.size()) visual.pop_tail();
+    cur = list.pHead;
+    while (cur != nullptr)
+    {
+        std::cout << cur->data << " ";
+        visual.add(cur->data, font);
+        cur = cur->Next;
+    }
+
+    std::cout << "transfer--------------------------------------\n";
+}
+
 void add_index_step(Buttons& visual, doublyLinkedList& list, sf::Font& font, sf::RenderWindow& window, int temp, int index)
 {
     sf::Time sleepTime = sf::seconds(0.5f);
@@ -361,6 +382,73 @@ void TextBox::handleEvent(sf::Event& event, sf::Font& font, Buttons& visual, dou
     }
 }
 
+void add_tail_queue(Buttons& visual, doublyLinkedList& list, sf::Font& font, sf::RenderWindow& window, int temp)
+{
+    sf::Time sleepTime = sf::seconds(0.7f);
+    window.clear(sf::Color::White);
+    for (int i = 0; i < visual.block.size(); i++)
+    {
+        visual.block[i].render(window);
+    }
+
+    window.display();
+    sf::sleep(sleepTime);
+
+    drawArrow(window, visual.block.back().shape.getPosition().x, visual.block.back().shape.getPosition().y + 200, visual.block.back().shape.getPosition().x, visual.block.back().shape.getPosition().y, sf::Color::Black, font);
+
+    window.display();
+    sf::sleep(sleepTime);
+
+    Button* Temp = new Button(visual.block.back().shape.getPosition().x, visual.block.back().shape.getPosition().y + 200, 80, 80, font, std::to_string(temp),
+        sf::Color::Green, sf::Color::Red, sf::Color::Blue, sf::Color::Black);
+
+    Temp->render(window);
+    drawArrow(window, visual.block.back().shape.getPosition().x, visual.block.back().shape.getPosition().y + 200, visual.block.back().shape.getPosition().x, visual.block.back().shape.getPosition().y, sf::Color::Black, font);
+    window.display();
+    sf::sleep(sleepTime);
+
+    drawArrow(window, visual.block.back().shape.getPosition().x, visual.block.back().shape.getPosition().y + 200, visual.block.back().shape.getPosition().x, visual.block.back().shape.getPosition().y, sf::Color::Black, font);
+
+    Temp->shape.setFillColor(sf::Color::Cyan);
+    Temp->render(window);
+
+    visual.block.back().shape.setFillColor(sf::Color::Green);
+    visual.block.back().render(window);
+
+    window.display();
+    sf::sleep(sleepTime);
+}
+void TextBox::handleQueueEvent(sf::Event& event, sf::Font& font, Buttons& visual, doublyLinkedList& list, sf::RenderWindow& window) {
+    if (event.type == sf::Event::MouseButtonPressed && event.mouseButton.button == sf::Mouse::Left) {
+        sf::Vector2f mousePos(event.mouseButton.x, event.mouseButton.y);
+        if (shape.getGlobalBounds().contains(mousePos)) {
+            isSelected = true;
+        }
+        else {
+            isSelected = false;
+        }
+    }
+
+    if (event.type == sf::Event::TextEntered && isSelected) {
+        if (event.text.unicode == '\b') {
+            if (!text.getString().isEmpty()) {
+                text.setString(text.getString().substring(0, text.getString().getSize() - 1));
+            }
+        }
+        else if (event.text.unicode < 128) {
+            text.setString(text.getString() + static_cast<char>(event.text.unicode));
+        }
+    }
+
+    if (event.type == sf::Event::KeyPressed) {
+        if (event.key.code == sf::Keyboard::Enter) {
+            std::string str = text.getString();
+            update();
+            add_tail_queue(visual, list, font, window, list.pHead->data);
+            transfer_tail_queue(visual, list, font, window);
+        }
+    }
+}
 void TextBox::handleSearchEvent(sf::Event& event, sf::Font& font, Buttons& visual, doublyLinkedList& list, int &search_data, sf::RenderWindow& window) {
     if (event.type == sf::Event::MouseButtonPressed && event.mouseButton.button == sf::Mouse::Left) {
         sf::Vector2f mousePos(event.mouseButton.x, event.mouseButton.y);

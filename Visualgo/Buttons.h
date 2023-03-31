@@ -18,5 +18,7 @@ struct Buttons
 	void render(sf::RenderWindow& target, sf::Font& font);
 
 	void render2arrow(sf::RenderWindow& target, bool& search, int& search_data, sf::Font& font);
+
+	void render2arrowQueue(sf::RenderWindow& target, bool& search, int& search_data, sf::Font& font);
 };
 

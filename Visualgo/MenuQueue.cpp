@@ -96,7 +96,7 @@ void MenuQueue(sf::RenderWindow& window, sf::Font& font, bool& MenuCur, bool& Li
 
 	bool search = 0;
 	int search_data = 0;
-	visual.render2arrow(window, search, search_data, font);
+	visual.render2arrowQueue(window, search, search_data, font);
 
 	if (BackButton->isClicked(window))
 	{

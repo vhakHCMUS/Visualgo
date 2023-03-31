@@ -57,7 +57,7 @@ int main()
             if (Stack && Add_Head) addField.handleEvent(event, font, temp, stack, 0, window);
 
             if (Queue && Init) textField.handleEvent(event, font, temp, queue, 1, window);
-            if (Queue && Add_Tail) addField.handleEvent(event, font, temp, queue, 1, window);
+            if (Queue && Add_Tail) addField.handleQueueEvent(event, font, temp, queue, window);
         }
 
         window.clear(sf::Color::White);
