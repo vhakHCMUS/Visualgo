@@ -147,6 +147,7 @@
     <ClCompile Include="Menu.cpp" />
     <ClCompile Include="MenuDLL.cpp" />
     <ClCompile Include="MenuQueue.cpp" />
+    <ClCompile Include="MenuSLL.cpp" />
     <ClCompile Include="MenuStack.cpp" />
     <ClCompile Include="MenuStaticArray.cpp" />
     <ClCompile Include="Queue.cpp" />
@@ -164,6 +165,7 @@
     <ClInclude Include="Menu.h" />
     <ClInclude Include="MenuDLL.h" />
     <ClInclude Include="MenuQueue.h" />
+    <ClInclude Include="MenuSLL.h" />
     <ClInclude Include="MenuStack.h" />
     <ClInclude Include="MenuStaticArray.h" />
     <ClInclude Include="Queue.h" />

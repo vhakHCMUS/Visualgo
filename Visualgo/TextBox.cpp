@@ -384,7 +384,7 @@ void TextBox::handleEvent(sf::Event& event, sf::Font& font, Buttons& visual, dou
 
 void add_tail_queue(Buttons& visual, doublyLinkedList& list, sf::Font& font, sf::RenderWindow& window, int temp)
 {
-    sf::Time sleepTime = sf::seconds(0.7f);
+    sf::Time sleepTime = sf::seconds(0.3f);
     window.clear(sf::Color::White);
     for (int i = 0; i < visual.block.size(); i++)
     {

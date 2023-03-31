@@ -74,7 +74,7 @@ void Buttons::render2arrow(sf::RenderWindow& target, bool& search, int& search_d
 	}
 }
 
-void Buttons::render2arrowQueue(sf::RenderWindow& target, bool& search, int& search_data, sf::Font& font)
+void Buttons::renderQueue(sf::RenderWindow& target, bool& search, int& search_data, sf::Font& font)
 {
 	for (auto& button : block) {
 		if (button.value == search_data && search) button.shape.setFillColor(button.hoverColor);
@@ -111,30 +111,36 @@ void Buttons::render2arrowQueue(sf::RenderWindow& target, bool& search, int& sea
 	for (int i = 1; i < block.size(); i++)
 	{
 		Arrow* arrow = new Arrow(block[i - 1].posX + block[i - 1].shape.getSize().x, block[i - 1].posY + block[i - 1].shape.getSize().y / 2, 50, 7, sf::Color::Black, font);
-		arrow->draw2(target);
+		arrow->draw(target);
 		delete arrow;
 	}
 }
-void Buttons::render(sf::RenderWindow& target, sf::Font& font)
+void Buttons::render(sf::RenderWindow& target, bool& search, int& search_data, sf::Font& font)
 {
+	for (auto& button : block) {
+		if (button.value == search_data && search) button.shape.setFillColor(button.hoverColor);
+		else button.shape.setFillColor(button.idleColor);
+	}
 	if (block.size())
 	{
 		block[0].shape.setFillColor(block[0].activeColor);
+
 		sf::Font font;
 		font.loadFromFile("arial.ttf");
 		sf::Text* aboveText = new sf::Text();
 		aboveText->setFont(font);
-		aboveText->setString("Input value: ");
 		aboveText->setCharacterSize(20);
 		aboveText->setFillColor(sf::Color::Red);
 		aboveText->setPosition(block[0].posX, block[0].posY - 50);
 		aboveText->setString("pHead");
+
 		target.draw(*aboveText);
 		delete aboveText;
 	}
 	for (auto& button : block) {
 		button.render(target);
 	}
+
 	for (int i = 1; i < block.size(); i++)
 	{
 		Arrow* arrow = new Arrow(block[i - 1].posX + block[i - 1].shape.getSize().x, block[i - 1].posY + block[i - 1].shape.getSize().y / 2, 50, 7, sf::Color::Black, font);

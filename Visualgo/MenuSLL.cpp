@@ -1,6 +1,6 @@
 #include "MenuDLL.h"
 #include "Arrow.h"
-void MenuDLL(sf::RenderWindow& window, sf::Font& font, bool& MenuCur, bool& LinkedList, TextBox& textField, Buttons& visual, TextBox& addField, doublyLinkedList& doublyLL, bool& init, bool& add_tail, bool& add_head, bool& add_index, bool& delete_index, bool& search, int search_data, bool& update)
+void MenuSLL(sf::RenderWindow& window, sf::Font& font, bool& MenuCur, bool& LinkedList, TextBox& textField, Buttons& visual, TextBox& addField, doublyLinkedList& doublyLL, bool& init, bool& add_tail, bool& add_head, bool& add_index, bool& delete_index, bool& search, int search_data, bool& update)
 {
 	Button* BackButton = new Button(50, 20, 200, 40, font, "Back",
 		sf::Color::Blue, sf::Color::Red, sf::Color::Blue, sf::Color::Black);
@@ -209,15 +209,15 @@ void MenuDLL(sf::RenderWindow& window, sf::Font& font, bool& MenuCur, bool& Link
 		sf::Time sleepTime = sf::seconds(0.3f);
 		if (visual.block.size() > 1)
 		{
-				for (int j = 0; j < visual.block.size(); j++) {
-					visual.block[j].shape.setFillColor(visual.block[j].idleColor);
-					visual.block[j].render(window);
-				}
-				// Set hover color of current button
-				visual.block[1].shape.setFillColor(sf::Color::Cyan);
-				visual.block[1].render(window);
-				window.display();
-				sf::sleep(sleepTime);
+			for (int j = 0; j < visual.block.size(); j++) {
+				visual.block[j].shape.setFillColor(visual.block[j].idleColor);
+				visual.block[j].render(window);
+			}
+			// Set hover color of current button
+			visual.block[1].shape.setFillColor(sf::Color::Cyan);
+			visual.block[1].render(window);
+			window.display();
+			sf::sleep(sleepTime);
 		}
 		doublyLL.deleteHead();
 		visual.pop_head();
@@ -251,7 +251,7 @@ void MenuDLL(sf::RenderWindow& window, sf::Font& font, bool& MenuCur, bool& Link
 		search = !(search);
 	}
 
-	visual.render2arrow(window, search, search_data, font);
+	visual.render(window,search, search_data, font);
 
 	if (BackButton->isClicked(window))
 	{

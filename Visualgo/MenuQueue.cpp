@@ -90,13 +90,26 @@ void MenuQueue(sf::RenderWindow& window, sf::Font& font, bool& MenuCur, bool& Li
 
 	if (Delete_Head->isClicked(window))
 	{
+		sf::Time sleepTime = sf::seconds(0.3f);
+		if (visual.block.size() > 1)
+		{
+			for (int j = 0; j < visual.block.size(); j++) {
+				visual.block[j].shape.setFillColor(visual.block[j].idleColor);
+				visual.block[j].render(window);
+			}
+			// Set hover color of current button
+			visual.block[1].shape.setFillColor(sf::Color::Cyan);
+			visual.block[1].render(window);
+			window.display();
+			sf::sleep(sleepTime);
+		}
 		doublyLL.deleteHead();
 		visual.pop_head();
 	}
 
 	bool search = 0;
 	int search_data = 0;
-	visual.render2arrowQueue(window, search, search_data, font);
+	visual.renderQueue(window, search, search_data, font);
 
 	if (BackButton->isClicked(window))
 	{

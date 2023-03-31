@@ -93,7 +93,7 @@ void MenuStack(sf::RenderWindow& window, sf::Font& font, bool& MenuCur, bool& St
 		while (visual.block.size()) visual.pop_tail();
 	}
 
-	visual.render(window, font);
+	visual.render(window, search, search_data, font);
 
 	if (BackButton->isClicked(window))
 	{

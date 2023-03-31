@@ -4,5 +4,5 @@
 void Menu(sf::RenderWindow& window, sf::Font& font, bool& Start, bool& Menu, Button &QuitButton);
 
 void MenuNext(sf::RenderWindow& window, sf::Font& font, bool& Start, bool& Menu, 
-	bool& StaticArray, bool& LinkedList, bool& Stack, bool& Queue);
+	bool& StaticArray, bool& SLinkedList, bool& DLinkedList, bool& Stack, bool& Queue);
 

@@ -12,6 +12,7 @@
 #include "MenuStaticArray.h"
 #include "MenuQueue.h"
 #include "MenuStack.h"
+#include "MenuSLL.h"
 #include <iostream>
 
 
@@ -29,11 +30,11 @@ int main()
         sf::Color::Blue, sf::Color::Red, sf::Color::Blue, sf::Color::Black);
 
     Buttons temp;
-    doublyLinkedList doublyLL, stack, queue;
+    doublyLinkedList doublyLL, stack, queue, singlyLL;
     TextBox textField(font, 600, 50, 500, 50, sf::Color::White, sf::Color::Black, 5);
     TextBox addField(font, 700, 500, 400, 50, sf::Color::White, sf::Color::Black, 5);
 
-    bool Start = 1, MenuCur = 0, StaticArray = 0, LinkedList = 0, Queue = 0, Stack = 0;
+    bool Start = 1, MenuCur = 0, StaticArray = 0, SLinkedList = 0, DLinkedList = 0, Queue = 0, Stack = 0;
     bool Init = 0, Add_Tail = 0, Add_Head = 0, Add_Index = 0, Delete_Index = 0, Search = 0, Update = 0;
     bool entered = 0;
     int search_data = 0;
@@ -45,13 +46,21 @@ int main()
 
                 window.close();
             }
-            if (LinkedList && Init) textField.handleEvent(event, font, temp, doublyLL, 1, window);
-            if (LinkedList && Add_Tail) addField.handleEvent(event, font, temp, doublyLL, 1, window);
-            if (LinkedList && Add_Head) addField.handleEvent(event, font, temp, doublyLL, 0, window);
-            if (LinkedList && Add_Index) addField.handleEvent(event, font, temp, doublyLL, 2, window);
-            if (LinkedList && Delete_Index) addField.handleEvent(event, font, temp, doublyLL, 3, window);
-            if (LinkedList && Search) addField.handleSearchEvent(event, font, temp, doublyLL, search_data, window);
-            if (LinkedList && Update) addField.handleEvent(event, font, temp, doublyLL, 4, window);
+            if (DLinkedList && Init) textField.handleEvent(event, font, temp, doublyLL, 1, window);
+            if (DLinkedList && Add_Tail) addField.handleEvent(event, font, temp, doublyLL, 1, window);
+            if (DLinkedList && Add_Head) addField.handleEvent(event, font, temp, doublyLL, 0, window);
+            if (DLinkedList && Add_Index) addField.handleEvent(event, font, temp, doublyLL, 2, window);
+            if (DLinkedList && Delete_Index) addField.handleEvent(event, font, temp, doublyLL, 3, window);
+            if (DLinkedList && Search) addField.handleSearchEvent(event, font, temp, doublyLL, search_data, window);
+            if (DLinkedList && Update) addField.handleEvent(event, font, temp, doublyLL, 4, window);
+
+            if (SLinkedList && Init) textField.handleEvent(event, font, temp, singlyLL, 1, window);
+            if (SLinkedList && Add_Tail) addField.handleEvent(event, font, temp, singlyLL, 1, window);
+            if (SLinkedList && Add_Head) addField.handleEvent(event, font, temp, singlyLL, 0, window);
+            if (SLinkedList && Add_Index) addField.handleEvent(event, font, temp, singlyLL, 2, window);
+            if (SLinkedList && Delete_Index) addField.handleEvent(event, font, temp, singlyLL, 3, window);
+            if (SLinkedList && Search) addField.handleSearchEvent(event, font, temp, singlyLL, search_data, window);
+            if (SLinkedList && Update) addField.handleEvent(event, font, temp, singlyLL, 4, window);
 
             if (Stack && Init) textField.handleEvent(event, font, temp, stack, 1, window);
             if (Stack && Add_Head) addField.handleEvent(event, font, temp, stack, 0, window);
@@ -65,15 +74,17 @@ int main()
         if (Start) Menu(window, font, Start, MenuCur, QuitButton);
 
         if (MenuCur) MenuNext(window, font, Start, MenuCur,
-            StaticArray, LinkedList, Stack, Queue);
+            StaticArray, SLinkedList, DLinkedList, Stack, Queue);
 
-        if (LinkedList) MenuDLL(window, font, MenuCur, LinkedList, textField, temp, addField, doublyLL, Init, Add_Tail, Add_Head, Add_Index, Delete_Index, Search, search_data, Update);
+        if (DLinkedList) MenuDLL(window, font, MenuCur, DLinkedList, textField, temp, addField, doublyLL, Init, Add_Tail, Add_Head, Add_Index, Delete_Index, Search, search_data, Update);
 
         if (StaticArray) MenuStaticArray(window, font, MenuCur, StaticArray);
 
         if (Stack) MenuStack(window, font, MenuCur, Stack, textField, temp, addField, stack, Init, Add_Tail, Add_Head, Add_Index, Delete_Index, Search, search_data, Update);
 
         if (Queue) MenuQueue(window, font, MenuCur, Queue, textField, temp, addField, queue, Init, Add_Tail);
+
+        if (SLinkedList) MenuSLL(window, font, MenuCur, SLinkedList, textField, temp, addField, singlyLL, Init, Add_Tail, Add_Head, Add_Index, Delete_Index, Search, search_data, Update);
         window.display();
     }
 
