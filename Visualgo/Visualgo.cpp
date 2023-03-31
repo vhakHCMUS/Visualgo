@@ -46,12 +46,8 @@ int main()
                 window.close();
             }
             if (LinkedList && Init) textField.handleEvent(event, font, temp, doublyLL, 1, window);
-            if (LinkedList && Add_Tail) {
-                addField.handleEvent(event, font, temp, doublyLL, 1, window);
-            }
-            if (LinkedList && Add_Head) {
-                addField.handleEvent(event, font, temp, doublyLL, 0, window);
-            }
+            if (LinkedList && Add_Tail) addField.handleEvent(event, font, temp, doublyLL, 1, window);
+            if (LinkedList && Add_Head) addField.handleEvent(event, font, temp, doublyLL, 0, window);
             if (LinkedList && Add_Index) addField.handleEvent(event, font, temp, doublyLL, 2, window);
             if (LinkedList && Delete_Index) addField.handleEvent(event, font, temp, doublyLL, 3, window);
             if (LinkedList && Search) addField.handleSearchEvent(event, font, temp, doublyLL, search_data, window);
@@ -60,7 +56,7 @@ int main()
             if (Stack && Init) textField.handleEvent(event, font, temp, stack, 1, window);
             if (Stack && Add_Head) addField.handleEvent(event, font, temp, stack, 0, window);
 
-            if (Queue && Init) textField.handleEvent(event, font, temp, queue, 0, window);
+            if (Queue && Init) textField.handleEvent(event, font, temp, queue, 1, window);
             if (Queue && Add_Tail) addField.handleEvent(event, font, temp, queue, 1, window);
         }
 
@@ -75,11 +71,9 @@ int main()
 
         if (StaticArray) MenuStaticArray(window, font, MenuCur, StaticArray);
 
-        if (Queue) MenuQueue(window, font, MenuCur, Queue, textField, temp, addField, queue, Init, Add_Tail);
-
         if (Stack) MenuStack(window, font, MenuCur, Stack, textField, temp, addField, stack, Init, Add_Tail, Add_Head, Add_Index, Delete_Index, Search, search_data, Update);
 
-
+        if (Queue) MenuQueue(window, font, MenuCur, Queue, textField, temp, addField, queue, Init, Add_Tail);
         window.display();
     }
 

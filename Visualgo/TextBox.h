@@ -21,7 +21,7 @@ struct TextBox {
 
     void handleSearchEvent(sf::Event& event, sf::Font& font, Buttons& visual, doublyLinkedList& list, int& search_data, sf::RenderWindow& window);
 
-    void transfer_head(Buttons& visual, doublyLinkedList& list, sf::Font& font, sf::RenderWindow& window);
+    void transfer(Buttons& visual, doublyLinkedList& list, sf::Font& font, sf::RenderWindow& window);
 
     void transfer_tail(Buttons& visual, doublyLinkedList& list, sf::Font& font, sf::RenderWindow& window);
 

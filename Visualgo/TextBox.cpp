@@ -54,12 +54,7 @@ void add_head_step(Buttons& visual, doublyLinkedList& list, sf::Font& font, sf::
     {
         visual.block[i].render(window);
     }
-    for (int i = 1; i < visual.block.size(); i++)
-    {
-        Arrow* arrow = new Arrow(visual.block[i - 1].posX + visual.block[i - 1].shape.getSize().x, visual.block[i - 1].posY + visual.block[i - 1].shape.getSize().y / 2, 50, 7, sf::Color::Black, font);
-        arrow->draw2(window);
-        delete arrow;
-    }
+
     window.display();
     sf::sleep(sleepTime);
 
@@ -124,11 +119,10 @@ void add_tail_step(Buttons& visual, doublyLinkedList& list, sf::Font& font, sf::
 }
 
 
-void TextBox::transfer_head(Buttons& visual, doublyLinkedList& list, sf::Font& font, sf::RenderWindow& window)
+void TextBox::transfer(Buttons& visual, doublyLinkedList& list, sf::Font& font, sf::RenderWindow& window)
 {
     Node* cur = List.pTail;
     int temp = cur->data;
-
     if (list.pHead != nullptr) add_head_step(visual, list, font, window, temp);
     while (cur != nullptr)
     {
@@ -358,7 +352,7 @@ void TextBox::handleEvent(sf::Event& event, sf::Font& font, Buttons& visual, dou
         if (event.key.code == sf::Keyboard::Enter) {
             std::string str = text.getString();
             update();
-            if (type == 0) transfer_head(visual, list, font, window);
+            if (type == 0) transfer(visual, list, font, window);
             if (type == 1) transfer_tail(visual, list, font, window);
             if (type == 2) transfer_index(visual, list, font, window);
             if (type == 3) transfer_del_index(visual, list, font, window);
