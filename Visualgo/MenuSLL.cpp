@@ -108,7 +108,7 @@ void MenuSLL(sf::RenderWindow& window, sf::Font& font, bool& MenuCur, bool& Link
 		aboveText->setString("Input value: ");
 		aboveText->setCharacterSize(20);
 		aboveText->setFillColor(sf::Color::Red);
-		aboveText->setPosition(700, 450);
+		aboveText->setPosition(900, 550);
 		aboveText->setString("Input value: [value] Current Add head, click again to quit");
 		window.draw(*aboveText);
 		delete aboveText;
@@ -121,7 +121,7 @@ void MenuSLL(sf::RenderWindow& window, sf::Font& font, bool& MenuCur, bool& Link
 		aboveText->setString("Input value: ");
 		aboveText->setCharacterSize(20);
 		aboveText->setFillColor(sf::Color::Red);
-		aboveText->setPosition(700, 450);
+		aboveText->setPosition(900, 550);
 		aboveText->setString("Input value: [value] Current Add tail, click again to quit");
 		window.draw(*aboveText);
 		delete aboveText;
@@ -133,7 +133,7 @@ void MenuSLL(sf::RenderWindow& window, sf::Font& font, bool& MenuCur, bool& Link
 		aboveText->setString("Input value: ");
 		aboveText->setCharacterSize(20);
 		aboveText->setFillColor(sf::Color::Red);
-		aboveText->setPosition(700, 450);
+		aboveText->setPosition(900, 550);
 		aboveText->setString("Input value: [index] [space] [value] Current Add by Index, click again to quit");
 		window.draw(*aboveText);
 		delete aboveText;
@@ -146,7 +146,7 @@ void MenuSLL(sf::RenderWindow& window, sf::Font& font, bool& MenuCur, bool& Link
 		aboveText->setString("Input value: ");
 		aboveText->setCharacterSize(20);
 		aboveText->setFillColor(sf::Color::Red);
-		aboveText->setPosition(700, 450);
+		aboveText->setPosition(900, 550);
 		aboveText->setString("Input value: [index] Current Delete by Index, click again to quit");
 		window.draw(*aboveText);
 		delete aboveText;
@@ -159,7 +159,7 @@ void MenuSLL(sf::RenderWindow& window, sf::Font& font, bool& MenuCur, bool& Link
 		aboveText->setString("Input value: ");
 		aboveText->setCharacterSize(20);
 		aboveText->setFillColor(sf::Color::Red);
-		aboveText->setPosition(700, 450);
+		aboveText->setPosition(900, 550);
 		aboveText->setString("Input value: [value] Current search, click again to quit");
 		window.draw(*aboveText);
 		delete aboveText;
@@ -172,7 +172,7 @@ void MenuSLL(sf::RenderWindow& window, sf::Font& font, bool& MenuCur, bool& Link
 		aboveText->setString("Input value: ");
 		aboveText->setCharacterSize(20);
 		aboveText->setFillColor(sf::Color::Red);
-		aboveText->setPosition(700, 450);
+		aboveText->setPosition(900, 550);
 		aboveText->setString("Input value: [index] [space] [value] Current Update by Index, click again to quit");
 		window.draw(*aboveText);
 		delete aboveText;

@@ -118,6 +118,127 @@ void add_tail_step(Buttons& visual, doublyLinkedList& list, sf::Font& font, sf::
     sf::sleep(sleepTime);
 }
 
+void add_index_step(Buttons& visual, doublyLinkedList& list, sf::Font& font, sf::RenderWindow& window, int temp, int index)
+{
+    sf::Time sleepTime = sf::seconds(0.5f);
+
+    Button* Temp = new Button(visual.block[index].shape.getPosition().x, visual.block[index].shape.getPosition().y + 200, 80, 80, font, std::to_string(temp),
+        sf::Color::Green, sf::Color::Red, sf::Color::Blue, sf::Color::Black);
+    window.clear(sf::Color::White);
+    for (int i = 0; i < index; i++)
+    {
+        // Reset colors of all buttons
+        for (int j = 0; j < visual.block.size(); j++) {
+            visual.block[j].shape.setFillColor(visual.block[j].idleColor);
+            visual.block[j].render(window);
+        }
+
+        // Set hover color of current button
+        visual.block[i].shape.setFillColor(visual.block[i].hoverColor);
+        visual.block[i].render(window);
+        Temp->render(window);
+        if (i == index - 1) {
+            drawArrow(window, Temp->shape.getPosition().x, Temp->shape.getPosition().y, visual.block[index - 1].shape.getPosition().x, visual.block[index - 1].shape.getPosition().y, sf::Color::Black, font);
+            drawArrow(window, Temp->shape.getPosition().x, Temp->shape.getPosition().y, visual.block[index].shape.getPosition().x, visual.block[index].shape.getPosition().y, sf::Color::Black, font);
+            sf::sleep(sleepTime);
+        }
+        window.display();
+        sf::sleep(sleepTime);
+    }
+    delete Temp;
+}
+
+void update_index_step(Buttons& visual, doublyLinkedList& list, sf::Font& font, sf::RenderWindow& window, int temp, int index)
+{
+    sf::Time sleepTime = sf::seconds(0.3f);
+    for (int i = 0; i < visual.block.size(); i++)
+    {
+        // Reset colors of all buttons
+        for (int j = 0; j < visual.block.size(); j++) {
+            visual.block[j].shape.setFillColor(visual.block[j].idleColor);
+            visual.block[j].render(window);
+        }
+
+        // Set hover color of current button
+        if (i <= index) visual.block[i].shape.setFillColor(visual.block[i].hoverColor);
+        visual.block[i].render(window);
+
+        window.display();
+        sf::sleep(sleepTime);
+        if (i == index) sf::sleep(sleepTime);
+    }
+}
+
+
+void delete_index_step(Buttons& visual, doublyLinkedList& list, sf::Font& font, sf::RenderWindow& window, int index)
+{
+    sf::Time sleepTime = sf::seconds(0.5f);
+    for (int i = 0; i < index; i++)
+    {
+        // Reset colors of all buttons
+        for (int j = 0; j < visual.block.size(); j++) {
+            visual.block[j].shape.setFillColor(visual.block[j].idleColor);
+            visual.block[j].render(window);
+        }
+
+        // Set hover color of current button
+        visual.block[i].shape.setFillColor(visual.block[i].hoverColor);
+        visual.block[i].render(window);
+
+        window.display();
+        sf::sleep(sleepTime);
+    }
+
+    window.clear(sf::Color::White);
+    for (int j = 0; j < visual.block.size(); j++) {
+        if (j == index) continue;
+        visual.block[j].shape.setFillColor(visual.block[j].idleColor);
+        visual.block[j].render(window);
+    }
+    Arrow* arrow = new Arrow(visual.block[index - 1].posX + visual.block[index - 1].shape.getSize().x, visual.block[index - 1].posY + visual.block[index - 1].shape.getSize().y / 2, 150, 10, sf::Color::Black, font);
+    arrow->draw2(window);
+    delete arrow;
+    window.display();
+    sf::sleep(sleepTime);
+
+}
+
+void add_tail_queue(Buttons& visual, doublyLinkedList& list, sf::Font& font, sf::RenderWindow& window, int temp)
+{
+    sf::Time sleepTime = sf::seconds(0.3f);
+    window.clear(sf::Color::White);
+    for (int i = 0; i < visual.block.size(); i++)
+    {
+        visual.block[i].render(window);
+    }
+
+    window.display();
+    sf::sleep(sleepTime);
+
+    drawArrow(window, visual.block.back().shape.getPosition().x, visual.block.back().shape.getPosition().y + 200, visual.block.back().shape.getPosition().x, visual.block.back().shape.getPosition().y, sf::Color::Black, font);
+
+    window.display();
+    sf::sleep(sleepTime);
+
+    Button* Temp = new Button(visual.block.back().shape.getPosition().x, visual.block.back().shape.getPosition().y + 200, 80, 80, font, std::to_string(temp),
+        sf::Color::Green, sf::Color::Red, sf::Color::Blue, sf::Color::Black);
+
+    Temp->render(window);
+    drawArrow(window, visual.block.back().shape.getPosition().x, visual.block.back().shape.getPosition().y + 200, visual.block.back().shape.getPosition().x, visual.block.back().shape.getPosition().y, sf::Color::Black, font);
+    window.display();
+    sf::sleep(sleepTime);
+
+    drawArrow(window, visual.block.back().shape.getPosition().x, visual.block.back().shape.getPosition().y + 200, visual.block.back().shape.getPosition().x, visual.block.back().shape.getPosition().y, sf::Color::Black, font);
+
+    Temp->shape.setFillColor(sf::Color::Cyan);
+    Temp->render(window);
+
+    visual.block.back().shape.setFillColor(sf::Color::Green);
+    visual.block.back().render(window);
+
+    window.display();
+    sf::sleep(sleepTime);
+}
 
 void TextBox::transfer(Buttons& visual, doublyLinkedList& list, sf::Font& font, sf::RenderWindow& window)
 {
@@ -189,55 +310,8 @@ void TextBox::transfer_tail_queue(Buttons& visual, doublyLinkedList& list, sf::F
     std::cout << "transfer--------------------------------------\n";
 }
 
-void add_index_step(Buttons& visual, doublyLinkedList& list, sf::Font& font, sf::RenderWindow& window, int temp, int index)
-{
-    sf::Time sleepTime = sf::seconds(0.5f);
 
-    Button* Temp = new Button(visual.block[index].shape.getPosition().x, visual.block[index].shape.getPosition().y + 200, 80, 80, font, std::to_string(temp),
-        sf::Color::Green, sf::Color::Red, sf::Color::Blue, sf::Color::Black);
-    window.clear(sf::Color::White);
-    for (int i = 0; i < index; i++)
-    {
-        // Reset colors of all buttons
-        for (int j = 0; j < visual.block.size(); j++) {
-            visual.block[j].shape.setFillColor(visual.block[j].idleColor);
-            visual.block[j].render(window);
-        }
 
-        // Set hover color of current button
-        visual.block[i].shape.setFillColor(visual.block[i].hoverColor);
-        visual.block[i].render(window);
-        Temp->render(window);
-        if (i == index - 1) {
-            drawArrow(window, Temp->shape.getPosition().x, Temp->shape.getPosition().y, visual.block[index - 1].shape.getPosition().x, visual.block[index - 1].shape.getPosition().y, sf::Color::Black, font);
-            drawArrow(window, Temp->shape.getPosition().x, Temp->shape.getPosition().y, visual.block[index].shape.getPosition().x, visual.block[index].shape.getPosition().y, sf::Color::Black, font);
-            sf::sleep(sleepTime);
-        }
-        window.display();
-        sf::sleep(sleepTime);
-    }
-    delete Temp;
-}
-void update_index_step(Buttons& visual, doublyLinkedList& list, sf::Font& font, sf::RenderWindow& window, int temp, int index)
-{
-    sf::Time sleepTime = sf::seconds(0.3f);
-    for (int i = 0; i < visual.block.size(); i++)
-    {
-        // Reset colors of all buttons
-        for (int j = 0; j < visual.block.size(); j++) {
-            visual.block[j].shape.setFillColor(visual.block[j].idleColor);
-            visual.block[j].render(window);
-        }
-
-        // Set hover color of current button
-        if (i <= index) visual.block[i].shape.setFillColor(visual.block[i].hoverColor);
-        visual.block[i].render(window);
-
-        window.display();
-        sf::sleep(sleepTime);
-        if (i == index) sf::sleep(sleepTime);
-    }
-}
 void TextBox::transfer_index(Buttons& visual, doublyLinkedList& list, sf::Font& font, sf::RenderWindow& window)
 {
     Node* cur = List.pHead;
@@ -257,38 +331,6 @@ void TextBox::transfer_index(Buttons& visual, doublyLinkedList& list, sf::Font& 
     std::cout << "transfer--------------------------------------\n";
 }
 
-void delete_index_step(Buttons& visual, doublyLinkedList& list, sf::Font& font, sf::RenderWindow& window, int index)
-{
-    sf::Time sleepTime = sf::seconds(0.5f);
-    for (int i = 0; i < index; i++)
-    {
-        // Reset colors of all buttons
-        for (int j = 0; j < visual.block.size(); j++) {
-            visual.block[j].shape.setFillColor(visual.block[j].idleColor);
-            visual.block[j].render(window);
-        }
-
-        // Set hover color of current button
-        visual.block[i].shape.setFillColor(visual.block[i].hoverColor);
-        visual.block[i].render(window);
-
-        window.display();
-        sf::sleep(sleepTime);
-    }
-
-    window.clear(sf::Color::White);
-    for (int j = 0; j < visual.block.size(); j++) {
-        if (j == index) continue;
-        visual.block[j].shape.setFillColor(visual.block[j].idleColor);
-        visual.block[j].render(window);
-    }
-    Arrow* arrow = new Arrow(visual.block[index - 1].posX + visual.block[index - 1].shape.getSize().x, visual.block[index - 1].posY + visual.block[index - 1].shape.getSize().y / 2, 150, 10, sf::Color::Black, font);
-    arrow->draw2(window);
-    delete arrow;
-    window.display();
-    sf::sleep(sleepTime);
-
-}
 void TextBox::transfer_del_index(Buttons& visual, doublyLinkedList& list, sf::Font& font, sf::RenderWindow& window)
 {
     Node* cur = List.pHead;
@@ -382,42 +424,7 @@ void TextBox::handleEvent(sf::Event& event, sf::Font& font, Buttons& visual, dou
     }
 }
 
-void add_tail_queue(Buttons& visual, doublyLinkedList& list, sf::Font& font, sf::RenderWindow& window, int temp)
-{
-    sf::Time sleepTime = sf::seconds(0.3f);
-    window.clear(sf::Color::White);
-    for (int i = 0; i < visual.block.size(); i++)
-    {
-        visual.block[i].render(window);
-    }
 
-    window.display();
-    sf::sleep(sleepTime);
-
-    drawArrow(window, visual.block.back().shape.getPosition().x, visual.block.back().shape.getPosition().y + 200, visual.block.back().shape.getPosition().x, visual.block.back().shape.getPosition().y, sf::Color::Black, font);
-
-    window.display();
-    sf::sleep(sleepTime);
-
-    Button* Temp = new Button(visual.block.back().shape.getPosition().x, visual.block.back().shape.getPosition().y + 200, 80, 80, font, std::to_string(temp),
-        sf::Color::Green, sf::Color::Red, sf::Color::Blue, sf::Color::Black);
-
-    Temp->render(window);
-    drawArrow(window, visual.block.back().shape.getPosition().x, visual.block.back().shape.getPosition().y + 200, visual.block.back().shape.getPosition().x, visual.block.back().shape.getPosition().y, sf::Color::Black, font);
-    window.display();
-    sf::sleep(sleepTime);
-
-    drawArrow(window, visual.block.back().shape.getPosition().x, visual.block.back().shape.getPosition().y + 200, visual.block.back().shape.getPosition().x, visual.block.back().shape.getPosition().y, sf::Color::Black, font);
-
-    Temp->shape.setFillColor(sf::Color::Cyan);
-    Temp->render(window);
-
-    visual.block.back().shape.setFillColor(sf::Color::Green);
-    visual.block.back().render(window);
-
-    window.display();
-    sf::sleep(sleepTime);
-}
 void TextBox::handleQueueEvent(sf::Event& event, sf::Font& font, Buttons& visual, doublyLinkedList& list, sf::RenderWindow& window) {
     if (event.type == sf::Event::MouseButtonPressed && event.mouseButton.button == sf::Mouse::Left) {
         sf::Vector2f mousePos(event.mouseButton.x, event.mouseButton.y);
@@ -476,6 +483,110 @@ void TextBox::handleSearchEvent(sf::Event& event, sf::Font& font, Buttons& visua
             std::string str = text.getString();
             update();
             transfer_search(search_data, visual, list, font, window);
+        }
+    }
+}
+
+void TextBox::transferArray(Buttons& visual,  int array[], int array_size, sf::Font& font, sf::RenderWindow& window)
+{
+    Node* cur = List.pHead;
+    
+    for (int i = 0; i < array_size; i++) array[i] = -1e3;
+    int i = 0;
+
+    while (cur != nullptr)
+    {
+        array[i] = cur->data;
+        i++;
+        cur = cur->Next;
+    }
+
+    while (visual.block.size()) visual.pop_tail();
+
+    for (int i = 0 ; i < array_size ; i++)
+        visual.add(array[i], font);
+
+    std::cout << "transfer--------------------------------------\n";
+}
+void TextBox::handleArrayEvent(sf::Event& event, sf::Font& font, Buttons& visual, int array[], int array_size, sf::RenderWindow& window) {
+    if (event.type == sf::Event::MouseButtonPressed && event.mouseButton.button == sf::Mouse::Left) {
+        sf::Vector2f mousePos(event.mouseButton.x, event.mouseButton.y);
+        if (shape.getGlobalBounds().contains(mousePos)) {
+            isSelected = true;
+        }
+        else {
+            isSelected = false;
+        }
+    }
+
+    if (event.type == sf::Event::TextEntered && isSelected) {
+        if (event.text.unicode == '\b') {
+            if (!text.getString().isEmpty()) {
+                text.setString(text.getString().substring(0, text.getString().getSize() - 1));
+            }
+        }
+        else if (event.text.unicode < 128) {
+            text.setString(text.getString() + static_cast<char>(event.text.unicode));
+        }
+    }
+
+    if (event.type == sf::Event::KeyPressed) {
+        if (event.key.code == sf::Keyboard::Enter) {
+            std::string str = text.getString();
+            update();
+            transferArray(visual, array, array_size, font, window);
+        }
+    }
+}
+
+void TextBox::transfer_search_array(int& search_data, Buttons& visual, int array[], int array_size, sf::Font& font, sf::RenderWindow& window)
+{
+    sf::Time sleepTime = sf::seconds(0.5f);
+    search_data = List.pHead->data;
+    for (int i = 0; i < visual.block.size(); i++)
+    {
+        // Reset colors of all buttons
+        for (int j = 0; j < visual.block.size(); j++) {
+            visual.block[j].shape.setFillColor(visual.block[j].idleColor);
+            visual.block[j].render(window);
+        }
+
+        // Set hover color of current button
+        visual.block[i].shape.setFillColor(visual.block[i].hoverColor);
+        visual.block[i].render(window);
+
+        window.display();
+        sf::sleep(sleepTime);
+    }
+}
+
+void TextBox::handleSearchArrayEvent(sf::Event& event, sf::Font& font, Buttons& visual, int array[], int array_size, int& search_data, sf::RenderWindow& window) {
+    if (event.type == sf::Event::MouseButtonPressed && event.mouseButton.button == sf::Mouse::Left) {
+        sf::Vector2f mousePos(event.mouseButton.x, event.mouseButton.y);
+        if (shape.getGlobalBounds().contains(mousePos)) {
+            isSelected = true;
+        }
+        else {
+            isSelected = false;
+        }
+    }
+
+    if (event.type == sf::Event::TextEntered && isSelected) {
+        if (event.text.unicode == '\b') {
+            if (!text.getString().isEmpty()) {
+                text.setString(text.getString().substring(0, text.getString().getSize() - 1));
+            }
+        }
+        else if (event.text.unicode < 128) {
+            text.setString(text.getString() + static_cast<char>(event.text.unicode));
+        }
+    }
+
+    if (event.type == sf::Event::KeyPressed) {
+        if (event.key.code == sf::Keyboard::Enter) {
+            std::string str = text.getString();
+            update();
+            transfer_search_array(search_data, visual, array, array_size, font, window);
         }
     }
 }

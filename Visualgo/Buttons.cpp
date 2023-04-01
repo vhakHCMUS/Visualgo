@@ -148,3 +148,15 @@ void Buttons::render(sf::RenderWindow& target, bool& search, int& search_data, s
 		delete arrow;
 	}
 }
+
+void Buttons::renderArray(sf::RenderWindow& target, bool& search, int& search_data, sf::Font& font)
+{
+	for (auto& button : block) {
+		if (button.value == search_data && search) button.shape.setFillColor(button.hoverColor);
+		else button.shape.setFillColor(button.idleColor);
+	}
+	for (auto& button : block) {
+		button.render(target);
+	}
+
+}

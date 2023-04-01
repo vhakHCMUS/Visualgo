@@ -36,6 +36,15 @@ struct TextBox {
     void transfer_search(int& search_data, Buttons& visual, doublyLinkedList& list, sf::Font& font, sf::RenderWindow& window);
 
     void handleQueueEvent(sf::Event& event, sf::Font& font, Buttons& visual, doublyLinkedList& list, sf::RenderWindow& window);
+
+    void transferArray(Buttons& visual, int array[], int array_size, sf::Font& font, sf::RenderWindow& window);
+
+    void handleArrayEvent(sf::Event& event, sf::Font& font, Buttons& visual, int array[], int array_size, sf::RenderWindow& window);
+
+    void handleSearchArrayEvent(sf::Event& event, sf::Font& font, Buttons& visual, int array[], int array_size, int& search_data, sf::RenderWindow& window);
+
+    void transfer_search_array(int& search_data, Buttons& visual, int array[], int array_size, sf::Font& font, sf::RenderWindow& window);
+
     
 };
 

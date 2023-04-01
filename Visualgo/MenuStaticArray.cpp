@@ -1,6 +1,6 @@
 #include "MenuStaticArray.h"
 
-void MenuStaticArray(sf::RenderWindow& window, sf::Font& font, bool& MenuCur, bool& StaticArray)
+void MenuStaticArray(sf::RenderWindow& window, sf::Font& font, bool& MenuCur, bool& StaticArray, bool& init, bool& search, int search_data, TextBox& textField, TextBox& addField, int& arraySize, int array[], Buttons &visual)
 {
 	Button* BackButton = new Button(50, 20, 200, 50, font, "Back",
 		sf::Color::Blue, sf::Color::Red, sf::Color::Blue, sf::Color::Black);
@@ -11,12 +11,6 @@ void MenuStaticArray(sf::RenderWindow& window, sf::Font& font, bool& MenuCur, bo
 	Button* Search = new Button(100, 200, 200, 50, font, "Search",
 		sf::Color::Blue, sf::Color::Red, sf::Color::Blue, sf::Color::Black);
 
-	Button* Add_Head = new Button(100, 300, 200, 50, font, "Add Head",
-		sf::Color::Blue, sf::Color::Red, sf::Color::Blue, sf::Color::Black);
-
-	Button* Delete_Head = new Button(100, 400, 200, 50, font, "Delete Head",
-		sf::Color::Blue, sf::Color::Red, sf::Color::Blue, sf::Color::Black);
-
 	MenuCur = 0;
 
 	BackButton->update(window);
@@ -24,13 +18,42 @@ void MenuStaticArray(sf::RenderWindow& window, sf::Font& font, bool& MenuCur, bo
 
 	Init->update(window);
 	Search->update(window);
-	Add_Head->update(window);
-	Delete_Head->update(window);
+
 
 	Init->render(window);
 	Search->render(window);
-	Add_Head->render(window);
-	Delete_Head->render(window);
+
+	if (Init->isClicked(window)) init = !(init);
+
+	if (Search->isClicked(window)) search = !(search);
+
+	if (init)
+	{
+		sf::Text* aboveText = new sf::Text();
+		aboveText->setFont(font);
+		aboveText->setCharacterSize(20);
+		aboveText->setFillColor(sf::Color::Red);
+		aboveText->setPosition(600, 10);
+		aboveText->setString("Input value");
+		window.draw(*aboveText);
+		textField.draw(window);
+		delete aboveText;
+	}
+
+	if (search)
+	{
+		addField.draw(window);
+
+		sf::Text* aboveText = new sf::Text();
+		aboveText->setFont(font);
+		aboveText->setString("Input value: ");
+		aboveText->setCharacterSize(20);
+		aboveText->setFillColor(sf::Color::Red);
+		aboveText->setPosition(900, 550);
+		aboveText->setString("Input value: [value] Current search, click again to quit");
+		window.draw(*aboveText);
+		delete aboveText;
+	}
 
 	if (BackButton->isClicked(window))
 	{
@@ -38,5 +61,6 @@ void MenuStaticArray(sf::RenderWindow& window, sf::Font& font, bool& MenuCur, bo
 		MenuCur = 1;
 	}
 
-	delete BackButton, Init, Search, Add_Head, Delete_Head;
+	visual.renderArray(window, search, search_data, font);
+	delete BackButton, Init, Search;
 }

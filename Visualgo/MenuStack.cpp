@@ -58,7 +58,7 @@ void MenuStack(sf::RenderWindow& window, sf::Font& font, bool& MenuCur, bool& St
 		aboveText->setString("Input value: ");
 		aboveText->setCharacterSize(20);
 		aboveText->setFillColor(sf::Color::Red);
-		aboveText->setPosition(700, 450);
+		aboveText->setPosition(900, 550);
 		aboveText->setString("Input value: [value] Current Add, click again to quit");
 		window.draw(*aboveText);
 		delete aboveText;
