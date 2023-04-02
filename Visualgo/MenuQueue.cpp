@@ -123,6 +123,7 @@ void MenuQueue(sf::RenderWindow& window, sf::Font& font, bool& MenuCur, bool& Li
 		add_tail = init = 0;
 		LinkedList = 0;
 		MenuCur = 1;
+		while (visual.block.size()) visual.block.pop_back();
 	}
 	if (Reset->isClicked(window))
 	{

@@ -107,6 +107,7 @@ void MenuStack(sf::RenderWindow& window, sf::Font& font, bool& MenuCur, bool& St
 		add_tail = add_head = init = 0;
 		Stack = 0;
 		MenuCur = 1;
+		while (visual.block.size()) visual.block.pop_back();
 	}
 
 	delete BackButton, Init, Add_Head, Delete_Head, Random_Init;

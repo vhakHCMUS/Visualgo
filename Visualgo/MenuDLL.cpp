@@ -179,7 +179,7 @@ void MenuDLL(sf::RenderWindow& window, sf::Font& font, bool& MenuCur, bool& Link
 	}
 	if (Delete_Tail->isClicked(window))
 	{
-		sf::Time sleepTime = sf::seconds(0.2f);
+		sf::Time sleepTime = sf::seconds(0.1f);
 		for (int i = 0; i < visual.block.size(); i++)
 		{
 			// Reset colors of all buttons
@@ -265,6 +265,7 @@ void MenuDLL(sf::RenderWindow& window, sf::Font& font, bool& MenuCur, bool& Link
 		add_tail = add_head = init = 0;
 		LinkedList = 0;
 		MenuCur = 1;
+		while (visual.block.size()) visual.block.pop_back();
 	}
 
 	delete BackButton, Init, Search, Add_Tail, Delete_Tail, Add_Head, Delete_Head, Add_Index, Delete_Index, Random_Init;

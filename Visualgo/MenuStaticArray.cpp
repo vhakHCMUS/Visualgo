@@ -79,6 +79,7 @@ void MenuStaticArray(sf::RenderWindow& window, sf::Font& font, bool& MenuCur, bo
 	{
 		StaticArray = 0;
 		MenuCur = 1;
+		while (visual.block.size()) visual.block.pop_back();
 	}
 
 	visual.renderArray(window, search, search_data, font);

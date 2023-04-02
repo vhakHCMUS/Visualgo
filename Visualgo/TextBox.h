@@ -17,39 +17,35 @@ struct TextBox {
 
     void draw(sf::RenderWindow& window);
 
-    void handleEvent(sf::Event& event, sf::Font& font, Buttons& visual, doublyLinkedList& list, int type, sf::RenderWindow& window);
+    void handleEvent(sf::Event& event, sf::Font& font, Buttons& visual, doublyLinkedList& list, int type, sf::RenderWindow& window, bool fast);
 
-    void handleSearchEvent(sf::Event& event, sf::Font& font, Buttons& visual, doublyLinkedList& list, int& search_data, sf::RenderWindow& window);
+    void handleSearchEvent(sf::Event& event, sf::Font& font, Buttons& visual, doublyLinkedList& list, int& search_data, sf::RenderWindow& windowb, bool fast);
 
-    void transfer(Buttons& visual, doublyLinkedList& list, sf::Font& font, sf::RenderWindow& window);
+    void transfer(Buttons& visual, doublyLinkedList& list, sf::Font& font, sf::RenderWindow& window, bool fast);
 
-    void transfer_tail(Buttons& visual, doublyLinkedList& list, sf::Font& font, sf::RenderWindow& window);
+    void transfer_tail(Buttons& visual, doublyLinkedList& list, sf::Font& font, sf::RenderWindow& window, bool fast);
 
-    void transfer_tail_queue(Buttons& visual, doublyLinkedList& list, sf::Font& font, sf::RenderWindow& window);
+    void transfer_tail_queue(Buttons& visual, doublyLinkedList& list, sf::Font& font, sf::RenderWindow& window, bool fast);
 
-    void transfer_index(Buttons& visual, doublyLinkedList& list, sf::Font& font, sf::RenderWindow& window);
+    void transfer_index(Buttons& visual, doublyLinkedList& list, sf::Font& font, sf::RenderWindow& window, bool fast);
 
-    void transfer_del_index(Buttons& visual, doublyLinkedList& list, sf::Font& font, sf::RenderWindow& window);
+    void transfer_del_index(Buttons& visual, doublyLinkedList& list, sf::Font& font, sf::RenderWindow& window, bool fast);
 
-    void transfer_update(Buttons& visual, doublyLinkedList& list, sf::Font& font, sf::RenderWindow& window);
+    void transfer_update(Buttons& visual, doublyLinkedList& list, sf::Font& font, sf::RenderWindow& window, bool fast);
 
-    void transfer_search(int& search_data, Buttons& visual, doublyLinkedList& list, sf::Font& font, sf::RenderWindow& window);
+    void transfer_search(int& search_data, Buttons& visual, doublyLinkedList& list, sf::Font& font, sf::RenderWindow& window, bool fast);
 
-    void handleQueueEvent(sf::Event& event, sf::Font& font, Buttons& visual, doublyLinkedList& list, sf::RenderWindow& window);
+    void handleQueueEvent(sf::Event& event, sf::Font& font, Buttons& visual, doublyLinkedList& list, sf::RenderWindow& window, bool fast);
 
-    void transferArray(Buttons& visual, int array[], int array_size, sf::Font& font, sf::RenderWindow& window);
+    void transferArray(Buttons& visual, int array[], int array_size, sf::Font& font, sf::RenderWindow& window, bool fast);
 
-    void transferIndexArray(Buttons& visual, int array[], int array_size, sf::Font& font, sf::RenderWindow& window);
+    void transferIndexArray(Buttons& visual, int array[], int array_size, sf::Font& font, sf::RenderWindow& window, bool fast);
 
-    void handleArrayEvent(sf::Event& event, sf::Font& font, Buttons& visual, int array[], int array_size, sf::RenderWindow& window, int type);
+    void handleArrayEvent(sf::Event& event, sf::Font& font, Buttons& visual, int array[], int array_size, sf::RenderWindow& window, int type, bool fast);
 
-    void handleSearchArrayEvent(sf::Event& event, sf::Font& font, Buttons& visual, int array[], int array_size, int& search_data, sf::RenderWindow& window);
+    void handleSearchArrayEvent(sf::Event& event, sf::Font& font, Buttons& visual, int array[], int array_size, int& search_data, sf::RenderWindow& window, bool fast);
 
-    void transfer_search_array(int& search_data, Buttons& visual, int array[], int array_size, sf::Font& font, sf::RenderWindow& window);
+    void transfer_search_array(int& search_data, Buttons& visual, int array[], int array_size, sf::Font& font, sf::RenderWindow& window, bool fast);
 
     
 };
-
-void add_head_step(Buttons& visual, doublyLinkedList& list, sf::Font& font, sf::RenderWindow& window, int temp);
-
-void add_tail_step(Buttons& visual, doublyLinkedList& list, sf::Font& font, sf::RenderWindow& window, int temp);
