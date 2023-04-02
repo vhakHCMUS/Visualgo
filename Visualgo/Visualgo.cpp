@@ -73,7 +73,8 @@ int main()
             if (Queue && Init) textField.handleEvent(event, font, temp, queue, 1, window);
             if (Queue && Add_Tail) addField.handleQueueEvent(event, font, temp, queue, window);
 
-            if (StaticArray && Init) textField.handleArrayEvent(event, font, temp, array, arraySize, window);
+            if (StaticArray && Init) textField.handleArrayEvent(event, font, temp, array, arraySize, window, 0);
+            if (StaticArray && Update) addField.handleArrayEvent(event, font, temp, array, arraySize, window, 1);
             if (StaticArray && Search) addField.handleSearchArrayEvent(event, font, temp, array, arraySize, search_data, window);
         }
 
@@ -86,7 +87,7 @@ int main()
 
         if (DLinkedList) MenuDLL(window, font, MenuCur, DLinkedList, textField, temp, addField, doublyLL, Init, Add_Tail, Add_Head, Add_Index, Delete_Index, Search, search_data, Update);
 
-        if (StaticArray) MenuStaticArray(window, font, MenuCur, StaticArray, Init, Search, search_data, textField, addField, arraySize, array, temp);
+        if (StaticArray) MenuStaticArray(window, font, MenuCur, StaticArray, Init, Search, search_data, Update, textField, addField, arraySize, array, temp);
 
         if (Stack) MenuStack(window, font, MenuCur, Stack, textField, temp, addField, stack, Init, Add_Tail, Add_Head, Add_Index, Delete_Index, Search, search_data, Update);
 

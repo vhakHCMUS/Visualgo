@@ -39,7 +39,9 @@ struct TextBox {
 
     void transferArray(Buttons& visual, int array[], int array_size, sf::Font& font, sf::RenderWindow& window);
 
-    void handleArrayEvent(sf::Event& event, sf::Font& font, Buttons& visual, int array[], int array_size, sf::RenderWindow& window);
+    void transferIndexArray(Buttons& visual, int array[], int array_size, sf::Font& font, sf::RenderWindow& window);
+
+    void handleArrayEvent(sf::Event& event, sf::Font& font, Buttons& visual, int array[], int array_size, sf::RenderWindow& window, int type);
 
     void handleSearchArrayEvent(sf::Event& event, sf::Font& font, Buttons& visual, int array[], int array_size, int& search_data, sf::RenderWindow& window);
 

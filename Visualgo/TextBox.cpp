@@ -508,7 +508,24 @@ void TextBox::transferArray(Buttons& visual,  int array[], int array_size, sf::F
 
     std::cout << "transfer--------------------------------------\n";
 }
-void TextBox::handleArrayEvent(sf::Event& event, sf::Font& font, Buttons& visual, int array[], int array_size, sf::RenderWindow& window) {
+
+void TextBox::transferIndexArray(Buttons& visual, int array[], int array_size, sf::Font& font, sf::RenderWindow& window)
+{
+    Node* cur = List.pHead;
+    
+    int index = cur->data;
+    cur = cur->Next;
+
+    array[index] = cur->data;
+
+    while (visual.block.size()) visual.pop_tail();
+
+    for (int i = 0; i < array_size; i++)
+        visual.add(array[i], font);
+
+    std::cout << "transfer--------------------------------------\n";
+}
+void TextBox::handleArrayEvent(sf::Event& event, sf::Font& font, Buttons& visual, int array[], int array_size, sf::RenderWindow& window, int type) {
     if (event.type == sf::Event::MouseButtonPressed && event.mouseButton.button == sf::Mouse::Left) {
         sf::Vector2f mousePos(event.mouseButton.x, event.mouseButton.y);
         if (shape.getGlobalBounds().contains(mousePos)) {
@@ -534,7 +551,8 @@ void TextBox::handleArrayEvent(sf::Event& event, sf::Font& font, Buttons& visual
         if (event.key.code == sf::Keyboard::Enter) {
             std::string str = text.getString();
             update();
-            transferArray(visual, array, array_size, font, window);
+            if (type == 0) transferArray(visual, array, array_size, font, window);
+            if (type == 1) transferIndexArray(visual, array, array_size, font, window);
         }
     }
 }
