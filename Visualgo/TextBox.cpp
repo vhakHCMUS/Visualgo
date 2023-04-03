@@ -182,7 +182,7 @@ void add_tail_step(Buttons& visual, doublyLinkedList& list, sf::Font& font, sf::
             for (int j = 1; j < visual.block.size(); j++)
             {
                 Arrow* arrow = new Arrow(visual.block[j - 1].posX + visual.block[j - 1].shape.getSize().x, visual.block[j - 1].posY + visual.block[j - 1].shape.getSize().y / 2, 50, 7, sf::Color::Black, font);
-                arrow->draw2(window);
+                arrow->draw(window);
                 delete arrow;
             }
             // Set hover color of current button
@@ -192,15 +192,94 @@ void add_tail_step(Buttons& visual, doublyLinkedList& list, sf::Font& font, sf::
             window.display();
             sleep_thread(sleepTime);
         }
+
+        for (int j = 0; j < visual.block.size(); j++) {
+            visual.block[j].shape.setFillColor(visual.block[j].idleColor);
+            visual.block[j].render(window);
+        }
         Button* Temp = new Button(visual.block.back().shape.getPosition().x, visual.block.back().shape.getPosition().y + 200, 60, 60, font, std::to_string(temp),
             sf::Color::Green, sf::Color::Red, sf::Color::Blue, sf::Color::Black);
+
         Temp->render(window);
+
         window.display();
+
         sleep_thread(sleepTime);
+
         drawArrow(window, Temp->shape.getPosition().x, Temp->shape.getPosition().y, visual.block.back().shape.getPosition().x, visual.block.back().shape.getPosition().y, sf::Color::Black, font);
         Temp->render(window);
+
         window.display();
         sleep_thread(sleepTime);
+        delete Temp;
+    }
+    else
+    {
+        int step = 0;
+        int maxStep = 3;
+        Button* Temp = new Button(visual.block.back().shape.getPosition().x, visual.block.back().shape.getPosition().y + 200, 60, 60, font, std::to_string(temp),
+            sf::Color::Green, sf::Color::Red, sf::Color::Blue, sf::Color::Black);
+        while (step < visual.block.size() + 2)
+        {
+            sf::Event event;
+            while (window.pollEvent(event))
+            {
+                if (event.type == sf::Event::Closed)
+                    window.close();
+                if (event.type == sf::Event::KeyPressed)
+                {
+                    if (event.key.code == sf::Keyboard::Right)
+                        step++;
+                    if (event.key.code == sf::Keyboard::Left)
+                        step--;
+                }
+            }
+
+            if (step < visual.block.size())
+            { 
+                for (int j = 0; j < visual.block.size(); j++) {
+                    visual.block[j].shape.setFillColor(visual.block[j].idleColor);
+                    visual.block[j].render(window);
+                }
+                for (int j = 1; j < visual.block.size(); j++)
+                {
+                    Arrow* arrow = new Arrow(visual.block[j - 1].posX + visual.block[j - 1].shape.getSize().x, visual.block[j - 1].posY + visual.block[j - 1].shape.getSize().y / 2, 50, 7, sf::Color::Black, font);
+                    arrow->draw(window);
+                    delete arrow;
+                }
+                // Set hover color of current button
+                visual.block[step].shape.setFillColor(visual.block[step].hoverColor);
+                visual.block[step].render(window);
+
+                window.display();
+            }
+            else
+            {
+                int tmp = step - visual.block.size();
+                for (int j = 0; j < visual.block.size(); j++) {
+                    visual.block[j].shape.setFillColor(visual.block[j].idleColor);
+                    visual.block[j].render(window);
+                }
+
+                if (tmp == 0)
+                {
+                    Temp->render(window);
+
+                    window.display();
+                }
+
+
+                if (tmp == 1)
+                {
+                    drawArrow(window, Temp->shape.getPosition().x, Temp->shape.getPosition().y, visual.block.back().shape.getPosition().x, visual.block.back().shape.getPosition().y, sf::Color::Black, font);
+                    Temp->render(window);
+
+                    window.display();
+                }
+            }
+        }
+
+        delete Temp;
     }
 }
 
