@@ -17,7 +17,7 @@ TextBox::TextBox(sf::Font& font, float x, float y, float width, float height, sf
     text.setFillColor(sf::Color::Black);
 }
 
-sf::Time sleepTime = sf::seconds(0.15f);
+sf::Time sleepTime = sf::seconds(0.2f);
 
 void sleep_thread(sf::Time sleepTime)
 {
@@ -65,16 +65,17 @@ void add_head_step(Buttons& visual, doublyLinkedList& list, sf::Font& font, sf::
             visual.block[i].render(window);
         }
 
-        window.display();
-        sleep_thread(sleepTime);
-
-        drawArrow(window, visual.block[0].shape.getPosition().x, visual.block[0].shape.getPosition().y + 200, visual.block[0].shape.getPosition().x, visual.block[0].shape.getPosition().y, sf::Color::Black, font);
-
+        //step 1
         window.display();
         sleep_thread(sleepTime);
 
         Button* Temp = new Button(visual.block[0].shape.getPosition().x, visual.block[0].shape.getPosition().y + 200, 80, 80, font, std::to_string(temp),
             sf::Color::Green, sf::Color::Red, sf::Color::Blue, sf::Color::Black);
+        Temp->render(window);
+
+        window.display();
+        sleep_thread(sleepTime);
+        //step 2
 
         Temp->render(window);
         drawArrow(window, visual.block[0].shape.getPosition().x, visual.block[0].shape.getPosition().y + 200, visual.block[0].shape.getPosition().x, visual.block[0].shape.getPosition().y, sf::Color::Black, font);
@@ -83,6 +84,7 @@ void add_head_step(Buttons& visual, doublyLinkedList& list, sf::Font& font, sf::
 
         drawArrow(window, visual.block[0].shape.getPosition().x, visual.block[0].shape.getPosition().y + 200, visual.block[0].shape.getPosition().x, visual.block[0].shape.getPosition().y, sf::Color::Black, font);
 
+        //step 3
         Temp->shape.setFillColor(sf::Color::Cyan);
         Temp->render(window);
 
@@ -91,7 +93,79 @@ void add_head_step(Buttons& visual, doublyLinkedList& list, sf::Font& font, sf::
 
         window.display();
         sleep_thread(sleepTime);
+        delete Temp;
     }
+    else
+    {
+        int step = 1;
+        int maxStep = 3;
+        for (int i = 0; i < visual.block.size(); i++)
+        {
+            visual.block[i].render(window);
+        }
+
+        Button* Temp = new Button(visual.block[0].shape.getPosition().x, visual.block[0].shape.getPosition().y + 200, 80, 80, font, std::to_string(temp),
+            sf::Color::Green, sf::Color::Red, sf::Color::Blue, sf::Color::Black);
+
+        while (step <= maxStep)
+        {
+            sf::Event event;
+            while (window.pollEvent(event))
+            {
+                if (event.type == sf::Event::Closed)
+                    window.close();
+                if (event.type == sf::Event::KeyPressed)
+                {
+                    if (event.key.code == sf::Keyboard::Right)
+                        step++;
+                    if (event.key.code == sf::Keyboard::Left)
+                        step--;
+                }
+            }
+
+            switch (step)
+            {
+            case 1:
+                window.clear(sf::Color::White);
+                for (int i = 0; i < visual.block.size(); i++)
+                {
+                    visual.block[i].render(window);
+                }
+                Temp->render(window);
+                window.display();
+                sleep_thread(sleepTime);
+                break;
+            case 2:
+                window.clear(sf::Color::White);
+                for (int i = 0; i < visual.block.size(); i++)
+                {
+                    visual.block[i].render(window);
+                }
+                Temp->render(window);
+                drawArrow(window, visual.block[0].shape.getPosition().x, visual.block[0].shape.getPosition().y + 200, visual.block[0].shape.getPosition().x, visual.block[0].shape.getPosition().y, sf::Color::Black, font);
+                window.display();
+                break;
+            case 3:
+                window.clear(sf::Color::White);
+                for (int i = 0; i < visual.block.size(); i++)
+                {
+                    visual.block[i].render(window);
+                }
+                Temp->shape.setFillColor(sf::Color::Cyan);
+                Temp->render(window);
+                drawArrow(window, visual.block[0].shape.getPosition().x, visual.block[0].shape.getPosition().y + 200, visual.block[0].shape.getPosition().x, visual.block[0].shape.getPosition().y, sf::Color::Black, font);
+                visual.block[0].shape.setFillColor(sf::Color::Green);
+                visual.block[0].render(window);
+                window.display();
+                break;
+            default:
+                break;
+            }
+        }
+
+        delete Temp;
+    }
+
 }
 
 void add_tail_step(Buttons& visual, doublyLinkedList& list, sf::Font& font, sf::RenderWindow& window, int temp, bool fast)

@@ -1,6 +1,6 @@
 #include "Menu.h"
 
-void Menu(sf::RenderWindow& window, sf::Font& font, bool &Start, bool &Menu, Button &QuitButton)
+void Menu(sf::RenderWindow& window, sf::Font& font, bool &Start, bool &Menu, Button &QuitButton, Button &VisualSwitch, bool& fast)
 {
     if (Start)
     {
@@ -17,6 +17,13 @@ void Menu(sf::RenderWindow& window, sf::Font& font, bool &Start, bool &Menu, But
         }
         QuitButton.update(window);
         QuitButton.render(window);
+
+        if (fast) VisualSwitch.text.setString("Visual : Fast"); else 
+            VisualSwitch.text.setString("Visual : Step by step"); 
+        VisualSwitch.update(window);
+        VisualSwitch.render(window);
+
+        if (VisualSwitch.isClicked(window)) fast = !fast;
 
         delete StartButton;
     }

@@ -29,6 +29,9 @@ int main()
     Button QuitButton(600, 800, 200, 50, font, "Quit",
         sf::Color::Blue, sf::Color::Red, sf::Color::Blue, sf::Color::Black);
 
+    Button VisualSwitch(1000, 100, 200, 50, font, "Visual : Fast",
+        sf::Color::Blue, sf::Color::Red, sf::Color::Blue, sf::Color::Black);
+
     Buttons temp;
     doublyLinkedList doublyLL, stack, queue, singlyLL;
     TextBox textField(font, 600, 50, 500, 50, sf::Color::White, sf::Color::Black, 5);
@@ -83,7 +86,7 @@ int main()
         
         window.clear(gray);
 
-        if (Start) Menu(window, font, Start, MenuCur, QuitButton);
+        if (Start) Menu(window, font, Start, MenuCur, QuitButton, VisualSwitch, fast);
 
         if (MenuCur) MenuNext(window, font, Start, MenuCur,
             StaticArray, SLinkedList, DLinkedList, Stack, Queue);
