@@ -42,12 +42,15 @@ int main()
 
     bool entered = 0, fast = 1;
 
+    bool darkMode = 0;
     int search_data = 0;
 
     int arraySize = 8;
     int array[8];
     sf::Color gray(200, 200, 200);
+    sf::Color lightPink(255, 182, 193);
 
+    sf::Color bg = lightPink;
     window.setFramerateLimit(30);
     while (window.isOpen()) {
 
@@ -57,49 +60,50 @@ int main()
 
                 window.close();
             }
-            if (DLinkedList && Init) textField.handleEvent(event, font, temp, doublyLL, 1, window, fast);
-            if (DLinkedList && Add_Tail) addField.handleEvent(event, font, temp, doublyLL, 1, window, fast);
-            if (DLinkedList && Add_Head) addField.handleEvent(event, font, temp, doublyLL, 0, window, fast);
-            if (DLinkedList && Add_Index) addField.handleEvent(event, font, temp, doublyLL, 2, window, fast);
-            if (DLinkedList && Delete_Index) addField.handleEvent(event, font, temp, doublyLL, 3, window, fast);
-            if (DLinkedList && Search) addField.handleSearchEvent(event, font, temp, doublyLL, search_data, window, fast);
-            if (DLinkedList && Update) addField.handleEvent(event, font, temp, doublyLL, 4, window, fast);
+            if (DLinkedList && Init) textField.handleEvent(event, font, temp, doublyLL, 1, window, fast, bg);
+            if (DLinkedList && Add_Tail) addField.handleEvent(event, font, temp, doublyLL, 1, window, fast, bg);
+            if (DLinkedList && Add_Head) addField.handleEvent(event, font, temp, doublyLL, 0, window, fast, bg);
+            if (DLinkedList && Add_Index) addField.handleEvent(event, font, temp, doublyLL, 2, window, fast, bg);
+            if (DLinkedList && Delete_Index) addField.handleEvent(event, font, temp, doublyLL, 3, window, fast, bg);
+            if (DLinkedList && Search) addField.handleSearchEvent(event, font, temp, doublyLL, search_data, window, fast, bg);
+            if (DLinkedList && Update) addField.handleEvent(event, font, temp, doublyLL, 4, window, fast, bg);
 
-            if (SLinkedList && Init) textField.handleEvent(event, font, temp, singlyLL, 1, window, fast);
-            if (SLinkedList && Add_Tail) addField.handleEvent(event, font, temp, singlyLL, 1, window, fast);
-            if (SLinkedList && Add_Head) addField.handleEvent(event, font, temp, singlyLL, 0, window, fast);
-            if (SLinkedList && Add_Index) addField.handleEvent(event, font, temp, singlyLL, 2, window, fast);
-            if (SLinkedList && Delete_Index) addField.handleEvent(event, font, temp, singlyLL, 3, window, fast);
-            if (SLinkedList && Search) addField.handleSearchEvent(event, font, temp, singlyLL, search_data, window, fast);
-            if (SLinkedList && Update) addField.handleEvent(event, font, temp, singlyLL, 4, window, fast);
+            if (SLinkedList && Init) textField.handleEvent(event, font, temp, singlyLL, 1, window, fast, bg);
+            if (SLinkedList && Add_Tail) addField.handleEvent(event, font, temp, singlyLL, 1, window, fast, bg);
+            if (SLinkedList && Add_Head) addField.handleEvent(event, font, temp, singlyLL, 0, window, fast, bg);
+            if (SLinkedList && Add_Index) addField.handleEvent(event, font, temp, singlyLL, 2, window, fast, bg);
+            if (SLinkedList && Delete_Index) addField.handleEvent(event, font, temp, singlyLL, 3, window, fast, bg);
+            if (SLinkedList && Search) addField.handleSearchEvent(event, font, temp, singlyLL, search_data, window, fast, bg);
+            if (SLinkedList && Update) addField.handleEvent(event, font, temp, singlyLL, 4, window, fast, bg);
 
-            if (Stack && Init) textField.handleEvent(event, font, temp, stack, 1, window, fast);
-            if (Stack && Add_Head) addField.handleEvent(event, font, temp, stack, 0, window, fast);
+            if (Stack && Init) textField.handleEvent(event, font, temp, stack, 1, window, fast, bg);
+            if (Stack && Add_Head) addField.handleEvent(event, font, temp, stack, 0, window, fast, bg);
 
-            if (Queue && Init) textField.handleEvent(event, font, temp, queue, 1, window, fast);
-            if (Queue && Add_Tail) addField.handleQueueEvent(event, font, temp, queue, window, fast);
-
-            if (StaticArray && Init) textField.handleArrayEvent(event, font, temp, array, arraySize, window, 0, fast);
-            if (StaticArray && Update) addField.handleArrayEvent(event, font, temp, array, arraySize, window, 1, fast);
-            if (StaticArray && Search) addField.handleSearchArrayEvent(event, font, temp, array, arraySize, search_data, window, fast);
+            if (Queue && Init) textField.handleEvent(event, font, temp, queue, 1, window, fast, bg);
+            if (Queue && Add_Tail) addField.handleQueueEvent(event, font, temp, queue, window, fast, bg);
+            
+            if (StaticArray && Init) textField.handleArrayEvent(event, font, temp, array, arraySize, window, 0, fast, bg);
+            if (StaticArray && Update) addField.handleArrayEvent(event, font, temp, array, arraySize, window, 1, fast, bg);
+            if (StaticArray && Search) addField.handleSearchArrayEvent(event, font, temp, array, arraySize, search_data, window, fast, bg);
         }
         
-        window.clear(gray);
+        if (darkMode) bg = gray; else bg = lightPink;
+        window.clear(bg);
 
-        if (Start) Menu(window, font, Start, MenuCur, QuitButton, VisualSwitch, fast);
+        if (Start) Menu(window, font, Start, MenuCur, QuitButton, VisualSwitch, fast, bg, darkMode);
 
         if (MenuCur) MenuNext(window, font, Start, MenuCur,
-            StaticArray, SLinkedList, DLinkedList, Stack, Queue);
+            StaticArray, SLinkedList, DLinkedList, Stack, Queue, bg);
 
-        if (DLinkedList) MenuDLL(window, font, MenuCur, DLinkedList, textField, temp, addField, doublyLL, Init, Add_Tail, Add_Head, Add_Index, Delete_Index, Search, search_data, Update);
+        if (DLinkedList) MenuDLL(window, font, MenuCur, DLinkedList, textField, temp, addField, doublyLL, Init, Add_Tail, Add_Head, Add_Index, Delete_Index, Search, search_data, Update, bg);
 
-        if (StaticArray) MenuStaticArray(window, font, MenuCur, StaticArray, Init, Search, search_data, Update, textField, addField, arraySize, array, temp);
+        if (StaticArray) MenuStaticArray(window, font, MenuCur, StaticArray, Init, Search, search_data, Update, textField, addField, arraySize, array, temp, bg);
 
-        if (Stack) MenuStack(window, font, MenuCur, Stack, textField, temp, addField, stack, Init, Add_Tail, Add_Head, Add_Index, Delete_Index, Search, search_data, Update);
+        if (Stack) MenuStack(window, font, MenuCur, Stack, textField, temp, addField, stack, Init, Add_Tail, Add_Head, Add_Index, Delete_Index, Search, search_data, Update, bg);
 
-        if (Queue) MenuQueue(window, font, MenuCur, Queue, textField, temp, addField, queue, Init, Add_Tail);
+        if (Queue) MenuQueue(window, font, MenuCur, Queue, textField, temp, addField, queue, Init, Add_Tail, bg);
 
-        if (SLinkedList) MenuSLL(window, font, MenuCur, SLinkedList, textField, temp, addField, singlyLL, Init, Add_Tail, Add_Head, Add_Index, Delete_Index, Search, search_data, Update);
+        if (SLinkedList) MenuSLL(window, font, MenuCur, SLinkedList, textField, temp, addField, singlyLL, Init, Add_Tail, Add_Head, Add_Index, Delete_Index, Search, search_data, Update, bg);
         window.display();
     }
 

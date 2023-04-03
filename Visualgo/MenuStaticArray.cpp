@@ -1,6 +1,6 @@
 #include "MenuStaticArray.h"
 
-void MenuStaticArray(sf::RenderWindow& window, sf::Font& font, bool& MenuCur, bool& StaticArray, bool& init, bool& search, int search_data, bool& update, TextBox& textField, TextBox& addField, int& arraySize, int array[], Buttons &visual)
+void MenuStaticArray(sf::RenderWindow& window, sf::Font& font, bool& MenuCur, bool& StaticArray, bool& init, bool& search, int search_data, bool& update, TextBox& textField, TextBox& addField, int& arraySize, int array[], Buttons &visual, sf::Color bg)
 {
 	Button* BackButton = new Button(50, 20, 200, 50, font, "Back",
 		sf::Color::Blue, sf::Color::Red, sf::Color::Blue, sf::Color::Black);

@@ -1,14 +1,26 @@
 #include "Menu.h"
 
-void Menu(sf::RenderWindow& window, sf::Font& font, bool &Start, bool &Menu, Button &QuitButton, Button &VisualSwitch, bool& fast)
+void Menu(sf::RenderWindow& window, sf::Font& font, bool &Start, bool &Menu, Button &QuitButton, Button &VisualSwitch, bool& fast, sf::Color bg, bool& darkMode)
 {
     if (Start)
     {
         Button* StartButton = new Button(600, 300, 200, 50, font, "Start",
             sf::Color::Blue, sf::Color::Red, sf::Color::Blue, sf::Color::Black);
 
+        Button* DarkMode = new Button(1000, 300, 200, 50, font, "Dark mode : On",
+            sf::Color::Blue, sf::Color::Red, sf::Color::Blue, sf::Color::Black);
+
         StartButton->update(window);
         StartButton->render(window);
+
+        if (!darkMode) DarkMode->text.setString("Dark mode : Off");
+        DarkMode->update(window);
+        DarkMode->render(window);
+
+        if (DarkMode->isClicked(window))
+        {
+            darkMode = !darkMode;
+        }
 
         if (StartButton->isClicked(window))
         {
@@ -20,17 +32,18 @@ void Menu(sf::RenderWindow& window, sf::Font& font, bool &Start, bool &Menu, But
 
         if (fast) VisualSwitch.text.setString("Visual : Fast"); else 
             VisualSwitch.text.setString("Visual : Step by step"); 
+
         VisualSwitch.update(window);
         VisualSwitch.render(window);
 
         if (VisualSwitch.isClicked(window)) fast = !fast;
 
-        delete StartButton;
+        delete StartButton, DarkMode;
     }
 }
 
 void MenuNext(sf::RenderWindow& window, sf::Font& font, bool& Start, bool& MenuCur,
-    bool& StaticArray, bool& SLinkedList, bool& DLinkedList, bool& Stack, bool& Queue)
+    bool& StaticArray, bool& SLinkedList, bool& DLinkedList, bool& Stack, bool& Queue, sf::Color bg)
 {
 
     Button *StaticArrayButton = new Button(100, 100, 200, 50, font, "StaticArray",

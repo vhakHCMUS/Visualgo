@@ -17,35 +17,35 @@ struct TextBox {
 
     void draw(sf::RenderWindow& window);
 
-    void handleEvent(sf::Event& event, sf::Font& font, Buttons& visual, doublyLinkedList& list, int type, sf::RenderWindow& window, bool fast);
+    void handleEvent(sf::Event& event, sf::Font& font, Buttons& visual, doublyLinkedList& list, int type, sf::RenderWindow& window, bool fast, sf::Color bg);
 
-    void handleSearchEvent(sf::Event& event, sf::Font& font, Buttons& visual, doublyLinkedList& list, int& search_data, sf::RenderWindow& windowb, bool fast);
+    void handleSearchEvent(sf::Event& event, sf::Font& font, Buttons& visual, doublyLinkedList& list, int& search_data, sf::RenderWindow& windowb, bool fast, sf::Color bg);
 
-    void transfer(Buttons& visual, doublyLinkedList& list, sf::Font& font, sf::RenderWindow& window, bool fast);
+    void transfer(Buttons& visual, doublyLinkedList& list, sf::Font& font, sf::RenderWindow& window, bool fast, sf::Color bg);
 
-    void transfer_tail(Buttons& visual, doublyLinkedList& list, sf::Font& font, sf::RenderWindow& window, bool fast);
+    void transfer_tail(Buttons& visual, doublyLinkedList& list, sf::Font& font, sf::RenderWindow& window, bool fast, sf::Color bg);
 
-    void transfer_tail_queue(Buttons& visual, doublyLinkedList& list, sf::Font& font, sf::RenderWindow& window, bool fast);
+    void transfer_tail_queue(Buttons& visual, doublyLinkedList& list, sf::Font& font, sf::RenderWindow& window, bool fast, sf::Color bg);
 
-    void transfer_index(Buttons& visual, doublyLinkedList& list, sf::Font& font, sf::RenderWindow& window, bool fast);
+    void transfer_index(Buttons& visual, doublyLinkedList& list, sf::Font& font, sf::RenderWindow& window, bool fast, sf::Color bg);
 
-    void transfer_del_index(Buttons& visual, doublyLinkedList& list, sf::Font& font, sf::RenderWindow& window, bool fast);
+    void transfer_del_index(Buttons& visual, doublyLinkedList& list, sf::Font& font, sf::RenderWindow& window, bool fast, sf::Color bg);
 
-    void transfer_update(Buttons& visual, doublyLinkedList& list, sf::Font& font, sf::RenderWindow& window, bool fast);
+    void transfer_update(Buttons& visual, doublyLinkedList& list, sf::Font& font, sf::RenderWindow& window, bool fast, sf::Color bg);
 
-    void transfer_search(int& search_data, Buttons& visual, doublyLinkedList& list, sf::Font& font, sf::RenderWindow& window, bool fast);
+    void transfer_search(int& search_data, Buttons& visual, doublyLinkedList& list, sf::Font& font, sf::RenderWindow& window, bool fast, sf::Color bg);
 
-    void handleQueueEvent(sf::Event& event, sf::Font& font, Buttons& visual, doublyLinkedList& list, sf::RenderWindow& window, bool fast);
+    void handleQueueEvent(sf::Event& event, sf::Font& font, Buttons& visual, doublyLinkedList& list, sf::RenderWindow& window, bool fast, sf::Color bg);
 
-    void transferArray(Buttons& visual, int array[], int array_size, sf::Font& font, sf::RenderWindow& window, bool fast);
+    void transferArray(Buttons& visual, int array[], int array_size, sf::Font& font, sf::RenderWindow& window, bool fast, sf::Color bg);
 
-    void transferIndexArray(Buttons& visual, int array[], int array_size, sf::Font& font, sf::RenderWindow& window, bool fast);
+    void transferIndexArray(Buttons& visual, int array[], int array_size, sf::Font& font, sf::RenderWindow& window, bool fast, sf::Color bg);
 
-    void handleArrayEvent(sf::Event& event, sf::Font& font, Buttons& visual, int array[], int array_size, sf::RenderWindow& window, int type, bool fast);
+    void handleArrayEvent(sf::Event& event, sf::Font& font, Buttons& visual, int array[], int array_size, sf::RenderWindow& window, int type, bool fast, sf::Color bg);
 
-    void handleSearchArrayEvent(sf::Event& event, sf::Font& font, Buttons& visual, int array[], int array_size, int& search_data, sf::RenderWindow& window, bool fast);
+    void handleSearchArrayEvent(sf::Event& event, sf::Font& font, Buttons& visual, int array[], int array_size, int& search_data, sf::RenderWindow& window, bool fast, sf::Color bg);
 
-    void transfer_search_array(int& search_data, Buttons& visual, int array[], int array_size, sf::Font& font, sf::RenderWindow& window, bool fast);
+    void transfer_search_array(int& search_data, Buttons& visual, int array[], int array_size, sf::Font& font, sf::RenderWindow& window, bool fast, sf::Color bg);
 
     
 };

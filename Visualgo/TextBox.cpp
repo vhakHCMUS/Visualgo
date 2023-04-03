@@ -17,7 +17,7 @@ TextBox::TextBox(sf::Font& font, float x, float y, float width, float height, sf
     text.setFillColor(sf::Color::Black);
 }
 
-sf::Time sleepTime = sf::seconds(0.2f);
+sf::Time sleepTime = sf::seconds(0.3f);
 
 void sleep_thread(sf::Time sleepTime)
 {
@@ -56,7 +56,7 @@ void TextBox::draw(sf::RenderWindow& window) {
     window.draw(text);
 }
 
-void add_head_step(Buttons& visual, doublyLinkedList& list, sf::Font& font, sf::RenderWindow& window, int temp, bool fast)
+void add_head_step(Buttons& visual, doublyLinkedList& list, sf::Font& font, sf::RenderWindow& window, int temp, bool fast, sf::Color bg)
 {
     if (fast)
     {
@@ -126,7 +126,7 @@ void add_head_step(Buttons& visual, doublyLinkedList& list, sf::Font& font, sf::
             switch (step)
             {
             case 1:
-                window.clear(sf::Color::White);
+                window.clear(bg);
                 for (int i = 0; i < visual.block.size(); i++)
                 {
                     visual.block[i].render(window);
@@ -136,7 +136,7 @@ void add_head_step(Buttons& visual, doublyLinkedList& list, sf::Font& font, sf::
                 sleep_thread(sleepTime);
                 break;
             case 2:
-                window.clear(sf::Color::White);
+                window.clear(bg);
                 for (int i = 0; i < visual.block.size(); i++)
                 {
                     visual.block[i].render(window);
@@ -146,7 +146,7 @@ void add_head_step(Buttons& visual, doublyLinkedList& list, sf::Font& font, sf::
                 window.display();
                 break;
             case 3:
-                window.clear(sf::Color::White);
+                window.clear(bg);
                 for (int i = 0; i < visual.block.size(); i++)
                 {
                     visual.block[i].render(window);
@@ -168,7 +168,7 @@ void add_head_step(Buttons& visual, doublyLinkedList& list, sf::Font& font, sf::
 
 }
 
-void add_tail_step(Buttons& visual, doublyLinkedList& list, sf::Font& font, sf::RenderWindow& window, int temp, bool fast)
+void add_tail_step(Buttons& visual, doublyLinkedList& list, sf::Font& font, sf::RenderWindow& window, int temp, bool fast, sf::Color bg)
 {
     if (fast)
     {
@@ -204,7 +204,7 @@ void add_tail_step(Buttons& visual, doublyLinkedList& list, sf::Font& font, sf::
     }
 }
 
-void add_index_step(Buttons& visual, doublyLinkedList& list, sf::Font& font, sf::RenderWindow& window, int temp, int index, bool fast)
+void add_index_step(Buttons& visual, doublyLinkedList& list, sf::Font& font, sf::RenderWindow& window, int temp, int index, bool fast, sf::Color bg)
 {
     if (fast)
     {
@@ -234,7 +234,7 @@ void add_index_step(Buttons& visual, doublyLinkedList& list, sf::Font& font, sf:
     }
 }
 
-void update_index_step(Buttons& visual, doublyLinkedList& list, sf::Font& font, sf::RenderWindow& window, int temp, int index, bool fast)
+void update_index_step(Buttons& visual, doublyLinkedList& list, sf::Font& font, sf::RenderWindow& window, int temp, int index, bool fast, sf::Color bg)
 {
     if (fast)
     {
@@ -258,7 +258,7 @@ void update_index_step(Buttons& visual, doublyLinkedList& list, sf::Font& font, 
 }
 
 
-void delete_index_step(Buttons& visual, doublyLinkedList& list, sf::Font& font, sf::RenderWindow& window, int index, bool fast)
+void delete_index_step(Buttons& visual, doublyLinkedList& list, sf::Font& font, sf::RenderWindow& window, int index, bool fast, sf::Color bg)
 {
     if (fast)
     {
@@ -291,7 +291,7 @@ void delete_index_step(Buttons& visual, doublyLinkedList& list, sf::Font& font, 
     }
 }
 
-void add_tail_queue(Buttons& visual, doublyLinkedList& list, sf::Font& font, sf::RenderWindow& window, int temp, bool fast)
+void add_tail_queue(Buttons& visual, doublyLinkedList& list, sf::Font& font, sf::RenderWindow& window, int temp, bool fast, sf::Color bg)
 {
     if (fast)
     {
@@ -329,11 +329,11 @@ void add_tail_queue(Buttons& visual, doublyLinkedList& list, sf::Font& font, sf:
     }
 }
 
-void TextBox::transfer(Buttons& visual, doublyLinkedList& list, sf::Font& font, sf::RenderWindow& window, bool fast)
+void TextBox::transfer(Buttons& visual, doublyLinkedList& list, sf::Font& font, sf::RenderWindow& window, bool fast, sf::Color bg)
 {
     Node* cur = List.pTail;
     int temp = cur->data;
-    if (list.pHead != nullptr) add_head_step(visual, list, font, window, temp, fast);
+    if (list.pHead != nullptr) add_head_step(visual, list, font, window, temp, fast, bg);
     while (cur != nullptr)
     {
         list.addHead(create(cur->data));
@@ -356,11 +356,11 @@ void TextBox::transfer(Buttons& visual, doublyLinkedList& list, sf::Font& font, 
     std::cout << "transfer--------------------------------------\n";
 }
 
-void TextBox::transfer_tail(Buttons& visual, doublyLinkedList& list, sf::Font& font, sf::RenderWindow &window, bool fast)
+void TextBox::transfer_tail(Buttons& visual, doublyLinkedList& list, sf::Font& font, sf::RenderWindow &window, bool fast, sf::Color bg)
 {
     Node* cur = List.pHead;
     int temp = cur->data;
-    if (list.pHead != nullptr) add_tail_step(visual, list, font, window, temp, fast);
+    if (list.pHead != nullptr) add_tail_step(visual, list, font, window, temp, fast, bg);
     while (cur != nullptr)
     {
         list.addTail(create(cur->data));
@@ -378,7 +378,7 @@ void TextBox::transfer_tail(Buttons& visual, doublyLinkedList& list, sf::Font& f
     std::cout << "transfer--------------------------------------\n";
 }
 
-void TextBox::transfer_tail_queue(Buttons& visual, doublyLinkedList& list, sf::Font& font, sf::RenderWindow& window, bool fast)
+void TextBox::transfer_tail_queue(Buttons& visual, doublyLinkedList& list, sf::Font& font, sf::RenderWindow& window, bool fast, sf::Color bg)
 {
     Node* cur = List.pHead;
     int temp = cur->data;
@@ -401,13 +401,13 @@ void TextBox::transfer_tail_queue(Buttons& visual, doublyLinkedList& list, sf::F
 
 
 
-void TextBox::transfer_index(Buttons& visual, doublyLinkedList& list, sf::Font& font, sf::RenderWindow& window, bool fast)
+void TextBox::transfer_index(Buttons& visual, doublyLinkedList& list, sf::Font& font, sf::RenderWindow& window, bool fast, sf::Color bg)
 {
     Node* cur = List.pHead;
     int index = cur->data;
     cur = cur->Next;
     int value = cur->data;
-    add_index_step(visual, list, font, window, value, index, fast);
+    add_index_step(visual, list, font, window, value, index, fast, bg);
     list.insertIndexK(index, value);
     while (visual.block.size()) visual.pop_tail();
     cur = list.pHead;
@@ -420,12 +420,12 @@ void TextBox::transfer_index(Buttons& visual, doublyLinkedList& list, sf::Font& 
     std::cout << "transfer--------------------------------------\n";
 }
 
-void TextBox::transfer_del_index(Buttons& visual, doublyLinkedList& list, sf::Font& font, sf::RenderWindow& window, bool fast)
+void TextBox::transfer_del_index(Buttons& visual, doublyLinkedList& list, sf::Font& font, sf::RenderWindow& window, bool fast, sf::Color bg)
 {
     Node* cur = List.pHead;
     int index = cur->data;
 
-    if (list.pHead != nullptr && index != 0) delete_index_step(visual, list, font, window, index, fast);
+    if (list.pHead != nullptr && index != 0) delete_index_step(visual, list, font, window, index, fast, bg);
     list.deleteIndexK(index);
     while (visual.block.size()) visual.pop_tail();
     cur = list.pHead;
@@ -438,13 +438,13 @@ void TextBox::transfer_del_index(Buttons& visual, doublyLinkedList& list, sf::Fo
     std::cout << "transfer--------------------------------------\n";
 }
 
-void TextBox::transfer_update(Buttons& visual, doublyLinkedList& list, sf::Font& font, sf::RenderWindow& window, bool fast)
+void TextBox::transfer_update(Buttons& visual, doublyLinkedList& list, sf::Font& font, sf::RenderWindow& window, bool fast, sf::Color bg)
 {
     Node* cur = List.pHead;
     int index = cur->data;
     cur = cur->Next;
     int value = cur->data;
-    update_index_step(visual, list, font, window, value, index, fast);
+    update_index_step(visual, list, font, window, value, index, fast, bg);
     list.updateIndexK(index, value);
     while (visual.block.size()) visual.pop_tail();
     cur = list.pHead;
@@ -457,7 +457,7 @@ void TextBox::transfer_update(Buttons& visual, doublyLinkedList& list, sf::Font&
     std::cout << "transfer--------------------------------------\n";
 }
 
-void TextBox::transfer_search(int &search_data, Buttons& visual, doublyLinkedList& list, sf::Font& font, sf::RenderWindow& window, bool fast)
+void TextBox::transfer_search(int &search_data, Buttons& visual, doublyLinkedList& list, sf::Font& font, sf::RenderWindow& window, bool fast, sf::Color bg)
 {
     search_data = List.pHead->data;
     for (int i = 0; i < visual.block.size(); i++)
@@ -485,7 +485,7 @@ void TextBox::transfer_search(int &search_data, Buttons& visual, doublyLinkedLis
     }
 }
 
-void TextBox::handleEvent(sf::Event& event, sf::Font& font, Buttons& visual, doublyLinkedList& list, int type, sf::RenderWindow& window, bool fast) {
+void TextBox::handleEvent(sf::Event& event, sf::Font& font, Buttons& visual, doublyLinkedList& list, int type, sf::RenderWindow& window, bool fast, sf::Color bg) {
     if (event.type == sf::Event::MouseButtonPressed && event.mouseButton.button == sf::Mouse::Left) {
         sf::Vector2f mousePos(event.mouseButton.x, event.mouseButton.y);
         if (shape.getGlobalBounds().contains(mousePos)) {
@@ -511,17 +511,17 @@ void TextBox::handleEvent(sf::Event& event, sf::Font& font, Buttons& visual, dou
         if (event.key.code == sf::Keyboard::Enter) {
             std::string str = text.getString();
             update();
-            if (type == 0) transfer(visual, list, font, window, fast);
-            if (type == 1) transfer_tail(visual, list, font, window, fast);
-            if (type == 2) transfer_index(visual, list, font, window, fast);
-            if (type == 3) transfer_del_index(visual, list, font, window, fast);
-            if (type == 4) transfer_update(visual, list, font, window, fast);
+            if (type == 0) transfer(visual, list, font, window, fast, bg);
+            if (type == 1) transfer_tail(visual, list, font, window, fast, bg);
+            if (type == 2) transfer_index(visual, list, font, window, fast, bg);
+            if (type == 3) transfer_del_index(visual, list, font, window, fast, bg);
+            if (type == 4) transfer_update(visual, list, font, window, fast, bg);
         }
     }
 }
 
 
-void TextBox::handleQueueEvent(sf::Event& event, sf::Font& font, Buttons& visual, doublyLinkedList& list, sf::RenderWindow& window, bool fast) {
+void TextBox::handleQueueEvent(sf::Event& event, sf::Font& font, Buttons& visual, doublyLinkedList& list, sf::RenderWindow& window, bool fast, sf::Color bg) {
     if (event.type == sf::Event::MouseButtonPressed && event.mouseButton.button == sf::Mouse::Left) {
         sf::Vector2f mousePos(event.mouseButton.x, event.mouseButton.y);
         if (shape.getGlobalBounds().contains(mousePos)) {
@@ -547,12 +547,12 @@ void TextBox::handleQueueEvent(sf::Event& event, sf::Font& font, Buttons& visual
         if (event.key.code == sf::Keyboard::Enter) {
             std::string str = text.getString();
             update();
-            add_tail_queue(visual, list, font, window, list.pHead->data, fast);
-            transfer_tail_queue(visual, list, font, window, fast);
+            add_tail_queue(visual, list, font, window, list.pHead->data, fast, bg);
+            transfer_tail_queue(visual, list, font, window, fast, bg);
         }
     }
 }
-void TextBox::handleSearchEvent(sf::Event& event, sf::Font& font, Buttons& visual, doublyLinkedList& list, int &search_data, sf::RenderWindow& window, bool fast) {
+void TextBox::handleSearchEvent(sf::Event& event, sf::Font& font, Buttons& visual, doublyLinkedList& list, int &search_data, sf::RenderWindow& window, bool fast, sf::Color bg) {
     if (event.type == sf::Event::MouseButtonPressed && event.mouseButton.button == sf::Mouse::Left) {
         sf::Vector2f mousePos(event.mouseButton.x, event.mouseButton.y);
         if (shape.getGlobalBounds().contains(mousePos)) {
@@ -578,12 +578,12 @@ void TextBox::handleSearchEvent(sf::Event& event, sf::Font& font, Buttons& visua
         if (event.key.code == sf::Keyboard::Enter) {
             std::string str = text.getString();
             update();
-            transfer_search(search_data, visual, list, font, window, fast);
+            transfer_search(search_data, visual, list, font, window, fast, bg);
         }
     }
 }
 
-void TextBox::transferArray(Buttons& visual,  int array[], int array_size, sf::Font& font, sf::RenderWindow& window, bool fast)
+void TextBox::transferArray(Buttons& visual,  int array[], int array_size, sf::Font& font, sf::RenderWindow& window, bool fast, sf::Color bg)
 {
     Node* cur = List.pHead;
     
@@ -605,7 +605,7 @@ void TextBox::transferArray(Buttons& visual,  int array[], int array_size, sf::F
     std::cout << "transfer--------------------------------------\n";
 }
 
-void TextBox::transferIndexArray(Buttons& visual, int array[], int array_size, sf::Font& font, sf::RenderWindow& window, bool fast)
+void TextBox::transferIndexArray(Buttons& visual, int array[], int array_size, sf::Font& font, sf::RenderWindow& window, bool fast, sf::Color bg)
 {
     if (fast)
     {
@@ -635,7 +635,7 @@ void TextBox::transferIndexArray(Buttons& visual, int array[], int array_size, s
         std::cout << "transfer--------------------------------------\n";
     }
 }
-void TextBox::handleArrayEvent(sf::Event& event, sf::Font& font, Buttons& visual, int array[], int array_size, sf::RenderWindow& window, int type, bool fast) {
+void TextBox::handleArrayEvent(sf::Event& event, sf::Font& font, Buttons& visual, int array[], int array_size, sf::RenderWindow& window, int type, bool fast, sf::Color bg) {
     if (event.type == sf::Event::MouseButtonPressed && event.mouseButton.button == sf::Mouse::Left) {
         sf::Vector2f mousePos(event.mouseButton.x, event.mouseButton.y);
         if (shape.getGlobalBounds().contains(mousePos)) {
@@ -661,13 +661,13 @@ void TextBox::handleArrayEvent(sf::Event& event, sf::Font& font, Buttons& visual
         if (event.key.code == sf::Keyboard::Enter) {
             std::string str = text.getString();
             update();
-            if (type == 0) transferArray(visual, array, array_size, font, window, fast);
-            if (type == 1) transferIndexArray(visual, array, array_size, font, window, fast);
+            if (type == 0) transferArray(visual, array, array_size, font, window, fast, bg);
+            if (type == 1) transferIndexArray(visual, array, array_size, font, window, fast, bg);
         }
     }
 }
 
-void TextBox::transfer_search_array(int& search_data, Buttons& visual, int array[], int array_size, sf::Font& font, sf::RenderWindow& window, bool fast)
+void TextBox::transfer_search_array(int& search_data, Buttons& visual, int array[], int array_size, sf::Font& font, sf::RenderWindow& window, bool fast, sf::Color bg)
 {
     if (fast)
     {
@@ -691,7 +691,7 @@ void TextBox::transfer_search_array(int& search_data, Buttons& visual, int array
     }
 }
 
-void TextBox::handleSearchArrayEvent(sf::Event& event, sf::Font& font, Buttons& visual, int array[], int array_size, int& search_data, sf::RenderWindow& window, bool fast) {
+void TextBox::handleSearchArrayEvent(sf::Event& event, sf::Font& font, Buttons& visual, int array[], int array_size, int& search_data, sf::RenderWindow& window, bool fast, sf::Color bg) {
     if (event.type == sf::Event::MouseButtonPressed && event.mouseButton.button == sf::Mouse::Left) {
         sf::Vector2f mousePos(event.mouseButton.x, event.mouseButton.y);
         if (shape.getGlobalBounds().contains(mousePos)) {
@@ -717,7 +717,7 @@ void TextBox::handleSearchArrayEvent(sf::Event& event, sf::Font& font, Buttons& 
         if (event.key.code == sf::Keyboard::Enter) {
             std::string str = text.getString();
             update();
-            transfer_search_array(search_data, visual, array, array_size, font, window, fast);
+            transfer_search_array(search_data, visual, array, array_size, font, window, fast, bg);
         }
     }
 }

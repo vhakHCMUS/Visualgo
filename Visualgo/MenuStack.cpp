@@ -1,6 +1,6 @@
 #include "MenuStack.h"
 
-void MenuStack(sf::RenderWindow& window, sf::Font& font, bool& MenuCur, bool& Stack, TextBox& textField, Buttons& visual, TextBox& addField, doublyLinkedList& doublyLL, bool& init, bool& add_tail, bool& add_head, bool& add_index, bool& delete_index, bool& search, int search_data, bool& update)
+void MenuStack(sf::RenderWindow& window, sf::Font& font, bool& MenuCur, bool& Stack, TextBox& textField, Buttons& visual, TextBox& addField, doublyLinkedList& doublyLL, bool& init, bool& add_tail, bool& add_head, bool& add_index, bool& delete_index, bool& search, int search_data, bool& update, sf::Color bg)
 {
 	Button* BackButton = new Button(50, 20, 200, 40, font, "Back",
 		sf::Color::Blue, sf::Color::Red, sf::Color::Blue, sf::Color::Black);
